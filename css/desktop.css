@@ -1,0 +1,109 @@
+/* ===================================================================
+   Coffee Pedia (دانشنامه قهوه) — Desktop layout
+   ---------------------------------------------------------------------
+   Previously the entire app was a single fixed-width "journal" card
+   (410px) centered on the page — on a large monitor this just floats
+   a phone-sized screen in a sea of empty background. There was no
+   real desktop layout at all, it was mobile-only at every width.
+
+   This file turns the same markup into a proper desktop app above
+   860px: a wide journal "sheet", the bottom tab bar becomes a
+   persistent side rail, card grids pick up extra columns, and the
+   bottom sheet modal becomes a centered dialog. Nothing below 860px
+   is touched — phones and small tablets render exactly as before.
+
+   The sliding nav indicator (js/app.js → updateNavIndicator) already
+   measures the active tab with getBoundingClientRect() and applies
+   translate(dx, dy) with a matching width/height, so it adapts to the
+   row → column change below with no extra JS branching required.
+   =================================================================== */
+
+@media (min-width:860px){
+  body{ padding:40px 24px; align-items:center; }
+
+  .journal{
+    width:100%;
+    max-width:var(--desktop-max-w);
+    height:min(88vh, 860px);
+    max-height:none;
+    flex-direction:row-reverse; /* dir="rtl": #appBody (1st in DOM) sits on the right, #navWrap on the left */
+    border-radius:34px;
+  }
+
+  #appBody{
+    display:flex;
+    flex-direction:column;
+    align-items:stretch;
+  }
+
+  /* Center a readable column inside the wide shell, magazine-style,
+     instead of stretching every line of body text edge to edge. */
+  #appBody > .view{ width:100%; }
+  #appBody > .view.active{
+    max-width:760px; margin-inline:auto; width:100%;
+  }
+
+  /* ---- Side rail (was: bottom tab bar) ---- */
+  #navWrap{
+    flex:0 0 var(--desktop-sidebar-w);
+    padding:26px 10px;
+    border-inline-start:1px dashed var(--line);
+    display:flex; align-items:stretch;
+  }
+  #navWrap .nav-track{
+    flex-direction:column;
+    width:100%;
+    padding:8px 5px;
+    gap:2px;
+  }
+  #navWrap .nav-item{
+    flex-direction:column;
+    padding:14px 4px;
+    font-size:10.5px;
+    gap:6px;
+  }
+  #navWrap .nav-item svg{ width:21px; height:21px; }
+  #navWrap .nav-indicator{
+    top:auto; bottom:auto; inset-inline:5px;
+  }
+
+  /* ---- More breathing room + extra grid columns ---- */
+  .mast{ padding:26px 28px 16px; }
+  .ticket-label{ margin:26px 28px 14px; }
+  .card-grid{ grid-template-columns:repeat(3, 1fr); gap:16px; padding:16px 28px 6px; }
+  .feature-scroll{ padding:0 28px 10px; }
+  .feature-card{ flex-basis:46%; }
+  .cat-card, .enc-item, .enc-note, .tool-card, .paper-card, .support-card{ margin-inline:28px; }
+  .enc-divider{ margin-inline:28px; }
+  .torn-rule{ margin-inline:28px; }
+  .detail-body{ padding:16px 28px 28px; }
+  .detail-hero{ margin-inline:28px; }
+  .detail-mast{ padding:22px 28px 8px; }
+
+  /* ---- Hover feedback (there's a mouse now) ---- */
+  .drink-card:hover, .cat-card:hover, .feature-card:hover, .tool-card:hover,
+  .stub:hover, .pill-choice:hover, .nav-item:hover{
+    filter:brightness(1.03);
+  }
+  .drink-card:hover, .cat-card:hover{ border-color:var(--rust); }
+  .btn:hover{ opacity:.92; }
+  .drink-card, .cat-card, .feature-card, .btn, .stub, .pill-choice{ transition:filter .12s ease, border-color .12s ease, opacity .12s ease; }
+
+  /* ---- Modal becomes a centered dialog, not a bottom sheet ---- */
+  .modal-backdrop{ align-items:center; justify-content:center; border-radius:34px; }
+  .modal-sheet{
+    width:min(420px, 86%);
+    border-radius:22px;
+    border:1.5px dashed var(--line);
+    border-top:1.5px dashed var(--line);
+    max-height:80%;
+  }
+
+  .toast{ inset-inline:auto; inset-inline-end:28px; bottom:28px; max-width:320px; }
+}
+
+/* A little extra room once things get really wide */
+@media (min-width:1300px){
+  .journal{ max-width:1280px; }
+  .card-grid{ grid-template-columns:repeat(4, 1fr); }
+}

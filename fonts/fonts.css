@@ -1,0 +1,36 @@
+/* ===================================================================
+   Coffee Pedia (دانشنامه قهوه) — Local Fonts
+   ---------------------------------------------------------------------
+   Previously the app pulled both fonts from CDNs at runtime
+   (cdn.jsdelivr.net + fonts.googleapis.com). That meant the app could
+   not run fully offline and depended on two third-party hosts being up.
+
+   Both fonts are now bundled locally, self-hosted, and loaded with
+   font-display:swap (so text is never invisible while the font loads).
+
+   Vazirmatn — variable font, weights 100–900 in a single file.
+     Source: https://github.com/rastikerdar/vazirmatn (v33.0.3, via npm)
+     License: SIL Open Font License 1.1 — see ./vazirmatn/OFL.txt
+
+   Lalezar — display face used for the wordmark / "lz" accent text.
+     Source: https://github.com/google/fonts (ofl/lalezar), original
+             upstream: https://github.com/BornaIz/Lalezar
+     License: SIL Open Font License 1.1 — see ./lalezar/OFL.txt
+   =================================================================== */
+
+@font-face{
+  font-family:'Vazirmatn';
+  src:url('vazirmatn/Vazirmatn[wght].woff2') format('woff2 supports variations'),
+      url('vazirmatn/Vazirmatn[wght].woff2') format('woff2-variations');
+  font-weight:100 900;
+  font-style:normal;
+  font-display:swap;
+}
+
+@font-face{
+  font-family:'Lalezar';
+  src:url('lalezar/Lalezar-Regular.woff2') format('woff2');
+  font-weight:400;
+  font-style:normal;
+  font-display:swap;
+}

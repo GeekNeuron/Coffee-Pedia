@@ -1,0 +1,89 @@
+/* ===================================================================
+   Coffee Pedia (دانشنامه قهوه) — Base / Reset / App Shell
+   =================================================================== */
+
+*{ box-sizing:border-box; -webkit-tap-highlight-color:transparent; }
+html,body{ height:100%; }
+
+body{
+  margin:0;
+  font-family:'Vazirmatn', Tahoma, sans-serif;
+  background:
+    radial-gradient(circle at 8% 8%, rgba(181,80,47,.05), transparent 45%),
+    radial-gradient(circle at 92% 92%, rgba(217,164,65,.06), transparent 45%),
+    #E9DCC1;
+  color:var(--ink);
+  display:flex; justify-content:center; padding:26px 12px;
+}
+html[data-theme="dark"] body{ background:#0F0A06; }
+.lz{ font-family:'Lalezar', 'Vazirmatn', sans-serif; font-weight:400; letter-spacing:.3px; }
+
+/* ---------------------------------------------------------------
+   BUGFIX (reported): "cup icon + checkmark render crooked/jagged"
+   ---------------------------------------------------------------
+   Root cause: every hand-written icon in this app is a plain
+   <svg viewBox="0 0 24 24" stroke="currentColor" ...> with NO
+   stroke-linecap / stroke-linejoin set anywhere except one single
+   rule (.ring-timer .progress). Browsers default both to "miter"/
+   "butt", so every joint (the mug handle meeting the cup body, the
+   V-corner of the done ✓, the gear teeth, etc.) renders as a sharp,
+   slightly-offset spike instead of the smooth rounded stroke every
+   Feather/Lucide-style icon set assumes. That's the "crooked" look.
+
+   Fix: stroke-linecap/linejoin are inherited SVG properties, so one
+   rule on the <svg> root fixes every icon in the app at once —
+   no per-icon or per-viewBox change needed.
+   ------------------------------------------------------------- */
+svg{ stroke-linecap:round; stroke-linejoin:round; }
+
+/* ---------------------------------------------------------------
+   BUGFIX companion (bottom-nav bug, part 2 — see js/app.js showView()):
+   the nav rail used to be shown/hidden with an inline style.display,
+   which always outranks a stylesheet rule and silently broke the
+   `#navWrap{ display:flex }` needed for the desktop side-rail layout
+   in css/desktop.css. A class lets CSS own the "what" (block vs flex)
+   while JS only owns the "visible or not".
+   ------------------------------------------------------------- */
+.is-hidden{ display:none !important; }
+
+.journal{
+  width:410px; max-width:100%;
+  background:var(--paper);
+  background-image:radial-gradient(rgba(138,115,96,.09) 1px, transparent 1px);
+  background-size:14px 14px;
+  border-radius:30px;
+  box-shadow:0 24px 50px rgba(42,27,18,.18), 0 0 0 1px rgba(42,27,18,.05);
+  overflow:hidden;
+  height:92vh;
+  max-height:900px;
+  display:flex; flex-direction:column;
+  position:relative;
+}
+@media (max-width:460px){
+  body{ padding:0; }
+  .journal{ width:100%; height:100vh; max-height:100vh; border-radius:0; box-shadow:none; }
+}
+
+.app-body{ flex:1 1 auto; overflow-y:auto; -webkit-overflow-scrolling:touch; scrollbar-width:none; padding-bottom:16px; }
+.app-body::-webkit-scrollbar{ display:none; }
+.view{ display:none; }
+.view.active{ display:block; animation:pageIn .2s ease; }
+@keyframes pageIn{ from{opacity:0; transform:translateY(8px);} to{opacity:1; transform:translateY(0);} }
+
+/* Skip-link for keyboard/screen-reader users (new — accessibility) */
+.skip-link{
+  position:absolute; inset-inline-start:12px; top:-60px; z-index:100;
+  background:var(--ink); color:var(--paper); padding:10px 16px; border-radius:10px;
+  font-size:13px; font-weight:700; transition:top .15s ease;
+}
+.skip-link:focus{ top:12px; }
+
+/* Respect users who've asked the OS for reduced motion (new — accessibility) */
+@media (prefers-reduced-motion: reduce){
+  *, *::before, *::after{
+    animation-duration:.001ms !important;
+    animation-iteration-count:1 !important;
+    transition-duration:.001ms !important;
+    scroll-behavior:auto !important;
+  }
+}

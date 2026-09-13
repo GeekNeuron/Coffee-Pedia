@@ -1,0 +1,39 @@
+/* ===================================================================
+   Coffee Pedia (دانشنامه قهوه) — Design Tokens
+   Color system, corner radii, and the light/dark theme swap.
+   =================================================================== */
+
+:root{
+  --ink:#2A1B12;
+  --ink-soft:#8A7360;
+  --paper:#F3EBDA;
+  --paper-card:#FFFCF5;
+  --paper-raised:#EADFC6;
+  --rust:#B5502F;
+  --rust-deep:#8C3B22;
+  --mustard:#D9A441;
+  --mustard-soft:#EFD9A8;
+  --line:#DBC79F;
+  --good:#6E9E5B;
+  --warn:#C1553F;
+  --gold:#F0C24B;
+  --r-lg:26px;
+  --r-md:16px;
+  --r-sm:10px;
+
+  /* new tokens, used only by css/desktop.css */
+  --desktop-sidebar-w:96px;
+  --desktop-max-w:1180px;
+}
+html[data-theme="dark"]{
+  --ink:#F2E6D6;
+  --ink-soft:#B9A38A;
+  --paper:#19120B;
+  --paper-card:#241A11;
+  --paper-raised:#2E2115;
+  --rust:#E08A5F;
+  --rust-deep:#C56A42;
+  --mustard:#E8B95C;
+  --mustard-soft:#4A3722;
+  --line:#3D2C1B;
+}
