@@ -83,3 +83,35 @@ const FLAVOR_WHEEL = [
   {key:'sour',     fa:'ترش و تخمیری',       en:'Sour / Fermented',    color:'#D9A441', example:'سرکه، ماست، شراب'},
   {key:'other',    fa:'سایر (نامطلوب)',     en:'Other / Papery / Chemical', color:'#8A7360', example:'کاغذی، کپک‌زده، دارویی — نشانه‌ی معمول عیب در دانه یا دم‌آوری'},
 ];
+
+/* ---------------------------------------------------------------
+   NEW — Recipe detail page support tables
+   ---------------------------------------------------------------
+   Used by js/app.js → openDetail() when rendering a recipe's Info tab.
+   ------------------------------------------------------------- */
+
+/* Fallback equipment list for recipe groups whose items all genuinely
+   use the same gear (so it isn't repeated 84 times in recipes.data.js).
+   Groups left out here (immersion, cold, traditional, modern, unusual,
+   rare_beans) are too mixed — every item in those already carries its
+   own explicit `equipment` in recipes.data.js. */
+const GROUP_EQUIPMENT = {
+  espresso_pure:    ['دستگاه اسپرسو', 'آسیاب قهوه'],
+  espresso_diluted: ['دستگاه اسپرسو', 'آسیاب قهوه', 'کتری'],
+  espresso_milk:    ['دستگاه اسپرسو', 'آسیاب قهوه', 'فرندر بخار شیر'],
+  espresso_extra:   ['دستگاه اسپرسو', 'آسیاب قهوه'],
+  pour_over:        ['دریپر', 'فیلتر کاغذی', 'کتری قوی‌گردن', 'ترازو', 'آسیاب قهوه'],
+  drip:             ['قهوه‌ساز قطره‌ای', 'فیلتر کاغذی', 'آسیاب قهوه'],
+};
+
+const DIFFICULTY_LABEL = {beginner:'مبتدی', intermediate:'متوسط', advanced:'پیشرفته'};
+
+/* Real unit conversion for the Metric/Imperial toggle on the Ingredients
+   tab. Only converts units we actually use in the data (گرم, میلی‌لیتر);
+   anything else (قاشق چای‌خوری, عدد, پیمانه, …) is already a "natural"
+   unit in both systems and is shown unchanged. */
+const UNIT_CONVERT = {
+  'گرم': {factor: 0.035274, imperialUnit: 'oz'},
+  'میلی‌لیتر': {factor: 0.033814, imperialUnit: 'fl oz'},
+};
+
