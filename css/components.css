@@ -76,6 +76,7 @@
 
 /* ---------------- Category cards (Encyclopedia index) ---------------- */
 .cat-card{ display:flex; align-items:center; gap:14px; padding:15px 16px; margin:0 22px 10px; background:var(--paper-card); border:1.5px dashed var(--line); border-radius:var(--r-md); cursor:pointer; }
+.cat-card.active{ border-style:solid; border-color:var(--rust); background:var(--mustard-soft); }
 .cat-card .icon{ width:44px; height:44px; border-radius:50%; background:var(--mustard-soft); display:flex; align-items:center; justify-content:center; font-size:19px; flex:0 0 auto; }
 .cat-card .icon svg{ width:21px; height:21px; color:var(--rust); }
 .cat-card .txt{ flex:1; min-width:0; }

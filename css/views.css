@@ -38,6 +38,75 @@
 }
 .back-stamp svg{ width:16px; height:16px; }
 
+/* ---------------- Recipe detail: badges + tabs (NEW) ---------------- */
+.detail-badges{ display:flex; gap:8px; padding:0 22px 14px; flex-wrap:wrap; }
+.badge-pill{ padding:7px 14px; border-radius:999px; font-size:11.5px; font-weight:800; background:var(--mustard-soft); color:var(--rust-deep); display:inline-flex; align-items:center; gap:5px; }
+.badge-pill-outline{ background:var(--paper-card); border:1.5px solid var(--line); color:var(--ink); }
+
+.detail-tabs{ display:flex; gap:6px; margin:0 22px 16px; background:var(--paper-raised); border-radius:16px; padding:5px; }
+.detail-tab{
+  flex:1; display:flex; align-items:center; justify-content:center; gap:6px;
+  padding:10px 6px; border-radius:12px; border:none; background:none; cursor:pointer;
+  font-family:inherit; font-size:12.5px; font-weight:700; color:var(--ink-soft);
+}
+.detail-tab svg{ width:15px; height:15px; }
+.detail-tab.active{ background:var(--ink); color:var(--paper); }
+
+.detail-tab-panel{ display:none; padding:0 22px 24px; }
+.detail-tab-panel.active{ display:block; animation:pageIn .18s ease; }
+
+.unit-toggle{ display:flex; gap:6px; background:var(--paper-raised); border-radius:12px; padding:4px; margin-bottom:14px; }
+.unit-btn{ flex:1; padding:8px 6px; border-radius:9px; border:none; background:none; cursor:pointer; font-family:inherit; font-size:11.5px; font-weight:700; color:var(--ink-soft); }
+.unit-btn.active{ background:var(--rust); color:#fff; }
+
+.ingredient-row, .step-row{
+  display:flex; align-items:flex-start; gap:12px; padding:13px 14px; margin-bottom:9px;
+  background:var(--paper-card); border:1.5px solid var(--line); border-radius:14px;
+}
+.ingredient-row.checked, .step-row.checked{ border-color:var(--good); background:var(--mustard-soft); }
+.check-circle{
+  width:26px; height:26px; border-radius:999px; border:2px solid var(--line); flex:0 0 auto;
+  display:flex; align-items:center; justify-content:center; cursor:pointer; background:var(--paper-card); margin-top:1px;
+}
+.check-circle svg{ width:14px; height:14px; color:#fff; display:none; }
+.checked .check-circle{ background:var(--good); border-color:var(--good); }
+.checked .check-circle svg{ display:block; }
+.ingredient-amount{ flex:0 0 auto; padding:4px 10px; border-radius:8px; background:var(--mustard-soft); color:var(--rust-deep); font-weight:800; font-size:12.5px; direction:ltr; white-space:nowrap; }
+.ingredient-name{ flex:1; font-size:13.5px; color:var(--ink); align-self:center; }
+.checked .ingredient-name, .checked .step-text{ text-decoration:line-through; color:var(--ink-soft); }
+
+.step-num{
+  width:28px; height:28px; border-radius:999px; background:var(--rust); color:#fff; font-weight:800; font-size:13px;
+  display:flex; align-items:center; justify-content:center; flex:0 0 auto; margin-top:1px;
+}
+.checked .step-num{ background:var(--good); }
+.step-body{ flex:1; min-width:0; }
+.step-label{ font-size:13px; font-weight:800; color:var(--rust-deep); margin-bottom:2px; }
+.checked .step-label{ color:var(--ink-soft); text-decoration:line-through; }
+.step-text{ font-size:13px; line-height:1.7; color:var(--ink); }
+.step-row .check-circle{ order:2; }
+
+.info-tab-heading{ display:flex; align-items:center; gap:8px; font-size:13.5px; font-weight:800; margin:18px 0 10px; color:var(--ink); }
+.info-tab-heading:first-child{ margin-top:0; }
+.info-tab-heading svg{ width:17px; height:17px; color:var(--rust); }
+
+.equipment-row{ display:flex; flex-wrap:wrap; gap:8px; margin-bottom:6px; }
+.equipment-chip{ display:flex; align-items:center; gap:6px; padding:8px 13px; border-radius:999px; background:var(--paper-card); border:1.5px solid var(--good); font-size:12px; font-weight:700; color:var(--ink); }
+.equipment-chip svg{ width:14px; height:14px; color:var(--good); flex:0 0 auto; }
+
+.origin-card{ background:var(--paper-card); border:1.5px dashed var(--line); border-radius:14px; overflow:hidden; margin-bottom:6px; }
+.origin-row{ display:flex; align-items:center; gap:12px; padding:13px 14px; }
+.origin-row + .origin-row{ border-top:1px dashed var(--line); }
+.origin-row svg{ width:17px; height:17px; color:var(--rust); flex:0 0 auto; }
+.origin-row .lbl{ flex:1; font-size:12.5px; color:var(--ink-soft); font-weight:600; }
+.origin-row .val{ font-size:13px; font-weight:800; color:var(--ink); }
+.caffeine-cups{ display:flex; gap:3px; direction:ltr; }
+.caffeine-cups svg{ width:15px; height:15px; }
+.caffeine-cups .filled{ color:var(--rust); }
+.caffeine-cups .empty{ color:var(--line); }
+
+.tip-box{ background:var(--mustard-soft); border-radius:14px; padding:14px 16px; font-size:13px; line-height:1.75; color:var(--ink); margin-bottom:6px; }
+
 /* ---------------- Settings ---------------- */
 .group-label{ padding:20px 22px 8px; font-size:11.5px; font-weight:800; color:var(--rust); }
 .paper-card{ margin:0 22px; background:var(--paper-card); border:1.5px dashed var(--line); border-radius:var(--r-md); overflow:hidden; }

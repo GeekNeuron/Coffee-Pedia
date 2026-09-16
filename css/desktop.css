@@ -1,88 +1,149 @@
 /* ===================================================================
-   Coffee Pedia (دانشنامه قهوه) — Desktop layout
+   Coffee Pedia (دانشنامه قهوه) — Desktop dashboard
    ---------------------------------------------------------------------
-   Previously the entire app was a single fixed-width "journal" card
-   (410px) centered on the page — on a large monitor this just floats
-   a phone-sized screen in a sea of empty background. There was no
-   real desktop layout at all, it was mobile-only at every width.
+   Rebuilt after feedback that the first pass ("just widen the mobile
+   card") caused real conflicts and didn't actually behave like a
+   desktop app. This version:
 
-   This file turns the same markup into a proper desktop app above
-   860px: a wide journal "sheet", the bottom tab bar becomes a
-   persistent side rail, card grids pick up extra columns, and the
-   bottom sheet modal becomes a centered dialog. Nothing below 860px
-   is touched — phones and small tablets render exactly as before.
+   1. Fixes the root cause of the conflicts: several panels (the
+      encyclopedia list/detail split, the bottom nav) used to be
+      shown/hidden with inline `el.style.display = '...'` in JS. An
+      inline style always wins over a stylesheet rule at equal or
+      lower specificity, so no rule written here could ever actually
+      take effect on those elements. They now toggle a class
+      (`.is-hidden` / `.is-hidden-mobile`) instead, so this file is
+      free to override that class for those two elements specifically
+      on wide screens — see js/app.js for the corresponding changes.
 
-   The sliding nav indicator (js/app.js → updateNavIndicator) already
-   measures the active tab with getBoundingClientRect() and applies
-   translate(dx, dy) with a matching width/height, so it adapts to the
-   row → column change below with no extra JS branching required.
+   2. Drops the earlier "center everything in a 760px column, but
+      also try to show a 3-4 column grid inside it" contradiction —
+      that constrained grids to mobile-ish width for no real benefit.
+      Each view now gets the width treatment that actually suits it:
+      full dashboard width for grids (home/tools/favorites/
+      encyclopedia), a genuinely narrow reading column only for the
+      linear step-by-step recipe/article detail page.
+
+   3. Adds actual dashboard elements that don't exist on mobile: a
+      quick-stats row on Home, a static grid instead of a swipe
+      carousel for Featured (carousels are a touch idiom, not a mouse
+      one), and a real two-pane master/detail layout for the
+      Encyclopedia instead of a single drill-down panel.
+
+   Same color tokens and component language as mobile throughout
+   (var(--rust)/var(--mustard)/dashed borders/paper texture) — only
+   the arrangement changes, per feedback to keep the theme.
    =================================================================== */
 
 @media (min-width:860px){
-  body{ padding:40px 24px; align-items:center; }
+  body{ padding:32px 24px; align-items:center; }
 
   .journal{
     width:100%;
     max-width:var(--desktop-max-w);
-    height:min(88vh, 860px);
+    height:min(90vh, 900px);
     max-height:none;
     flex-direction:row-reverse; /* dir="rtl": #appBody (1st in DOM) sits on the right, #navWrap on the left */
-    border-radius:34px;
+    border-radius:28px;
   }
 
-  #appBody{
-    display:flex;
-    flex-direction:column;
-    align-items:stretch;
-  }
+  #appBody{ display:block; }
 
-  /* Center a readable column inside the wide shell, magazine-style,
-     instead of stretching every line of body text edge to edge. */
-  #appBody > .view{ width:100%; }
-  #appBody > .view.active{
-    max-width:760px; margin-inline:auto; width:100%;
-  }
-
-  /* ---- Side rail (was: bottom tab bar) ---- */
+  /* ---- Side rail (was: bottom tab bar) — a real sidebar list, not a
+     mobile tab bar turned sideways: icon + label in a row, full-width
+     clickable rows, left-aligned. ---- */
   #navWrap{
     flex:0 0 var(--desktop-sidebar-w);
-    padding:26px 10px;
+    padding:22px 12px;
     border-inline-start:1px dashed var(--line);
     display:flex; align-items:stretch;
   }
   #navWrap .nav-track{
     flex-direction:column;
     width:100%;
-    padding:8px 5px;
-    gap:2px;
+    padding:6px;
+    gap:3px;
+    background:none;
   }
   #navWrap .nav-item{
-    flex-direction:column;
-    padding:14px 4px;
-    font-size:10.5px;
-    gap:6px;
+    flex-direction:row;
+    justify-content:flex-start;
+    padding:12px 14px;
+    font-size:13px;
+    gap:11px;
   }
-  #navWrap .nav-item svg{ width:21px; height:21px; }
-  #navWrap .nav-indicator{
-    top:auto; bottom:auto; inset-inline:5px;
-  }
+  #navWrap .nav-item svg{ width:19px; height:19px; flex:0 0 auto; }
+  #navWrap .nav-indicator{ top:auto; bottom:auto; inset-inline:6px; }
 
-  /* ---- More breathing room + extra grid columns ---- */
-  .mast{ padding:26px 28px 16px; }
-  .ticket-label{ margin:26px 28px 14px; }
-  .card-grid{ grid-template-columns:repeat(3, 1fr); gap:16px; padding:16px 28px 6px; }
-  .feature-scroll{ padding:0 28px 10px; }
-  .feature-card{ flex-basis:46%; }
-  .cat-card, .enc-item, .enc-note, .tool-card, .paper-card, .support-card{ margin-inline:28px; }
-  .enc-divider{ margin-inline:28px; }
-  .torn-rule{ margin-inline:28px; }
-  .detail-body{ padding:16px 28px 28px; }
-  .detail-hero{ margin-inline:28px; }
-  .detail-mast{ padding:22px 28px 8px; }
+  /* ---- View padding: roomier than mobile's 22px ---- */
+  .mast{ padding:24px 30px 14px; }
+  .ticket-label{ margin:24px 30px 12px; }
+  .card-grid{ grid-template-columns:repeat(3, 1fr); gap:16px; padding:16px 30px 6px; }
+  .stub-row{ padding:0 30px; }
+  .cat-card, .enc-item, .enc-note, .tool-card, .paper-card, .support-card{ margin-inline:30px; }
+  .enc-divider{ margin-inline:30px; }
+  .torn-rule{ margin-inline:30px; }
+
+  /* ---- NEW: quick-stats dashboard row (Home) ---- */
+  .dashboard-stats{
+    display:grid; grid-template-columns:repeat(4, 1fr); gap:14px;
+    margin:18px 30px 4px;
+  }
+  .stat-card{
+    background:var(--paper-card); border:1.5px dashed var(--line); border-radius:16px;
+    padding:16px 14px; text-align:center;
+  }
+  .stat-num{ font-size:26px; font-weight:800; color:var(--rust); font-family:'Vazirmatn',sans-serif; }
+  .stat-lbl{ font-size:11.5px; color:var(--ink-soft); font-weight:700; margin-top:2px; }
+
+  /* ---- Featured: static grid, not a swipe carousel (mouse ≠ touch) ---- */
+  .feature-scroll{
+    display:grid; grid-template-columns:repeat(3, 1fr); gap:14px;
+    overflow-x:visible; padding:0 30px 8px; scroll-snap-type:none;
+  }
+  .feature-card{ flex:none; }
+  .feature-dots{ display:none; } /* dots only make sense for a scrollable strip */
+
+  /* ---- Encyclopedia: real master/detail split, not a drill-down ---- */
+  .encyclopedia-split{
+    display:flex; align-items:flex-start; gap:0;
+    height:calc(100% - 96px); /* below mast+search; lets both panes scroll independently */
+  }
+  #categoryListPanel{
+    flex:0 0 340px; height:100%; overflow-y:auto; border-inline-end:1px dashed var(--line); padding-inline-end:8px;
+  }
+  #categoryListPanel.is-hidden-mobile{ display:block !important; } /* mobile hides this once a category is open — desktop always shows it */
+  #categoryDetailPanel{
+    flex:1 1 auto; height:100%; overflow-y:auto; min-width:0;
+  }
+  #categoryDetailPanel.is-hidden{ display:block !important; } /* mobile hides this until a category is chosen — desktop shows a placeholder instead, see below */
+  #categoryDetailPanel .back-stamp{ display:none; } /* redundant once the list is always visible alongside */
+  #categoryDetailPanel:not(.has-selection)::before{
+    content:'یک بخش را از فهرست کناری انتخاب کنید';
+    display:block; text-align:center; color:var(--ink-soft); font-size:13px; padding:80px 24px;
+  }
+  #categoryDetailPanel.has-selection::before{ content:none; }
+
+  /* ---- Tools / Favorites: use the extra width ---- */
+  #view-tools .tool-card{ margin-inline:30px; }
+
+  /* ---- Recipe/article detail page: a real reading column, not a
+     dashboard grid — steps are inherently linear regardless of
+     screen size, so this one view intentionally stays narrow. ---- */
+  #view-detail{ max-width:640px; margin-inline:auto; }
+  .detail-mast{ padding:24px 30px 6px; }
+  .detail-badges{ padding:0 30px 14px; }
+  .detail-tabs{ margin-inline:30px; }
+  .detail-tab-panel{ padding-inline:30px; }
+  .detail-hero{ margin-inline:30px; }
+  .detail-body{ padding:16px 30px 28px; }
+
+  /* ---- Settings: stays a simple centered column, like most desktop
+     settings pages — no benefit to spreading a list of rows wide. ---- */
+  #view-settings{ max-width:640px; margin-inline:auto; }
 
   /* ---- Hover feedback (there's a mouse now) ---- */
   .drink-card:hover, .cat-card:hover, .feature-card:hover, .tool-card:hover,
-  .stub:hover, .pill-choice:hover, .nav-item:hover{
+  .stub:hover, .pill-choice:hover, .nav-item:hover, .detail-tab:hover{
     filter:brightness(1.03);
   }
   .drink-card:hover, .cat-card:hover{ border-color:var(--rust); }
@@ -90,7 +151,7 @@
   .drink-card, .cat-card, .feature-card, .btn, .stub, .pill-choice{ transition:filter .12s ease, border-color .12s ease, opacity .12s ease; }
 
   /* ---- Modal becomes a centered dialog, not a bottom sheet ---- */
-  .modal-backdrop{ align-items:center; justify-content:center; border-radius:34px; }
+  .modal-backdrop{ align-items:center; justify-content:center; border-radius:28px; }
   .modal-sheet{
     width:min(420px, 86%);
     border-radius:22px;
@@ -99,11 +160,12 @@
     max-height:80%;
   }
 
-  .toast{ inset-inline:auto; inset-inline-end:28px; bottom:28px; max-width:320px; }
+  .toast{ inset-inline:auto; inset-inline-end:30px; bottom:28px; max-width:320px; }
 }
 
 /* A little extra room once things get really wide */
 @media (min-width:1300px){
   .journal{ max-width:1280px; }
   .card-grid{ grid-template-columns:repeat(4, 1fr); }
+  .feature-scroll{ grid-template-columns:repeat(4, 1fr); }
 }

@@ -45,6 +45,8 @@ svg{ stroke-linecap:round; stroke-linejoin:round; }
    while JS only owns the "visible or not".
    ------------------------------------------------------------- */
 .is-hidden{ display:none !important; }
+.is-hidden-mobile{ display:none; }
+.dashboard-stats{ display:none; } /* shown only at desktop widths — see css/desktop.css */
 
 .journal{
   width:410px; max-width:100%;
