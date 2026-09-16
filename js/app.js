@@ -156,10 +156,99 @@ function toggleFavorite(id){
   else state.favorites.add(id);
   renderGrid();
   renderFavorites();
+  renderDashboardStats();
   if (state.currentDetailId === id) updateDetailFavIcon();
 }
 
 /* ---------------- Detail view ---------------- */
+function isNumericAmount(str){
+  return /^[۰-۹0-9]+([.,][۰-۹0-9]+)?$/.test(String(str).trim());
+}
+
+function renderIngredients(ingredients, unitSystem){
+  const wrap = document.getElementById('ingredientsList');
+  wrap.innerHTML = ingredients.map((ing, i) => {
+    let label;
+    if (unitSystem === 'imperial' && UNIT_CONVERT[ing.unit] && isNumericAmount(ing.amount)) {
+      const num = parseFloat(toLatinDigits(ing.amount));
+      const conv = (num * UNIT_CONVERT[ing.unit].factor).toFixed(1);
+      label = toPersianDigits(conv) + ' ' + UNIT_CONVERT[ing.unit].imperialUnit;
+    } else {
+      label = ing.unit ? `${ing.amount} ${ing.unit}` : ing.amount;
+    }
+    return `
+      <div class="ingredient-row" data-ing="${i}">
+        <span class="check-circle" role="checkbox" aria-checked="false">${Icons.render('check', {fill:'currentColor'})}</span>
+        <span class="ingredient-amount">${escapeHtml(label)}</span>
+        <span class="ingredient-name">${escapeHtml(ing.name)}</span>
+      </div>`;
+  }).join('');
+}
+
+function renderSteps(steps){
+  document.getElementById('stepsList').innerHTML = steps.map((s, i) => `
+    <div class="step-row" data-step="${i}">
+      <span class="step-num">${toPersianDigits(i + 1)}</span>
+      <div class="step-body">
+        ${s.label ? `<div class="step-label">${escapeHtml(s.label)}</div>` : ''}
+        <div class="step-text">${escapeHtml(s.text)}</div>
+      </div>
+      <span class="check-circle" role="checkbox" aria-checked="false">${Icons.render('check', {fill:'currentColor'})}</span>
+    </div>`).join('');
+}
+
+function renderInfoTab(d, entry){
+  const equipList = (d.equipment && d.equipment.length) ? d.equipment : (GROUP_EQUIPMENT[entry.cat.id] || []);
+  document.getElementById('equipmentBlock').style.display = equipList.length ? 'block' : 'none';
+  document.getElementById('equipmentList').innerHTML = equipList.map(eq =>
+    `<span class="equipment-chip">${Icons.render('check')}${escapeHtml(eq)}</span>`).join('');
+
+  const caffeineDots = Array.from({length: 5}, (_, i) =>
+    `<span class="${i < (d.caffeineLevel || 0) ? 'filled' : 'empty'}">${Icons.render('coffee', {fill: i < (d.caffeineLevel || 0) ? 'currentColor' : 'none'})}</span>`
+  ).join('');
+
+  document.getElementById('originInfoCard').innerHTML = `
+    <div class="origin-row">${Icons.render('culture')}<span class="lbl">خاستگاه</span><span class="val">${escapeHtml(d.origin || '—')}</span></div>
+    <div class="origin-row">${Icons.render('coffee')}<span class="lbl">سطح کافئین</span><span class="caffeine-cups">${caffeineDots}</span></div>
+    <div class="origin-row">${Icons.render('immersion')}<span class="lbl">زمان آماده‌سازی</span><span class="val">${escapeHtml(d.prepTime || '—')}</span></div>
+    <div class="origin-row">${Icons.render('clock')}<span class="lbl">زمان کل</span><span class="val">${escapeHtml(d.totalTime || '—')}</span></div>`;
+
+  const tipBlock = document.getElementById('proTipBlock');
+  if (d.proTip){ tipBlock.style.display = 'block'; document.getElementById('proTipText').textContent = d.proTip; }
+  else tipBlock.style.display = 'none';
+
+  const varBlock = document.getElementById('variationBlock');
+  if (d.variation){ varBlock.style.display = 'block'; document.getElementById('variationText').textContent = d.variation; }
+  else varBlock.style.display = 'none';
+}
+
+let currentUnitSystem = 'metric';
+const DETAIL_TAB_PANEL = {ingredients:'panelIngredients', steps:'panelSteps', info:'panelInfo'};
+
+function switchDetailTab(tabKey){
+  document.querySelectorAll('.detail-tab').forEach(t => t.classList.toggle('active', t.dataset.detailTab === tabKey));
+  document.querySelectorAll('.detail-tab-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById(DETAIL_TAB_PANEL[tabKey]).classList.add('active');
+}
+document.querySelectorAll('[data-detail-tab]').forEach(btn =>
+  btn.addEventListener('click', () => switchDetailTab(btn.dataset.detailTab)));
+document.getElementById('ingredientsList').addEventListener('click', (e) => {
+  const row = e.target.closest('.ingredient-row');
+  if (row){ const on = row.classList.toggle('checked'); row.querySelector('.check-circle').setAttribute('aria-checked', on); }
+});
+document.getElementById('stepsList').addEventListener('click', (e) => {
+  const row = e.target.closest('.step-row');
+  if (row){ const on = row.classList.toggle('checked'); row.querySelector('.check-circle').setAttribute('aria-checked', on); }
+});
+document.getElementById('unitToggle').addEventListener('click', (e) => {
+  const btn = e.target.closest('.unit-btn');
+  if (!btn) return;
+  currentUnitSystem = btn.dataset.unitSys;
+  document.querySelectorAll('.unit-btn').forEach(b => b.classList.toggle('active', b === btn));
+  const d = ITEM_INDEX.get(state.currentDetailId)?.item;
+  if (d && d.ingredients) renderIngredients(d.ingredients, currentUnitSystem);
+});
+
 function openDetail(id){
   const entry = ITEM_INDEX.get(id);
   if (!entry){ showToast('یافت نشد'); return; }
@@ -169,27 +258,43 @@ function openDetail(id){
 
   document.getElementById('detailName').textContent = n.fa;
   document.getElementById('detailNameEn').textContent = n.en;
-  document.getElementById('detailPills').innerHTML =
-    `<span class="tag-pill" style="border-color:var(--rust); color:var(--rust-deep);">${escapeHtml(entry.cat.title)}</span>`;
+  document.getElementById('detailRing').innerHTML = Icons.render(entry.cat.icon || DRINK_ICON.get(id) || 'coffee');
+  updateDetailFavIcon();
 
-  // NEW — recipe groups each carry an original SVG hero illustration
-  // (assets/images/) shown above the pill row; encyclopedia entries
-  // (no group.hero) simply don't render one.
-  const heroEl = document.getElementById('detailHero');
-  if (entry.cat.hero){
-    heroEl.style.display = 'block';
-    heroEl.innerHTML = `<img src="${entry.cat.hero}" alt="" loading="lazy">`;
+  // ---------------------------------------------------------------
+  // NEW — recipes (from RECIPE_GROUPS) now render as a proper
+  // Ingredients / Steps / Info tabbed page instead of one long prose
+  // block. Encyclopedia entries are unaffected — they keep the
+  // original rich-text rendering below, since "ingredients/steps"
+  // doesn't apply to e.g. a history article.
+  // ---------------------------------------------------------------
+  const isRecipe = Array.isArray(d.steps) && Array.isArray(d.ingredients);
+  document.getElementById('detailBadges').style.display = isRecipe ? 'flex' : 'none';
+  document.getElementById('detailTabs').style.display = isRecipe ? 'flex' : 'none';
+  document.getElementById('panelIngredients').style.display = isRecipe ? '' : 'none';
+  document.getElementById('panelSteps').style.display = isRecipe ? '' : 'none';
+  document.getElementById('panelInfo').style.display = isRecipe ? '' : 'none';
+  document.getElementById('detailBodyWrap').style.display = isRecipe ? 'none' : 'block';
+
+  if (isRecipe){
+    document.getElementById('detailDifficultyBadge').textContent = DIFFICULTY_LABEL[d.difficulty] || d.difficulty || '';
+    document.getElementById('detailTimeBadge').innerHTML = Icons.render('immersion') + escapeHtml(d.totalTime || '');
+    currentUnitSystem = 'metric';
+    document.querySelectorAll('.unit-btn').forEach(b => b.classList.toggle('active', b.dataset.unitSys === 'metric'));
+    renderIngredients(d.ingredients, currentUnitSystem);
+    renderSteps(d.steps);
+    renderInfoTab(d, entry);
+    switchDetailTab('ingredients');
+    document.getElementById('detailHero').style.display = 'none';
   } else {
-    heroEl.style.display = 'none';
-    heroEl.innerHTML = '';
+    document.getElementById('detailPills').innerHTML =
+      `<span class="tag-pill" style="border-color:var(--rust); color:var(--rust-deep);">${escapeHtml(entry.cat.title)}</span>`;
+    const heroEl = document.getElementById('detailHero');
+    if (entry.cat.hero){ heroEl.style.display = 'block'; heroEl.innerHTML = `<img src="${entry.cat.hero}" alt="" loading="lazy">`; }
+    else { heroEl.style.display = 'none'; heroEl.innerHTML = ''; }
+    document.getElementById('detailRich').innerHTML = d.body || '<p>محتوایی برای این مورد ثبت نشده است.</p>';
   }
 
-  document.getElementById('detailRich').innerHTML = d.body || '<p>محتوایی برای این مورد ثبت نشده است.</p>';
-  // was: always showed a static ☕, regardless of whether this was a cold
-  // brew, an encyclopedia entry about history, or anything else.
-  document.getElementById('detailRing').innerHTML = Icons.render(entry.cat.icon || DRINK_ICON.get(id) || 'coffee');
-
-  updateDetailFavIcon();
   showView('detail');
   document.getElementById('appBody').scrollTop = 0;
 }
@@ -256,13 +361,16 @@ function openCategory(catId){
   document.getElementById('categoryTitle').textContent = cat.title;
   document.getElementById('categoryCount').textContent = `${toPersianDigits(cat.items.length)} بخش`;
   document.getElementById('categoryItemsWrap').innerHTML = cat.items.map(renderEncItem).join('');
-  document.getElementById('categoryListPanel').style.display = 'none';
-  document.getElementById('categoryDetailPanel').style.display = 'block';
+  document.getElementById('categoryListPanel').classList.add('is-hidden-mobile');
+  document.getElementById('categoryDetailPanel').classList.remove('is-hidden');
+  document.getElementById('categoryDetailPanel').classList.add('has-selection');
+  document.querySelectorAll('#categoryList .cat-card').forEach(el =>
+    el.classList.toggle('active', el.dataset.cat === catId));
   document.getElementById('appBody').scrollTop = 0;
 }
 document.getElementById('categoryBackBtn').addEventListener('click', () => {
-  document.getElementById('categoryDetailPanel').style.display = 'none';
-  document.getElementById('categoryListPanel').style.display = 'block';
+  document.getElementById('categoryDetailPanel').classList.add('is-hidden');
+  document.getElementById('categoryListPanel').classList.remove('is-hidden-mobile');
 });
 
 /* ---------------- View / tab switching ---------------- */
@@ -316,8 +424,8 @@ function showView(name){
   document.getElementById('navWrap').classList.toggle('is-hidden', !isMainTab);
   if (isMainTab){
     state.currentTab = name;
-    document.getElementById('categoryDetailPanel').style.display = 'none';
-    document.getElementById('categoryListPanel').style.display = 'block';
+    document.getElementById('categoryDetailPanel').classList.add('is-hidden');
+    document.getElementById('categoryListPanel').classList.remove('is-hidden-mobile');
     updateNavIndicator(name);
   }
   document.getElementById('appBody').scrollTop = 0;
@@ -631,6 +739,19 @@ document.getElementById('cafAddBtn').addEventListener('click', () => {
   renderCafLog();
 });
 
+/* ---------------------------------------------------------------
+   NEW — Desktop dashboard quick-stats row (hidden on mobile via CSS,
+   see css/desktop.css → .dashboard-stats). Numbers only need to be
+   computed once at init, plus whenever favorites change.
+   ------------------------------------------------------------- */
+function renderDashboardStats(){
+  const el = (id) => document.getElementById(id);
+  el('statDrinks').textContent = toPersianDigits(ALL_DRINKS.length);
+  el('statCategories').textContent = toPersianDigits(RECIPE_GROUPS.length);
+  el('statEncyclopedia').textContent = toPersianDigits(ENCYCLOPEDIA.reduce((s, c) => s + c.items.length, 0));
+  el('statFavorites').textContent = toPersianDigits(state.favorites.size);
+}
+
 /* ---------------- Init ---------------- */
 function init(){
   renderFeatured();
@@ -646,6 +767,7 @@ function init(){
   renderFlavorWheel();
   renderCafSelect();
   renderCafLog();
+  renderDashboardStats();
   updateTimerDisplay();
   updateRatioResult();
   applyTheme();
