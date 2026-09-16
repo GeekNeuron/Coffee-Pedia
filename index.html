@@ -40,6 +40,25 @@
       </div>
       <div class="torn-rule"></div>
 
+      <div class="dashboard-stats" id="dashboardStats">
+        <div class="stat-card">
+          <div class="stat-num" id="statDrinks">—</div>
+          <div class="stat-lbl">نوشیدنی</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="statCategories">—</div>
+          <div class="stat-lbl">دسته‌بندی</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="statEncyclopedia">—</div>
+          <div class="stat-lbl">مقاله‌ی دانشنامه</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="statFavorites">—</div>
+          <div class="stat-lbl">علاقه‌مندی</div>
+        </div>
+      </div>
+
       <div class="ticket-label"><span class="dot"></span><h2 class="lz">نوشیدنی‌های ویژه</h2></div>
       <div class="feature-scroll" id="featuredCarousel"></div>
       <div class="feature-dots" id="featuredDots"></div>
@@ -69,6 +88,7 @@
           <input id="encyclopediaSearch" type="text" placeholder="جست‌وجو در همه‌ی مباحث…">
         </div>
       </div>
+      <div class="encyclopedia-split" id="encyclopediaSplit">
       <div id="categoryListPanel">
         <div id="categoryList"></div>
         <div class="empty-note" id="encyclopediaSearchEmpty" style="display:none;">
@@ -76,7 +96,7 @@
           <h3>نتیجه‌ای یافت نشد</h3>
         </div>
       </div>
-      <div id="categoryDetailPanel" style="display:none;">
+      <div id="categoryDetailPanel" class="is-hidden">
         <div style="padding:2px 22px 14px; display:flex; align-items:center; gap:12px;">
           <button class="back-stamp" id="categoryBackBtn" aria-label="بازگشت به فهرست">
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 6l6 6-6 6"/></svg>
@@ -88,6 +108,7 @@
           </div>
         </div>
         <div id="categoryItemsWrap"></div>
+      </div>
       </div>
     </section>
 
@@ -230,8 +251,58 @@
         </button>
       </div>
       <div class="torn-rule" style="margin-top:14px;"></div>
+
+      <!-- Recipe-only: difficulty + total time badges -->
+      <div class="detail-badges" id="detailBadges" style="display:none;">
+        <span class="badge-pill" id="detailDifficultyBadge"></span>
+        <span class="badge-pill badge-pill-outline" id="detailTimeBadge"></span>
+      </div>
+
+      <!-- Recipe-only: Ingredients / Steps / Info tabs -->
+      <div class="detail-tabs" id="detailTabs" style="display:none;">
+        <button class="detail-tab active" data-detail-tab="ingredients" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3 2v20M3 7h4M3 12h4M3 17h4"/><path d="M14 2c-2 4-2 8 0 11l-1 9h6l-1-9c2-3 2-7 0-11"/></svg>مواد لازم
+        </button>
+        <button class="detail-tab" data-detail-tab="steps" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M8 6h13M8 12h13M8 18h13"/><path d="M3 6h.01M3 12h.01M3 18h.01"/></svg>مراحل
+        </button>
+        <button class="detail-tab" data-detail-tab="info" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg>اطلاعات
+        </button>
+      </div>
+
+      <div class="detail-tab-panel active" id="panelIngredients">
+        <div class="unit-toggle" id="unitToggle">
+          <button class="unit-btn active" data-unit-sys="metric" type="button">متریک (g, ml)</button>
+          <button class="unit-btn" data-unit-sys="imperial" type="button">امپریال (oz)</button>
+        </div>
+        <div id="ingredientsList"></div>
+      </div>
+
+      <div class="detail-tab-panel" id="panelSteps">
+        <div id="stepsList"></div>
+      </div>
+
+      <div class="detail-tab-panel" id="panelInfo">
+        <div id="equipmentBlock">
+          <h4 class="info-tab-heading">تجهیزات</h4>
+          <div class="equipment-row" id="equipmentList"></div>
+        </div>
+        <h4 class="info-tab-heading">خاستگاه و اطلاعات</h4>
+        <div class="origin-card" id="originInfoCard"></div>
+        <div id="proTipBlock" style="display:none;">
+          <h4 class="info-tab-heading"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18h6M10 22h4M12 2a6 6 0 0 0-4 10.5c.6.5 1 1.3 1 2.1V15h6v-.4c0-.8.4-1.6 1-2.1A6 6 0 0 0 12 2z"/></svg>نکات حرفه‌ای</h4>
+          <div class="tip-box" id="proTipText"></div>
+        </div>
+        <div id="variationBlock" style="display:none;">
+          <h4 class="info-tab-heading"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.94 13.5 8 21l3.94-1.5L18 13.5"/><path d="M12 2v4M4.93 4.93l2.83 2.83M2 12h4M17.24 7.76l2.83-2.83"/></svg>تغییرات و انواع دیگر</h4>
+          <div class="tip-box" id="variationText"></div>
+        </div>
+      </div>
+
+      <!-- Encyclopedia-entry fallback: hero illustration + rich body -->
       <div class="detail-hero" id="detailHero" style="display:none;"></div>
-      <div class="detail-body">
+      <div class="detail-body" id="detailBodyWrap">
         <div class="pill-row" id="detailPills"></div>
         <div class="rich" id="detailRich"></div>
       </div>

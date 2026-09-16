@@ -310,3 +310,92 @@ by whichever fits the context. Both names you suggested are represented
 rather than picking just one.
 
 Version bumped to `v3.0.0` in the footer tag, given the scope of this pass.
+
+---
+
+## 12. Second pass — desktop rebuild + recipe detail redesign
+
+After the first delivery, you reported the desktop mode had real conflicts,
+and asked for each drink's detail page to follow a reference (screenshots
+of a recipe app with Ingredients/Steps/Info tabs, checkable steps, an
+Equipment/Origin/Caffeine/Time info card, Pro Tips, and Variations), plus a
+proper dashboard layout for desktop using the same color/theme. All three
+are done:
+
+### Desktop — root cause of the conflicts, and the rebuild
+
+The first pass's real bug: several panels (the bottom nav, the encyclopedia
+list/detail switch) were shown or hidden with `element.style.display = '...'`
+directly in JavaScript. An inline style always wins over a stylesheet rule,
+so no desktop CSS could ever actually take effect on those elements — the
+rules were dead code. Every one of those toggles now sets a class
+(`.is-hidden` / `.is-hidden-mobile`) instead, so `css/desktop.css` can
+override that class for specific elements at desktop widths. There was
+also a design contradiction: the previous version centered every view in a
+narrow 760px column *and* tried to show a 3-4 column grid inside that same
+column — which just made the grid cramped, not "desktop." That's gone;
+`css/desktop.css` was rebuilt from scratch (still the exact same color
+tokens and component language — dashed borders, paper texture, rust/mustard
+accents) as an actual dashboard:
+
+- **Real sidebar** — the bottom tab bar becomes a proper vertical list
+  (icon + label side by side, not a tab bar rotated 90°).
+- **Quick-stats row** on Home (drinks / categories / encyclopedia articles /
+  favorites) — a dashboard element that doesn't exist on mobile at all.
+- **Featured section** becomes a static 3-4 column grid instead of a
+  swipe carousel — a carousel is a touch idiom, not something you'd
+  drag with a mouse.
+- **Encyclopedia becomes a real master/detail split** — the category list
+  stays visible in a fixed left pane while the selected article shows
+  alongside it on the right, both independently scrollable, instead of
+  the mobile drill-down (list replaced by detail, back button to return).
+- **The recipe/article detail page stays intentionally narrow** (a
+  centered ~640px reading column) even on a wide screen — steps are
+  inherently linear, so "wide" isn't actually better there; this was a
+  deliberate choice, not an oversight.
+- Hover states, a centered dialog instead of a bottom sheet for the
+  settings modal, and the same responsive breakpoints as before (untouched
+  below 860px).
+
+### Recipe detail page — rebuilt to match your reference
+
+Every recipe (all 84) was migrated from one long HTML paragraph into full
+structured data: `description`, `difficulty`, `prepTime`/`totalTime`,
+`origin`, `caffeineLevel` (1-5), `equipment[]`, `ingredients[{amount, unit,
+name}]`, `steps[{label, text}]`, `proTip`, `variation` — see
+`js/database/recipes.data.js`'s header and `database/README.md` for the
+full schema. Every value was read directly out of that recipe's own
+original text (the quantities, origins, and times were already stated
+there in prose); nothing was invented for the migration.
+
+The detail page now renders, for any recipe:
+
+- Difficulty and total-time badges under the title.
+- **Ingredients tab** — checkable ingredient rows (tap to cross an item off
+  while you cook) with a working **Metric ⇄ Imperial** toggle that actually
+  converts grams→oz and ml→fl oz (not just a label swap).
+- **Steps tab** — numbered, checkable steps with a bold label per step
+  where the original content had one (e.g. "دم‌آوری", "گرم‌کردن شیر").
+- **Info tab** — an Equipment checklist, an Origin/Caffeine-level/Prep-time/
+  Total-time card, a Pro Tips box, and a Variations box — populated from
+  the recipe's own data, each section simply omitted if that recipe has
+  nothing for it (e.g. a purely historical entry has no equipment list).
+
+Encyclopedia articles (the other 196 entries — history, science, culture,
+etc.) are unaffected and still render as the original rich-text article;
+"ingredients/steps" doesn't apply to an article about coffee history, so
+that page only appears for actual recipes.
+
+Checkbox state (ingredients/steps checked off) resets each time you open a
+detail page fresh, rather than being remembered — this app doesn't use
+localStorage anywhere (by original design), so nothing persists across a
+reload regardless; this is consistent with that, not a new limitation.
+
+### Verification this time
+
+Every one of the 279 detail pages (84 recipes + 195 encyclopedia entries)
+was opened programmatically in an automated test (jsdom) with zero runtime
+errors, along with the new tab-switching, ingredient/step checkboxes, unit
+conversion, and the encyclopedia split-panel state — precisely because a
+silent per-item data issue is exactly the kind of thing that's easy to miss
+when eyeballing a couple of examples by hand.
