@@ -1,14 +1,8 @@
-/* ===================================================================
-   Coffee Pedia (دانشنامه قهوه) — Reusable Components
-   =================================================================== */
-
-/* ---------------- Buttons ---------------- */
 .btn{ border:none; border-radius:999px; padding:13px 20px; font-size:14px; font-weight:700; display:flex; align-items:center; justify-content:center; gap:8px; cursor:pointer; flex:1; font-family:inherit; }
 .btn-ink{ background:var(--ink); color:var(--paper); }
 .btn-line{ background:var(--paper-card); color:var(--ink); border:1.5px dashed var(--line); }
 .btn svg{ width:16px; height:16px; }
 
-/* ---------------- Featured (stamp-style) ---------------- */
 .feature-scroll{ display:flex; gap:13px; overflow-x:auto; padding:0 22px 8px; scroll-snap-type:x mandatory; scrollbar-width:none; }
 .feature-scroll::-webkit-scrollbar{ display:none; }
 .feature-card{
@@ -34,7 +28,6 @@
 .feature-dots span{ width:6px; height:6px; border-radius:50%; background:var(--line); }
 .feature-dots span.active{ width:20px; border-radius:5px; background:var(--rust); }
 
-/* ---------------- Chips (ticket-stub) ---------------- */
 .stub-row{ display:flex; gap:9px; overflow-x:auto; padding:0 22px; scrollbar-width:none; }
 .stub-row::-webkit-scrollbar{ display:none; }
 .stub{
@@ -47,11 +40,11 @@
 .stub svg{ width:14px; height:14px; }
 .stub.active{ border-style:solid; border-color:var(--rust); background:var(--rust); color:#fff; }
 
-/* ---------------- Drink cards (index-card style) ---------------- */
 .card-grid{ display:grid; grid-template-columns:1fr 1fr; gap:13px; padding:16px 22px 6px; }
 .drink-card{
   position:relative; background:var(--paper-card); border:1.5px dashed var(--line);
   border-radius:var(--r-md); padding:14px 12px 12px; cursor:pointer;
+  transition:background-color .3s ease, border-color .2s ease, transform .15s ease;
 }
 .drink-card .ring{
   width:42px; height:42px; border-radius:50%; margin-bottom:10px;
@@ -74,8 +67,7 @@
 .empty-note svg{ width:38px; height:38px; color:var(--rust); margin-bottom:12px; opacity:.7; }
 .empty-note h3{ margin:0 0 6px; color:var(--ink); font-size:15px; }
 
-/* ---------------- Category cards (Encyclopedia index) ---------------- */
-.cat-card{ display:flex; align-items:center; gap:14px; padding:15px 16px; margin:0 22px 10px; background:var(--paper-card); border:1.5px dashed var(--line); border-radius:var(--r-md); cursor:pointer; }
+.cat-card{ display:flex; align-items:center; gap:14px; padding:15px 16px; margin:0 22px 10px; background:var(--paper-card); border:1.5px dashed var(--line); border-radius:var(--r-md); cursor:pointer; transition:background-color .3s ease, border-color .2s ease; }
 .cat-card.active{ border-style:solid; border-color:var(--rust); background:var(--mustard-soft); }
 .cat-card .icon{ width:44px; height:44px; border-radius:50%; background:var(--mustard-soft); display:flex; align-items:center; justify-content:center; font-size:19px; flex:0 0 auto; }
 .cat-card .icon svg{ width:21px; height:21px; color:var(--rust); }
@@ -83,10 +75,8 @@
 .cat-card .txt h4{ margin:0 0 2px; font-size:14px; font-weight:800; }
 .cat-card .txt span{ font-size:11px; color:var(--ink-soft); }
 
-/* ---------------- Tag pill (used in detail header) ---------------- */
 .tag-pill{ padding:5px 12px; border-radius:999px; font-size:11px; font-weight:800; border:1.5px solid; }
 
-/* ---------------- Modal + toast ---------------- */
 .modal-backdrop{ position:absolute; inset:0; background:rgba(20,12,6,.45); display:none; align-items:flex-end; z-index:50; }
 .modal-backdrop.show{ display:flex; }
 .modal-sheet{ width:100%; background:var(--paper-card); border-radius:24px 24px 0 0; padding:22px 20px 26px; max-height:70%; overflow-y:auto; border-top:1.5px dashed var(--line); }

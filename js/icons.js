@@ -1,29 +1,3 @@
-/* ===================================================================
-   Coffee Pedia (دانشنامه قهوه) — Icon Library
-   ---------------------------------------------------------------------
-   A single, consistent, professional icon set for the whole app.
-
-   - `coffee`, `home`, `book`, `heart`, `gear`, `search` and a dozen
-     other everyday glyphs were already hand-authored in the original
-     app in the Feather/Lucide visual language (24x24, 2px stroke) —
-     they are kept here as-is so nothing visually changes for them.
-
-   - The 27 new glyphs (history, botany, roast, chemistry, technique,
-     equipment, additive, dessert, sensory, health, economics, culture,
-     art, folklore, vocabulary, safety, future, milk, sparkle,
-     pourover, immersion, autodrip, cold, traditional, unusual,
-     rarebeans, thermometer) replace the emoji (📜🌱🔥⚗️🧭…) that used
-     to stand in for every encyclopedia category and recipe group.
-     They come from Lucide (https://lucide.dev), the actively
-     maintained continuation of Feather Icons — ISC licensed, free
-     for any use. See /assets/icons/LICENSE.
-
-   - `thermometer` also fixes a real mix-up in the original file:
-     the "Brewing Temperature Guide" card was using the exact same
-     clock/timer glyph as the Brew Timer tool (copy-paste leftover).
-     It now uses an actual thermometer.
-   =================================================================== */
-
 (function(global){
   var ICONS =   {
     "coffee": "<path d=\"M18 8h1a4 4 0 0 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z\"/><path d=\"M6 1v3M10 1v3M14 1v3\"/>",
@@ -79,15 +53,6 @@
     "thermometer": "<path d=\"M14 4v10.54a4 4 0 1 1-4 0V4a2 2 0 0 1 4 0Z\" />"
   };
 
-  /**
-   * Build a full <svg> icon string.
-   * @param {string} key - a key from ICONS
-   * @param {object} [opts]
-   * @param {string} [opts.fill] - defaults to 'none' (outline icon). Pass 'currentColor' for solid icons (e.g. play button).
-   * @param {string} [opts.strokeWidth] - defaults to '2'
-   * @param {string} [opts.className] - optional class attribute
-   * @param {string} [opts.fallback] - key to use if the requested key is missing (defaults to 'coffee')
-   */
   function renderIcon(key, opts){
     opts = opts || {};
     var body = ICONS[key] || ICONS[opts.fallback || 'coffee'];

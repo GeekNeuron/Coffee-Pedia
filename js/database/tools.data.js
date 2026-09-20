@@ -1,9 +1,3 @@
-/* ===================================================================
-   Coffee Pedia (دانشنامه قهوه) — Tools data
-   Timer presets · Ratio guide · Temperature/Roast/Grind guides ·
-   Caffeine table · nav & option lists · the new Flavor Wheel dataset
-   =================================================================== */
-
 const FEATURED_IDS = [24, 38, 62, 85, 96, 97];
 const NAV_TABS = ['home','encyclopedia','tools','favorites'];
 const UNIT_OPTIONS = ['متریک (ml, g)', 'امپریال (oz, lb)'];
@@ -21,7 +15,6 @@ const RATIOS = [
   {r:18, desc:'بسیار ملایم: سبک‌ترین حالت، برای طعم‌های ظریف و اسیدیته‌ی بالا'},
 ];
 
-/* icon: a key from js/icons.js (was: a hard-coded ☕ emoji repeated on every row) */
 const TEMP_GUIDE = [
   {name:'اسپرسو', c:'۹۰-۹۶°C', f:'۱۹۵-۲۰۵°F', color:'var(--ink)', icon:'thermometer'},
   {name:'پوراوور', c:'۹۲-۹۶°C', f:'۱۹۸-۲۰۵°F', color:'var(--rust)', icon:'thermometer'},
@@ -29,9 +22,6 @@ const TEMP_GUIDE = [
   {name:'کلد برو', c:'دمای اتاق', f:'دمای اتاق', color:'#4A7FB5', icon:'thermometer'},
 ];
 
-/* icon: 'bean' for all three — a roasted coffee bean, at increasing "darkness"
-   via the badge background color, replaces the sun/cloud/moon emoji trio
-   which didn't really describe roast level (light roast is not "sunny weather"). */
 const ROAST_GUIDE = [
   {name:'روشن (Light Roast)', desc:'میوه‌ای، گلی، اسیدیته‌ی درخشان', temp:'۹۰-۹۴°C / ۱۹۴-۲۰۲°F', best:'پوراوور، ایروپرس، کمکس', bg:'var(--mustard-soft)', ink:'var(--rust-deep)', icon:'bean'},
   {name:'متوسط (Medium Roast)', desc:'متعادل، طعم کارامل، شیرینی مغزدار', temp:'۹۳-۹۶°C / ۲۰۰-۲۰۵°F', best:'دریپ، فرنچ پرس، فلت وایت', bg:'var(--rust)', ink:'#fff', icon:'bean'},
@@ -61,17 +51,6 @@ const CAFFEINE_TABLE = [
 ];
 const CAFFEINE_DAILY_LIMIT = 400;
 
-/* ---------------------------------------------------------------
-   NEW — Coffee Flavor Wheel tool
-   ---------------------------------------------------------------
-   The 9 primary categories below are the standard top-level
-   vocabulary used across the specialty-coffee industry for
-   describing flavor in cupping (the same 9 families anchor the
-   SCA/WCR Coffee Taster's Flavor Wheel). This is an original
-   illustration drawn by this app (see js/app.js → renderFlavorWheel)
-   using that public vocabulary — it is not a reproduction of any
-   copyrighted flavor-wheel artwork.
-   ------------------------------------------------------------- */
 const FLAVOR_WHEEL = [
   {key:'fruity',   fa:'میوه‌ای',            en:'Fruity',              color:'#C1553F', example:'توت‌فرنگی، مرکبات، سیب، آلبالو'},
   {key:'floral',   fa:'گلی',                en:'Floral',              color:'#D98BB0', example:'یاس، بابونه، گل رز'},
@@ -84,17 +63,6 @@ const FLAVOR_WHEEL = [
   {key:'other',    fa:'سایر (نامطلوب)',     en:'Other / Papery / Chemical', color:'#8A7360', example:'کاغذی، کپک‌زده، دارویی — نشانه‌ی معمول عیب در دانه یا دم‌آوری'},
 ];
 
-/* ---------------------------------------------------------------
-   NEW — Recipe detail page support tables
-   ---------------------------------------------------------------
-   Used by js/app.js → openDetail() when rendering a recipe's Info tab.
-   ------------------------------------------------------------- */
-
-/* Fallback equipment list for recipe groups whose items all genuinely
-   use the same gear (so it isn't repeated 84 times in recipes.data.js).
-   Groups left out here (immersion, cold, traditional, modern, unusual,
-   rare_beans) are too mixed — every item in those already carries its
-   own explicit `equipment` in recipes.data.js. */
 const GROUP_EQUIPMENT = {
   espresso_pure:    ['دستگاه اسپرسو', 'آسیاب قهوه'],
   espresso_diluted: ['دستگاه اسپرسو', 'آسیاب قهوه', 'کتری'],
@@ -106,12 +74,7 @@ const GROUP_EQUIPMENT = {
 
 const DIFFICULTY_LABEL = {beginner:'مبتدی', intermediate:'متوسط', advanced:'پیشرفته'};
 
-/* Real unit conversion for the Metric/Imperial toggle on the Ingredients
-   tab. Only converts units we actually use in the data (گرم, میلی‌لیتر);
-   anything else (قاشق چای‌خوری, عدد, پیمانه, …) is already a "natural"
-   unit in both systems and is shown unchanged. */
 const UNIT_CONVERT = {
   'گرم': {factor: 0.035274, imperialUnit: 'oz'},
   'میلی‌لیتر': {factor: 0.033814, imperialUnit: 'fl oz'},
 };
-

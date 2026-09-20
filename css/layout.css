@@ -1,10 +1,8 @@
-/* ===================================================================
-   Coffee Pedia (دانشنامه قهوه) — Structural Layout
-   Masthead / section labels / bottom navigation
-   =================================================================== */
-
-/* ---------------- Masthead / header ---------------- */
-.mast{ padding:20px 22px 14px; display:flex; align-items:center; gap:13px; }
+.mast{
+  padding:20px 22px 14px; display:flex; align-items:center; gap:13px;
+  position:sticky; top:0; z-index:6; background:var(--paper);
+  transition:background-color .35s ease;
+}
 .seal{
   width:50px; height:50px; border-radius:50%; flex:0 0 auto;
   background:radial-gradient(circle at 35% 30%, var(--mustard-soft), var(--paper-raised) 70%);
@@ -21,6 +19,7 @@
   width:42px; height:42px; border-radius:50%; flex:0 0 auto;
   border:1.5px dashed var(--rust); background:var(--paper-card);
   display:flex; align-items:center; justify-content:center; cursor:pointer; color:var(--ink);
+  transition:transform .15s ease, background-color .35s ease;
 }
 .stamp-btn svg{ width:18px; height:18px; }
 
@@ -29,24 +28,33 @@
   background-image:repeating-linear-gradient(to left, var(--line) 0 6px, transparent 6px 11px);
 }
 
-/* ---------------- Section labels ---------------- */
 .ticket-label{ display:flex; align-items:center; gap:10px; margin:22px 22px 12px; }
 .ticket-label .dot{ width:7px; height:7px; border-radius:50%; background:var(--rust); flex:0 0 auto; }
 .ticket-label h2{ margin:0; font-size:19px; flex:1; }
-.ticket-label .link{ font-size:11.5px; font-weight:700; color:var(--rust); cursor:pointer; }
+.ticket-label .link{ font-size:11.5px; font-weight:700; color:var(--rust); cursor:pointer; transition:opacity .15s ease; }
+.ticket-label .link:active{ opacity:.6; }
 
-/* ---------------- Bottom nav (sliding stamp) ---------------- */
-.nav-wrap{ flex:0 0 auto; padding:10px 16px calc(env(safe-area-inset-bottom, 10px) + 10px); position:relative; }
-.nav-track{ position:relative; display:flex; background:var(--paper-raised); border-radius:999px; padding:5px; }
+.nav-wrap{
+  position:absolute; left:50%; transform:translateX(-50%); bottom:16px;
+  z-index:30; width:auto;
+  padding:0;
+  filter:drop-shadow(0 4px 12px rgba(42,27,18,.3));
+}
+.nav-track{
+  position:relative; display:flex; background:var(--paper-card); border:1.5px solid var(--line);
+  border-radius:999px; padding:6px; gap:2px;
+  transition:background-color .35s ease, border-color .35s ease;
+}
 .nav-indicator{
-  position:absolute; top:5px; bottom:5px; border-radius:999px; background:var(--rust);
-  transition:transform .28s cubic-bezier(.4,0,.2,1), width .28s cubic-bezier(.4,0,.2,1);
+  position:absolute; top:6px; bottom:6px; border-radius:999px; background:var(--rust);
+  transition:transform .3s cubic-bezier(.34,1.3,.64,1), width .3s cubic-bezier(.34,1.3,.64,1), background-color .35s ease;
   z-index:0;
 }
 .nav-item{
-  position:relative; z-index:1; flex:1; display:flex; flex-direction:column; align-items:center; gap:2px;
-  padding:9px 4px; cursor:pointer; color:var(--ink-soft); font-size:10px; font-weight:700;
-  background:none; border:none; font-family:inherit;
+  position:relative; z-index:1; flex:0 0 auto; display:flex; flex-direction:column; align-items:center; gap:2px;
+  padding:9px 16px; cursor:pointer; color:var(--ink-soft); font-size:10px; font-weight:700;
+  background:none; border:none; font-family:inherit; white-space:nowrap;
+  transition:color .2s ease, transform .15s ease;
 }
 .nav-item svg{ width:19px; height:19px; }
 .nav-item.active{ color:#fff; }

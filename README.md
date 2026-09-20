@@ -399,3 +399,90 @@ errors, along with the new tab-switching, ingredient/step checkboxes, unit
 conversion, and the encyclopedia split-panel state — precisely because a
 silent per-item data issue is exactly the kind of thing that's easy to miss
 when eyeballing a couple of examples by hand.
+
+---
+
+## 13. Third pass — nav rebuild, sticky headers, content audit, animation & cleanup pass
+
+- **Subtitle**: Encyclopedia tagline is now "علم، تاریخ، فرهنگ و یه فنجون قهوه" per request.
+- **Bottom nav — actually fixed this time**:
+  - Root cause of the overflow: mobile used `height:100vh`, which on many mobile
+    browsers equals the viewport height *including* the area the address bar
+    can occupy — so a `100vh`-tall card can genuinely extend below the visible
+    fold. Now declared as `height:100vh; height:100dvh;` (dynamic viewport
+    height overrides on any browser that supports it; `100vh` is the fallback).
+  - The nav is a genuinely **floating pill** now — `position:absolute`, inset
+    from every edge, drop-shadow, rounded — in both mobile and desktop,
+    instead of being docked to an edge. Desktop no longer turns it into a
+    sidebar; it's the same floating bottom-center component, just slightly
+    roomier padding.
+  - It's **always rendered now** — the code that hid it outside the four main
+    tabs was removed outright, so it stays visible on the recipe detail page
+    and in Settings too, always showing whichever tab you came from.
+  - The active-tab indicator's position/size math was already correct
+    (`translate(dx, dy)` + measured width/height); what was actually broken
+    was everything around it (overflow, inline-style conflicts) — fixing
+    those should resolve what looked like a "wrong color/position" symptom.
+- **Recipe/article header alignment bug, root cause**: `.detail-names` (the
+  div holding the title + English name) had no `flex` sizing rule at all, so
+  it fell back to the flexbox default of *not* being allowed to shrink below
+  its own content's natural width. For a drink with a long English name, the
+  header would overflow or crowd its siblings differently than for a drink
+  with a short one — which is exactly the "different every time" symptom.
+  Fixed with `flex:1 1 auto; min-width:0;` plus `align-items:center` on the
+  row (it was `flex-start`, which is why icon/text/buttons looked
+  vertically unbalanced even when nothing overflowed).
+- **Timer icon, root cause**: `.ring-timer svg{ transform:rotate(-90deg) }`
+  was written as a descendant selector, so it matched *every* `<svg>` inside
+  `.ring-timer` — including the small mug/checkmark icon nested in
+  `.ring-center`, not just the big progress ring it was meant for. That's
+  the "tilted cup" bug. Scoped the rotation to the progress ring alone and
+  added an explicit upright rule for the icon.
+- **Headers are now sticky** (`position:sticky; top:0`) in every view,
+  mobile and desktop, including the recipe/article detail page — they stay
+  in place while the content under them scrolls.
+- **All numbers converted to Persian digits** — this took a full pass over
+  every one of the 279 entries (encyclopedia + recipes) plus every
+  structured recipe field (ingredients, steps, equipment, times) and the
+  UI chrome (timer countdown, caffeine mg values, the ratio-tool input, the
+  version tag). ~100 individual fixes. Two **deliberate exceptions**, both
+  disclosed rather than silently decided: the physics/math formulas inside
+  the "Coffee & Mathematics" and "Coffee & Engineering" encyclopedia entries
+  keep their Latin-numeral subscripts/exponents (e.g. `P_1`, `T^4`) because
+  those digits are functional notation — converting them would corrupt the
+  formulas, not just relabel them. Everything else, including product/model
+  names and scientific codes that contain digits (V60, E61, SL-28, CYP1A2,
+  Grade 1–5, …), had its digits Persianized too, since the instruction was
+  explicit and unqualified.
+- **Spelling/spacing audit**: automated, pattern-based sweep across all 279
+  entries for missing ZWNJ (نیم‌فاصله) in compound verbs and words
+  (میشود→می‌شود, برجستهسازی→برجسته‌سازی, تخممرغ→تخم‌مرغ, and others — 26
+  instances fixed across body text *and* the newer structured recipe
+  fields), plus checks for double spaces and spacing around punctuation
+  (both came back clean). A full manual proofread of ~280 articles wasn't
+  feasible in this pass; this covers every *pattern-detectable* class of
+  error rather than a spot-check of a few entries.
+- **Animation pass**: the encyclopedia's expand/collapse (`<details>`)
+  now animates smoothly via a CSS grid-rows technique (native
+  `<details>` has no built-in transition) instead of snapping open/shut.
+  Added hover/active feedback (a gentle press-down scale) to every
+  interactive element — cards, buttons, nav items, tabs — and a smooth
+  color transition on theme switching (background/border colors fade
+  instead of snapping when you toggle light/dark).
+- **Code comments removed** from every `.js` and `.css` file — the
+  reasoning/rationale for each fix now lives only here in the README,
+  not inline in the source.
+- **Tap/click highlight disabled** app-wide (`-webkit-tap-highlight-color:
+  transparent`, plus a plain button reset removing default browser
+  appearance/shadow), on top of the `:focus-visible` outlines that still
+  exist for keyboard users only.
+- "یک قهوه برایم بخر" → "یه قهوه برام بخر", and the button itself is
+  noticeably smaller now.
+
+### Verification
+
+Re-ran the full automated pass: all 279 detail pages opened with zero
+runtime errors, every nav tab and the encyclopedia category list/detail
+flow exercised, theme toggled, timer started/stopped, and the digit/ZWNJ
+audit re-run against the final content until it came back clean (save for
+the two disclosed math-formula exceptions above).

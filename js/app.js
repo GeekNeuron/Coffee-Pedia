@@ -1,35 +1,22 @@
-/* ===================================================================
-   Coffee Pedia (دانشنامه قهوه) — App logic
-   =================================================================== */
-
 const ENCYCLOPEDIA_BROWSABLE = ENCYCLOPEDIA;
 const ITEM_INDEX = new Map();
 ENCYCLOPEDIA.forEach(cat => cat.items.forEach(it => ITEM_INDEX.set(it.id, {cat, item: it})));
 
 const ALL_DRINKS = RECIPE_GROUPS.flatMap(g => g.items);
-// Recipes live only inside RECIPE_GROUPS (not duplicated into ENCYCLOPEDIA) —
-// index them here too so openDetail()/FEATURED lookups by id work regardless
-// of where a drink is shown.
 RECIPE_GROUPS.forEach(g => g.items.forEach(it =>
   ITEM_INDEX.set(it.id, {cat: {id: g.id, title: g.title, icon: g.icon, hero: g.hero}, item: it})));
 
-// Reverse lookup: drink id -> its group's icon key, so every card/ring shows
-// an icon that actually reflects the kind of drink (was: a single hard-coded
-// ☕ emoji on literally every card, regardless of whether it was a cold brew,
-// a pour-over or an espresso drink).
 const DRINK_ICON = new Map();
 RECIPE_GROUPS.forEach(g => g.items.forEach(it => DRINK_ICON.set(it.id, g.icon || 'coffee')));
 
 const FEATURED = FEATURED_IDS.map(id => ITEM_INDEX.get(id)?.item).filter(Boolean);
 
-/* ---------------- Name splitting: every drink shows "نام فارسی" + "English Name" ---------------- */
 function splitName(title){
   const m = title.match(/^(.*?)\s*\(([^)]*)\)\s*$/);
   if (m) return { fa: m[1].trim(), en: m[2].trim() };
   return { fa: title, en: '' };
 }
 
-/* ---------------- In-memory app state (no localStorage) ---------------- */
 const state = {
   theme: 'light',
   unit: 'متریک (ml, g)',
@@ -59,7 +46,6 @@ function stripTags(html){
   return String(html).replace(/<[^>]*>/g, ' ');
 }
 
-/* ---------------- Home: featured + chips + grid ---------------- */
 function renderFeatured(){
   const track = document.getElementById('featuredCarousel');
   const dots = document.getElementById('featuredDots');
@@ -160,7 +146,6 @@ function toggleFavorite(id){
   if (state.currentDetailId === id) updateDetailFavIcon();
 }
 
-/* ---------------- Detail view ---------------- */
 function isNumericAmount(str){
   return /^[۰-۹0-9]+([.,][۰-۹0-9]+)?$/.test(String(str).trim());
 }
@@ -261,13 +246,6 @@ function openDetail(id){
   document.getElementById('detailRing').innerHTML = Icons.render(entry.cat.icon || DRINK_ICON.get(id) || 'coffee');
   updateDetailFavIcon();
 
-  // ---------------------------------------------------------------
-  // NEW — recipes (from RECIPE_GROUPS) now render as a proper
-  // Ingredients / Steps / Info tabbed page instead of one long prose
-  // block. Encyclopedia entries are unaffected — they keep the
-  // original rich-text rendering below, since "ingredients/steps"
-  // doesn't apply to e.g. a history article.
-  // ---------------------------------------------------------------
   const isRecipe = Array.isArray(d.steps) && Array.isArray(d.ingredients);
   document.getElementById('detailBadges').style.display = isRecipe ? 'flex' : 'none';
   document.getElementById('detailTabs').style.display = isRecipe ? 'flex' : 'none';
@@ -310,7 +288,6 @@ document.getElementById('detailFavBtn').addEventListener('click', () => {
 });
 document.getElementById('detailBackBtn').addEventListener('click', () => showView(state.currentTab));
 
-/* ---------------- Encyclopedia ---------------- */
 function renderCategoryList(filterText){
   const wrap = document.getElementById('categoryList');
   const emptyEl = document.getElementById('encyclopediaSearchEmpty');
@@ -350,8 +327,8 @@ document.getElementById('encyclopediaSearch').addEventListener('input', (e) => {
 
 function renderEncItem(it){
   if (it.kind === 'divider') return `<div class="enc-divider">${escapeHtml(it.title)}</div>`;
-  if (it.kind === 'note') return `<div class="enc-note"><strong>${escapeHtml(it.title)}</strong><div class="rich">${it.body}</div></div>`;
-  return `<details class="enc-item"><summary>${escapeHtml(it.title)}</summary><div class="rich">${it.body}</div></details>`;
+  if (it.kind === 'note') return `<div class="enc-note"><strong>${escapeHtml(it.title)}</strong><div class="rich"><div class="rich-inner">${it.body}</div></div></div>`;
+  return `<details class="enc-item"><summary>${escapeHtml(it.title)}</summary><div class="rich"><div class="rich-inner">${it.body}</div></div></details>`;
 }
 
 function openCategory(catId){
@@ -373,27 +350,6 @@ document.getElementById('categoryBackBtn').addEventListener('click', () => {
   document.getElementById('categoryListPanel').classList.remove('is-hidden-mobile');
 });
 
-/* ---------------- View / tab switching ---------------- */
-
-/* ---------------------------------------------------------------
-   BUGFIX (reported): "bottom nav bug"
-   ---------------------------------------------------------------
-   Root cause #1 — this function only ever computed a *horizontal*
-   offset (translateX) between the active tab and the track. That's
-   only correct for a row layout. css/desktop.css turns the nav into
-   a vertical side rail on wide screens, and a pure translateX can't
-   follow that. Fix: measure both axes and set width AND height, so
-   the same code works whether .nav-track is a row (mobile) or a
-   column (desktop) — no layout-specific branching needed.
-
-   Root cause #2 — on first load this ran once, synchronously, before
-   the Vazirmatn/Lalezar web fonts had finished swapping in. The tab
-   label widths change slightly once the real font loads (the
-   fallback system font has different metrics), and nothing recomputed
-   the indicator afterwards — only a window `resize` listener existed,
-   which a font swap does not trigger. Fix: also recompute once
-   document.fonts.ready resolves.
-   ------------------------------------------------------------- */
 function updateNavIndicator(tab){
   const idx = NAV_TABS.indexOf(tab);
   if (idx === -1) return;
@@ -416,12 +372,6 @@ function showView(name){
   document.querySelectorAll('.view').forEach(v => v.classList.remove('active'));
   document.getElementById('view-' + name).classList.add('active');
   const isMainTab = NAV_TABS.includes(name);
-  // was: navWrap.style.display = isMainTab ? 'block' : 'none' — an inline
-  // style always wins over a stylesheet rule, so css/desktop.css's
-  // `#navWrap{display:flex}` (needed to lay the side-rail out as a column)
-  // could never take effect on desktop. A class lets CSS decide the
-  // display value for the current layout; JS only decides visibility.
-  document.getElementById('navWrap').classList.toggle('is-hidden', !isMainTab);
   if (isMainTab){
     state.currentTab = name;
     document.getElementById('categoryDetailPanel').classList.add('is-hidden');
@@ -445,7 +395,6 @@ if (document.fonts && document.fonts.ready){
   document.fonts.ready.then(() => updateNavIndicator(state.currentTab));
 }
 
-/* ---------------- Toast ---------------- */
 let toastTimer = null;
 function showToast(msg){
   const t = document.getElementById('toast');
@@ -455,7 +404,6 @@ function showToast(msg){
   toastTimer = setTimeout(() => t.classList.remove('show'), 2200);
 }
 
-/* ---------------- Settings: theme ---------------- */
 function applyTheme(){
   document.documentElement.setAttribute('data-theme', state.theme);
   document.getElementById('themeSwitch').classList.toggle('on', state.theme === 'dark');
@@ -473,7 +421,6 @@ document.getElementById('themeSwitch').addEventListener('click', (e) => {
   applyTheme();
 });
 
-/* ---------------- Settings: pickers & feedback ---------------- */
 function openModal(html){
   document.getElementById('modalSheet').innerHTML = html;
   document.getElementById('modalBackdrop').classList.add('show');
@@ -527,7 +474,6 @@ document.getElementById('feedbackRow').addEventListener('click', () => {
   });
 });
 
-/* ---------------- Buy Me a Coffee ---------------- */
 document.getElementById('buyMeCoffeeBtn').addEventListener('click', () => {
   try {
     const win = window.open('https://www.buymeacoffee.com/coffeepedia', '_blank', 'noopener,noreferrer');
@@ -537,7 +483,6 @@ document.getElementById('buyMeCoffeeBtn').addEventListener('click', () => {
   }
 });
 
-/* ---------------- Brew Timer ---------------- */
 const timerState = { presetIndex:0, remaining:TIMER_PRESETS[0].seconds, intervalId:null };
 const RING_CIRCUMFERENCE = 2 * Math.PI * 86;
 
@@ -563,8 +508,8 @@ function resetStartButton(){
 }
 function updateTimerDisplay(){
   const total = TIMER_PRESETS[timerState.presetIndex].seconds;
-  const m = String(Math.floor(timerState.remaining / 60)).padStart(2, '0');
-  const s = String(timerState.remaining % 60).padStart(2, '0');
+  const m = toPersianDigits(String(Math.floor(timerState.remaining / 60)).padStart(2, '0'));
+  const s = toPersianDigits(String(timerState.remaining % 60).padStart(2, '0'));
   document.getElementById('timerClock').textContent = `${m}:${s}`;
   const progressFrac = total === 0 ? 0 : 1 - (timerState.remaining / total);
   const offset = RING_CIRCUMFERENCE * (1 - progressFrac);
@@ -598,7 +543,6 @@ document.getElementById('timerResetBtn').addEventListener('click', () => {
   resetStartButton();
 });
 
-/* ---------------- Ratio calculator ---------------- */
 let selectedRatio = 16;
 function renderRatioPresets(){
   const wrap = document.getElementById('ratioPresets');
@@ -623,7 +567,6 @@ function updateRatioResult(){
 }
 document.getElementById('coffeeGramsInput').addEventListener('input', updateRatioResult);
 
-/* ---------------- Brew Temperature Guide ---------------- */
 function renderTempGuide(){
   document.getElementById('tempGuideHeading').innerHTML = Icons.render('thermometer') + 'راهنمای دمای دم‌آوری';
   document.getElementById('tempGuideList').innerHTML = TEMP_GUIDE.map(t => `
@@ -633,7 +576,6 @@ function renderTempGuide(){
     </div>`).join('');
 }
 
-/* ---------------- Roast Level Guide ---------------- */
 function renderRoastGuide(){
   document.getElementById('roastGuideList').innerHTML = ROAST_GUIDE.map(r => `
     <div class="guide-row" style="align-items:flex-start;">
@@ -645,7 +587,6 @@ function renderRoastGuide(){
     </div>`).join('');
 }
 
-/* ---------------- Grind Size Guide ---------------- */
 function renderGrindGuide(){
   document.getElementById('grindGuideList').innerHTML = GRIND_GUIDE.map(g => `
     <div class="grind-block">
@@ -655,16 +596,6 @@ function renderGrindGuide(){
     </div>`).join('');
 }
 
-/* ---------------------------------------------------------------
-   NEW — Coffee Flavor Wheel
-   ---------------------------------------------------------------
-   An original SVG donut chart built at runtime from FLAVOR_WHEEL
-   (js/database/tools.data.js). Tapping / clicking a wedge or its
-   legend entry shows a toast with a few example flavor notes from
-   that family — a small, self-contained reference tool inspired by
-   (but not a copy of) the flavor wheels used across the specialty
-   coffee industry.
-   ------------------------------------------------------------- */
 function renderFlavorWheel(){
   const size = 220, cx = size/2, cy = size/2, rOuter = 100, rInner = 44;
   const n = FLAVOR_WHEEL.length;
@@ -702,10 +633,9 @@ function renderFlavorWheel(){
     }));
 }
 
-/* ---------------- Caffeine tracker ---------------- */
 function renderCafSelect(){
   const sel = document.getElementById('cafDrinkSelect');
-  sel.innerHTML = CAFFEINE_TABLE.map((d, i) => `<option value="${i}">${d.name} — ${toPersianDigits(d.mg)}mg</option>`).join('');
+  sel.innerHTML = CAFFEINE_TABLE.map((d, i) => `<option value="${i}">${d.name} — ${toPersianDigits(d.mg)} میلی‌گرم</option>`).join('');
 }
 function renderCafLog(){
   const list = document.getElementById('cafLogList');
@@ -713,7 +643,7 @@ function renderCafLog(){
     <div class="caf-log-row">
       <span class="nm">${entry.name}</span>
       <span style="display:flex; align-items:center; gap:10px;">
-        <span class="mg">${toPersianDigits(entry.mg)}mg</span>
+        <span class="mg">${toPersianDigits(entry.mg)} میلی‌گرم</span>
         <button data-remove="${i}" aria-label="حذف">×</button>
       </span>
     </div>`).join('');
@@ -739,11 +669,6 @@ document.getElementById('cafAddBtn').addEventListener('click', () => {
   renderCafLog();
 });
 
-/* ---------------------------------------------------------------
-   NEW — Desktop dashboard quick-stats row (hidden on mobile via CSS,
-   see css/desktop.css → .dashboard-stats). Numbers only need to be
-   computed once at init, plus whenever favorites change.
-   ------------------------------------------------------------- */
 function renderDashboardStats(){
   const el = (id) => document.getElementById(id);
   el('statDrinks').textContent = toPersianDigits(ALL_DRINKS.length);
@@ -752,7 +677,6 @@ function renderDashboardStats(){
   el('statFavorites').textContent = toPersianDigits(state.favorites.size);
 }
 
-/* ---------------- Init ---------------- */
 function init(){
   renderFeatured();
   renderChips();
