@@ -129,25 +129,27 @@
       <div class="tool-card">
         <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="13" r="8"/><path d="M12 9v4l2.5 2.5M9 2h6M12 2v3"/></svg>تایمر دم‌آوری</h3>
         <div class="pill-choice-row" id="timerPresets"></div>
-        <div class="ring-wrap">
-          <div class="ring-timer">
-            <svg width="196" height="196" viewBox="0 0 196 196" class="ring-track-svg">
-              <circle class="track" cx="98" cy="98" r="86"/>
-              <circle class="progress" id="timerProgress" cx="98" cy="98" r="86" stroke-dasharray="540" stroke-dashoffset="0"/>
-            </svg>
-            <div class="ring-center">
-              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" id="timerIcon"><path d="M18 8h1a4 4 0 0 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><path d="M6 1v3M10 1v3M14 1v3"/></svg>
-              <div class="ring-clock" id="timerClock">00:25</div>
+        <div class="timer-body">
+          <div class="ring-wrap">
+            <div class="ring-timer">
+              <svg width="196" height="196" viewBox="0 0 196 196" class="ring-track-svg">
+                <circle class="track" cx="98" cy="98" r="86"/>
+                <circle class="progress" id="timerProgress" cx="98" cy="98" r="86" stroke-dasharray="540" stroke-dashoffset="0"/>
+              </svg>
+              <div class="ring-center">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" id="timerIcon"><path d="M18 8h1a4 4 0 0 1 0 8h-1M2 8h16v9a4 4 0 0 1-4 4H6a4 4 0 0 1-4-4V8z"/><path d="M6 1v3M10 1v3M14 1v3"/></svg>
+                <div class="ring-clock" id="timerClock">00:25</div>
+              </div>
             </div>
           </div>
-        </div>
-        <div class="btn-row">
-          <button class="btn btn-ink" id="timerStartBtn">
-            <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>شروع
-          </button>
-          <button class="btn btn-line" id="timerResetBtn">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.5 9A9 9 0 1 0 21 13"/></svg>ریست
-          </button>
+          <div class="btn-row">
+            <button class="btn btn-ink" id="timerStartBtn">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z"/></svg>شروع
+            </button>
+            <button class="btn btn-line" id="timerResetBtn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M1 4v6h6M23 20v-6h-6"/><path d="M20.5 9A9 9 0 1 0 21 13"/></svg>ریست
+            </button>
+          </div>
         </div>
       </div>
 
@@ -355,6 +357,11 @@
           <div class="settings-text"><div class="t">ارسال بازخورد</div><div class="s">به بهبود اپلیکیشن کمک کنید</div></div>
           <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
         </button>
+        <button class="settings-row" id="aboutRow" type="button">
+          <div class="settings-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="10"/><path d="M12 16v-4M12 8h.01"/></svg></div>
+          <div class="settings-text"><div class="t">درباره ما</div><div class="s">معرفی اپلیکیشن، منابع و نسخه</div></div>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9 18l6-6-6-6"/></svg>
+        </button>
       </div>
 
       <div class="support-card">
@@ -374,7 +381,7 @@
   <!-- ============ Bottom nav (side rail on desktop — see css/desktop.css) ============ -->
   <div class="nav-wrap" id="navWrap">
     <div class="nav-track" role="tablist" aria-label="بخش‌های اصلی">
-      <div class="nav-indicator" id="navIndicator"></div>
+      <div class="nav-indicator" id="navIndicator" aria-hidden="true"></div>
       <button class="nav-item active" data-tab="home" type="button" role="tab" aria-selected="true">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M2 9.5 12 2l10 7.5V21a1 1 0 0 1-1 1h-5v-7H8v7H3a1 1 0 0 1-1-1z"/></svg>خانه
       </button>

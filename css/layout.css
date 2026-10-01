@@ -35,21 +35,21 @@
 .ticket-label .link:active{ opacity:.6; }
 
 .nav-wrap{
-  position:absolute; left:50%; transform:translateX(-50%); bottom:16px;
-  z-index:30; width:auto;
-  padding:0;
-  filter:drop-shadow(0 4px 12px rgba(42,27,18,.3));
+  position:absolute; left:0; right:0; bottom:16px;
+  z-index:30; display:flex; justify-content:center; pointer-events:none;
 }
 .nav-track{
   position:relative; display:flex; background:var(--paper-card); border:1.5px solid var(--line);
-  border-radius:999px; padding:6px; gap:2px;
+  border-radius:999px; padding:6px; gap:2px; pointer-events:auto;
+  box-shadow:0 6px 16px rgba(42,27,18,.24);
   transition:background-color .35s ease, border-color .35s ease;
 }
 .nav-indicator{
-  position:absolute; top:6px; bottom:6px; border-radius:999px; background:var(--rust);
-  transition:transform .3s cubic-bezier(.34,1.3,.64,1), width .3s cubic-bezier(.34,1.3,.64,1), background-color .35s ease;
-  z-index:0;
+  position:absolute; top:0; left:0; width:0; height:0; border-radius:999px; background:var(--rust);
+  transition:transform .32s cubic-bezier(.4,0,.2,1), width .32s cubic-bezier(.4,0,.2,1), height .32s cubic-bezier(.4,0,.2,1), background-color .35s ease;
+  z-index:0; pointer-events:none; will-change:transform;
 }
+.nav-indicator.no-anim{ transition:background-color .35s ease; }
 .nav-item{
   position:relative; z-index:1; flex:0 0 auto; display:flex; flex-direction:column; align-items:center; gap:2px;
   padding:9px 16px; cursor:pointer; color:var(--ink-soft); font-size:10px; font-weight:700;

@@ -23,15 +23,16 @@
   .torn-rule{ margin-inline:30px; }
 
   .dashboard-stats{
-    display:grid; grid-template-columns:repeat(4, 1fr); gap:14px;
-    margin:18px 30px 4px;
+    display:grid; grid-template-columns:repeat(4, 1fr); gap:12px;
+    margin:14px 30px 2px;
   }
   .stat-card{
-    background:var(--paper-card); border:1.5px dashed var(--line); border-radius:16px;
-    padding:16px 14px; text-align:center;
+    display:flex; align-items:center; justify-content:center; gap:10px;
+    background:var(--paper-card); border:1.5px dashed var(--line); border-radius:14px;
+    padding:10px 14px;
   }
-  .stat-num{ font-size:26px; font-weight:800; color:var(--rust); font-family:'Vazirmatn',sans-serif; }
-  .stat-lbl{ font-size:11.5px; color:var(--ink-soft); font-weight:700; margin-top:2px; }
+  .stat-num{ font-size:22px; line-height:1.2; font-weight:800; color:var(--rust); font-family:'Vazirmatn',sans-serif; }
+  .stat-lbl{ font-size:12px; color:var(--ink-soft); font-weight:700; white-space:nowrap; }
 
   .feature-scroll{
     display:grid; grid-template-columns:repeat(3, 1fr); gap:14px;
@@ -60,6 +61,11 @@
   #categoryDetailPanel.has-selection::before{ content:none; }
 
   #view-tools .tool-card{ margin-inline:30px; }
+  #timerPresets{ justify-content:center; }
+  .timer-body{ display:flex; align-items:center; justify-content:center; gap:72px; padding:4px 0 10px; }
+  .timer-body .ring-wrap{ margin:0; }
+  .timer-body .btn-row{ flex-direction:column; width:210px; gap:12px; }
+  .timer-body .btn-row .btn{ flex:none; width:100%; }
 
   #view-detail{ max-width:640px; margin-inline:auto; }
   .detail-mast{ padding:24px 30px 6px; }

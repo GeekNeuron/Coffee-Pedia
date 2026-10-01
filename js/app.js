@@ -350,22 +350,21 @@ document.getElementById('categoryBackBtn').addEventListener('click', () => {
   document.getElementById('categoryListPanel').classList.remove('is-hidden-mobile');
 });
 
-function updateNavIndicator(tab){
+function updateNavIndicator(tab, animate){
   const idx = NAV_TABS.indexOf(tab);
   if (idx === -1) return;
-  const track = document.querySelector('.nav-track');
-  const items = track.querySelectorAll('.nav-item');
+  const items = document.querySelectorAll('.nav-track .nav-item');
   const target = items[idx];
   const indicator = document.getElementById('navIndicator');
-  const trackRect = track.getBoundingClientRect();
-  const itemRect = target.getBoundingClientRect();
-  indicator.style.width = itemRect.width + 'px';
-  indicator.style.height = itemRect.height + 'px';
-  const dx = itemRect.left - trackRect.left;
-  const dy = itemRect.top - trackRect.top;
-  indicator.style.transform = `translate(${dx}px, ${dy}px)`;
-  items.forEach((it, i) => it.classList.toggle('active', i === idx));
-  items.forEach((it, i) => it.setAttribute('aria-selected', i === idx ? 'true' : 'false'));
+  if (animate === false) indicator.classList.add('no-anim');
+  indicator.style.width = target.offsetWidth + 'px';
+  indicator.style.height = target.offsetHeight + 'px';
+  indicator.style.transform = `translate(${target.offsetLeft}px, ${target.offsetTop}px)`;
+  if (animate === false){ void indicator.offsetWidth; indicator.classList.remove('no-anim'); }
+  items.forEach((it, i) => {
+    it.classList.toggle('active', i === idx);
+    it.setAttribute('aria-selected', i === idx ? 'true' : 'false');
+  });
 }
 
 function showView(name){
@@ -390,9 +389,12 @@ document.querySelector('[data-see-all]').addEventListener('click', () => {
   renderChips();
   renderGrid();
 });
-window.addEventListener('resize', () => updateNavIndicator(state.currentTab));
+window.addEventListener('resize', () => updateNavIndicator(state.currentTab, false));
 if (document.fonts && document.fonts.ready){
-  document.fonts.ready.then(() => updateNavIndicator(state.currentTab));
+  document.fonts.ready.then(() => updateNavIndicator(state.currentTab, false));
+}
+if (window.ResizeObserver){
+  new ResizeObserver(() => updateNavIndicator(state.currentTab, false)).observe(document.querySelector('.nav-track'));
 }
 
 let toastTimer = null;
@@ -471,6 +473,43 @@ document.getElementById('feedbackRow').addEventListener('click', () => {
     closeModal();
     if (!val) return;
     showToast('بابت بازخوردتان سپاسگزاریم!');
+  });
+});
+
+document.getElementById('aboutRow').addEventListener('click', () => {
+  const drinks = toPersianDigits(ALL_DRINKS.length);
+  const groups = toPersianDigits(RECIPE_GROUPS.length);
+  const articles = toPersianDigits(ENCYCLOPEDIA.reduce((sum, c) => sum + c.items.length, 0));
+  const version = escapeHtml(document.querySelector('.pkg-tag').textContent.trim());
+  openModal(`<h3>درباره ما</h3>
+    <div class="about-hero">
+      <div class="seal">${Icons.render('coffee')}</div>
+      <div>
+        <div class="lz about-name">Coffee Pedia</div>
+        <div class="about-sub">دانشنامه‌ی قهوه — هر فنجان یک داستان دارد</div>
+      </div>
+    </div>
+    <p class="about-text">کافی‌پدیا یک دانشنامه‌ی فارسی درباره‌ی قهوه است: تاریخ، علم و فرهنگ قهوه، دستور تهیه‌ی ده‌ها نوشیدنی و ابزارهای دم‌آوری، همه در یک اپلیکیشن که بدون اینترنت هم کار می‌کند. این اپلیکیشن حاصل تلاش یک‌نفره است.</p>
+    <div class="about-stats">
+      <div class="about-stat"><b>${drinks}</b><span>نوشیدنی</span></div>
+      <div class="about-stat"><b>${groups}</b><span>دسته‌بندی</span></div>
+      <div class="about-stat"><b>${articles}</b><span>مقاله</span></div>
+    </div>
+    <h4 class="about-h">منابع و اعتبارها</h4>
+    <ul class="about-credits">
+      <li><b>فونت‌ها:</b> وزیرمتن (Vazirmatn) و لاله‌زار (Lalezar) با مجوز SIL OFL</li>
+      <li><b>آیکون‌ها:</b> مجموعه‌ی Lucide (مجوز ISC) در کنار آیکون‌های دست‌ساز اپلیکیشن</li>
+      <li><b>داده‌ی امتیاز کاپینگ:</b> پایگاه Coffee Quality Institute، از مخزن متن‌باز jldbc/coffee-quality-database</li>
+    </ul>
+    <p class="about-version">${version}</p>
+    <div class="modal-actions">
+      <button class="btn btn-line" id="aboutFeedback" type="button">ارسال بازخورد</button>
+      <button class="btn btn-ink" id="aboutClose" type="button">بستن</button>
+    </div>`);
+  document.getElementById('aboutClose').addEventListener('click', closeModal);
+  document.getElementById('aboutFeedback').addEventListener('click', () => {
+    closeModal();
+    document.getElementById('feedbackRow').click();
   });
 });
 
@@ -695,6 +734,6 @@ function init(){
   updateTimerDisplay();
   updateRatioResult();
   applyTheme();
-  updateNavIndicator('home');
+  updateNavIndicator('home', false);
 }
 init();

@@ -486,3 +486,14 @@ runtime errors, every nav tab and the encyclopedia category list/detail
 flow exercised, theme toggled, timer started/stopped, and the digit/ZWNJ
 audit re-run against the final content until it came back clean (save for
 the two disclosed math-formula exceptions above).
+
+---
+
+## 14. Fourth pass
+
+- **Nav indicator**: the position is now computed from `offsetLeft/offsetTop/offsetWidth/offsetHeight` relative to the track (not viewport `getBoundingClientRect` deltas), so it no longer depends on the page transform, scroll or the floating wrapper. It re-measures on resize, font load and track resize (`ResizeObserver`), without animating the correction.
+- **Stat cards (desktop)**: number and label sit side by side in one row per card.
+- **Timer icon**: `#timerIcon` uses `--timer-icon-angle` (`css/variables.css`), now `45deg`; change that one value to adjust.
+- **Timer (desktop)**: ring on the right, Start/Reset stacked on the left (`.timer-body` in `css/desktop.css`). Mobile is unchanged.
+- **Encyclopedia**: glossary-style entries (ids 134, 169, 219) are real two-column tables; every article row is numbered and the open one is highlighted.
+- **Settings**: new «درباره ما» row opening an About dialog (intro, counts, credits, version).
