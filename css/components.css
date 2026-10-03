@@ -3,7 +3,7 @@
 .btn-line{ background:var(--paper-card); color:var(--ink); border:1.5px dashed var(--line); }
 .btn svg{ width:16px; height:16px; }
 
-.feature-scroll{ display:flex; gap:13px; overflow-x:auto; padding:0 22px 8px; scroll-snap-type:x mandatory; scrollbar-width:none; }
+.feature-scroll{ display:flex; gap:13px; overflow-x:auto; padding:0 22px 8px; scroll-padding-inline:22px; scroll-snap-type:x mandatory; scrollbar-width:none; }
 .feature-scroll::-webkit-scrollbar{ display:none; }
 .feature-card{
   position:relative; flex:0 0 82%; scroll-snap-align:start; cursor:pointer;

@@ -497,3 +497,10 @@ the two disclosed math-formula exceptions above).
 - **Timer (desktop)**: ring on the right, Start/Reset stacked on the left (`.timer-body` in `css/desktop.css`). Mobile is unchanged.
 - **Encyclopedia**: glossary-style entries (ids 134, 169, 219) are real two-column tables; every article row is numbered and the open one is highlighted.
 - **Settings**: new «درباره ما» row opening an About dialog (intro, counts, credits, version).
+
+## به‌روزرسانی دور دوم
+- **history**: هر نوشیدنی فیلد `history` (تاریخچه) دارد که در تب «اطلاعات» نمایش داده می‌شود.
+- **مراحل دقیق**: هر گام می‌تواند `meta` داشته باشد (دما، وزن، زمان) که به‌صورت چیپ زیر گام دیده می‌شود. `body` از روی `steps` ساخته شده است.
+- «نوشیدنی‌های ویژه» هر بار تصادفی و متفاوت از دفعه‌ی قبل انتخاب می‌شود (`pickFeatured`).
+- متن‌های اضافه‌ی چت از دانشنامه پاک و جدول زمانی تاریخچه‌ی قهوه بازنویسی شد.
+- زاویه‌ی آیکون تایمر با متغیر CSS ‏`--timer-icon-angle` (در variables.css) تنظیم می‌شود؛ مقدار فعلی ۰ درجه.

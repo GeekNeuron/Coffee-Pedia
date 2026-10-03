@@ -9,7 +9,19 @@ RECIPE_GROUPS.forEach(g => g.items.forEach(it =>
 const DRINK_ICON = new Map();
 RECIPE_GROUPS.forEach(g => g.items.forEach(it => DRINK_ICON.set(it.id, g.icon || 'coffee')));
 
-const FEATURED = FEATURED_IDS.map(id => ITEM_INDEX.get(id)?.item).filter(Boolean);
+function pickFeatured(count){
+  const shuffle = arr => arr.map(v => [Math.random(), v]).sort((a, b) => a[0] - b[0]).map(x => x[1]);
+  let prev = [];
+  try { prev = JSON.parse(localStorage.getItem('cp_featured_prev') || '[]'); } catch (e) {}
+  const picks = [];
+  shuffle(RECIPE_GROUPS.filter(g => g.items.length)).slice(0, count).forEach(g => {
+    const fresh = g.items.filter(d => !prev.includes(d.id));
+    picks.push(shuffle(fresh.length ? fresh : g.items)[0]);
+  });
+  try { localStorage.setItem('cp_featured_prev', JSON.stringify(picks.map(d => d.id))); } catch (e) {}
+  return picks.length ? picks : FEATURED_IDS.map(id => ITEM_INDEX.get(id)?.item).filter(Boolean);
+}
+const FEATURED = pickFeatured(6);
 
 function splitName(title){
   const m = title.match(/^(.*?)\s*\(([^)]*)\)\s*$/);
@@ -56,7 +68,7 @@ function renderFeatured(){
       <div class="feature-ring">${Icons.render(DRINK_ICON.get(d.id))}</div>
       <div class="feature-fa">${escapeHtml(n.fa)}</div>
       <div class="feature-en">${escapeHtml(n.en)}</div>
-      <div class="feature-tagline">★ ویژه‌ی این هفته</div>
+      <div class="feature-tagline">★ پیشنهاد امروز</div>
     </div>`;
   }).join('');
   dots.innerHTML = FEATURED.map((_, i) => `<span class="${i===0?'active':''}"></span>`).join('');
@@ -177,6 +189,7 @@ function renderSteps(steps){
       <div class="step-body">
         ${s.label ? `<div class="step-label">${escapeHtml(s.label)}</div>` : ''}
         <div class="step-text">${escapeHtml(s.text)}</div>
+        ${s.meta ? `<div class="step-meta"><bdi dir="rtl">${escapeHtml(s.meta)}</bdi></div>` : ''}
       </div>
       <span class="check-circle" role="checkbox" aria-checked="false">${Icons.render('check', {fill:'currentColor'})}</span>
     </div>`).join('');
@@ -197,6 +210,12 @@ function renderInfoTab(d, entry){
     <div class="origin-row">${Icons.render('coffee')}<span class="lbl">سطح کافئین</span><span class="caffeine-cups">${caffeineDots}</span></div>
     <div class="origin-row">${Icons.render('immersion')}<span class="lbl">زمان آماده‌سازی</span><span class="val">${escapeHtml(d.prepTime || '—')}</span></div>
     <div class="origin-row">${Icons.render('clock')}<span class="lbl">زمان کل</span><span class="val">${escapeHtml(d.totalTime || '—')}</span></div>`;
+
+  const histBlock = document.getElementById('historyBlock');
+  if (d.history){
+    histBlock.style.display = 'block';
+    document.getElementById('historyText').innerHTML = String(d.history).split(/\n\n+/).map(p => `<p>${escapeHtml(p)}</p>`).join('');
+  } else histBlock.style.display = 'none';
 
   const tipBlock = document.getElementById('proTipBlock');
   if (d.proTip){ tipBlock.style.display = 'block'; document.getElementById('proTipText').textContent = d.proTip; }
