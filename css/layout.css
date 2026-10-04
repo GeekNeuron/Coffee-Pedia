@@ -51,7 +51,7 @@
 }
 .nav-indicator.no-anim{ transition:background-color .35s ease; }
 .nav-item{
-  position:relative; z-index:1; flex:0 0 74px; width:74px; height:52px; box-sizing:border-box; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px;
+  position:relative; z-index:1; flex:0 0 52px; width:52px; height:52px; box-sizing:border-box; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:3px;
   padding:0 4px; cursor:pointer; color:var(--ink-soft); font-size:10px; font-weight:700;
   background:none; border:none; font-family:inherit; white-space:nowrap;
   transition:color .2s ease, transform .15s ease;
@@ -62,3 +62,6 @@
 .btn:focus-visible, .stub:focus-visible, .pill-choice:focus-visible{
   outline:2px solid var(--rust); outline-offset:2px;
 }
+
+.nav-item svg{ width:22px; height:22px; }
+.nav-label{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }

@@ -735,7 +735,54 @@ function renderDashboardStats(){
   el('statFavorites').textContent = toPersianDigits(state.favorites.size);
 }
 
+function renderGlossary(){
+  const q = (document.getElementById('glossarySearch').value || '').trim().toLowerCase();
+  const cat = state.glossCat || 'all';
+  const list = GLOSSARY.filter(t => (cat==='all' || t.cat===cat) &&
+    (!q || (t.fa+' '+t.en+' '+t.d).toLowerCase().includes(q)))
+    .sort((a,b) => a.en.localeCompare(b.en));
+  document.getElementById('glossaryCount').textContent = GLOSSARY.length.toLocaleString('fa') + ' اصطلاح';
+  document.getElementById('glossaryList').innerHTML = list.map(t => `
+    <article class="gl-item">
+      <div class="gl-head"><h3>${escapeHtml(t.fa)}</h3><span class="gl-en" dir="ltr">${escapeHtml(t.en)}</span></div>
+      <p>${escapeHtml(t.d)}</p>
+      <span class="gl-tag">${GLOSSARY_CATS[t.cat]}</span>
+    </article>`).join('');
+  document.getElementById('glossaryEmpty').style.display = list.length ? 'none' : '';
+}
+function renderGlossaryChips(){
+  const cats = [['all','همه'], ...Object.entries(GLOSSARY_CATS)];
+  const box = document.getElementById('glossaryChips');
+  box.innerHTML = cats.map(([k,v]) => `<button type="button" class="stub${(state.glossCat||'all')===k?' active':''}" data-gc="${k}">${v}</button>`).join('');
+  box.querySelectorAll('[data-gc]').forEach(b => b.addEventListener('click', () => {
+    state.glossCat = b.dataset.gc; renderGlossaryChips(); renderGlossary();
+  }));
+}
+function renderEquipment(){
+  document.getElementById('grindChart').innerHTML = GRIND_CHART.map(g => `
+    <div class="grind-block">
+      <div class="grind-head"><h5>${g.m}</h5><div class="grind-dots">${Array.from({length:9}, (_,i) => `<span class="${i<g.lv?'filled':''}"></span>`).join('')}</div></div>
+      <div class="grind-bar"><div class="fill" style="width:${((g.lv)/9*100).toFixed(0)}%;"></div></div>
+      <div class="grind-meta"><b><bdi dir="rtl">${g.mic}</bdi></b> — ${g.like}</div>
+      <div class="grind-meta">زمان: <bdi dir="rtl">${g.time}</bdi></div>
+      <div class="grind-warn"><span>ریزتر از حد: ${g.bad_fine}</span><span>درشت‌تر از حد: ${g.bad_coarse}</span></div>
+      <div class="grind-note">${g.note}</div>
+    </div>`).join('');
+  document.getElementById('equipmentList').innerHTML = EQUIPMENT.map(e => `
+    <details class="eq-card">
+      <summary><span class="eq-ico">${Icons.render(e.icon)}</span><span class="eq-title"><b>${e.name}</b><small dir="ltr">${e.en}</small></span></summary>
+      <p class="eq-sum">${e.sum}</p>
+      <ol class="eq-steps">${e.steps.map(s => `<li><b>${s.t}</b><span>${s.d}</span></li>`).join('')}</ol>
+      <div class="eq-mist"><h4>اشتباهات رایج</h4><ul>${e.mistakes.map(m => `<li>${m}</li>`).join('')}</ul></div>
+      <div class="eq-tip"><b>نکته:</b> ${e.tip}</div>
+    </details>`).join('');
+}
+document.getElementById('glossarySearch').addEventListener('input', renderGlossary);
+
 function init(){
+  renderGlossaryChips();
+  renderGlossary();
+  renderEquipment();
   renderFeatured();
   renderChips();
   renderGrid();

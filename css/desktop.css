@@ -12,7 +12,9 @@
   .nav-wrap{ bottom:22px; }
   .nav-track{ padding:8px; gap:4px; }
   .nav-item{ padding:11px 22px; font-size:12.5px; gap:6px; flex-direction:row; }
+  .nav-item{ flex:0 0 118px; width:118px; height:46px; padding:0 10px; }
   .nav-item svg{ width:18px; height:18px; }
+  .nav-label{ position:static; width:auto; height:auto; overflow:visible; clip:auto; }
 
   .mast{ padding:24px 30px 14px; }
   .ticket-label{ margin:24px 30px 12px; }
