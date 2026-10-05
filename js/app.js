@@ -735,19 +735,25 @@ function renderDashboardStats(){
   el('statFavorites').textContent = toPersianDigits(state.favorites.size);
 }
 
-function renderGlossary(){
+let glossLimit = 60;
+function renderGlossary(resetLimit){
+  if (resetLimit !== false && resetLimit !== 'more') glossLimit = 60;
   const q = (document.getElementById('glossarySearch').value || '').trim().toLowerCase();
   const cat = state.glossCat || 'all';
   const list = GLOSSARY.filter(t => (cat==='all' || t.cat===cat) &&
     (!q || (t.fa+' '+t.en+' '+t.d).toLowerCase().includes(q)))
     .sort((a,b) => a.en.localeCompare(b.en));
-  document.getElementById('glossaryCount').textContent = GLOSSARY.length.toLocaleString('fa') + ' اصطلاح';
-  document.getElementById('glossaryList').innerHTML = list.map(t => `
+  const total = GLOSSARY.length.toLocaleString('fa') + ' اصطلاح';
+  document.getElementById('glossaryCount').textContent = (q || cat!=='all') ? `${list.length.toLocaleString('fa')} نتیجه از ${total}` : total;
+  const shown = list.slice(0, glossLimit);
+  document.getElementById('glossaryList').innerHTML = shown.map(t => `
     <article class="gl-item">
       <div class="gl-head"><h3>${escapeHtml(t.fa)}</h3><span class="gl-en" dir="ltr">${escapeHtml(t.en)}</span></div>
       <p>${escapeHtml(t.d)}</p>
       <span class="gl-tag">${GLOSSARY_CATS[t.cat]}</span>
-    </article>`).join('');
+    </article>`).join('') + (list.length > glossLimit ? `<button type="button" class="btn gl-more" id="glossaryMore">نمایش بیشتر (${(list.length-glossLimit).toLocaleString('fa')} مورد دیگر)</button>` : '');
+  const more = document.getElementById('glossaryMore');
+  if (more) more.addEventListener('click', () => { glossLimit += 80; renderGlossary('more'); });
   document.getElementById('glossaryEmpty').style.display = list.length ? 'none' : '';
 }
 function renderGlossaryChips(){
@@ -759,7 +765,7 @@ function renderGlossaryChips(){
   }));
 }
 function renderEquipment(){
-  document.getElementById('grindChart').innerHTML = GRIND_CHART.map(g => `
+  document.getElementById('grindChart').innerHTML = GRIND_CHART.slice().reverse().map(g => `
     <div class="grind-block">
       <div class="grind-head"><h5>${g.m}</h5><div class="grind-dots">${Array.from({length:9}, (_,i) => `<span class="${i<g.lv?'filled':''}"></span>`).join('')}</div></div>
       <div class="grind-bar"><div class="fill" style="width:${((g.lv)/9*100).toFixed(0)}%;"></div></div>
@@ -777,7 +783,7 @@ function renderEquipment(){
       <div class="eq-tip"><b>نکته:</b> ${e.tip}</div>
     </details>`).join('');
 }
-document.getElementById('glossarySearch').addEventListener('input', renderGlossary);
+document.getElementById('glossarySearch').addEventListener('input', () => renderGlossary());
 
 function init(){
   renderGlossaryChips();

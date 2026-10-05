@@ -65,3 +65,10 @@
 
 .nav-item svg{ width:22px; height:22px; }
 .nav-label{ position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0 0 0 0); white-space:nowrap; }
+
+/* narrow phones: keep the 6-item floating nav inside the screen */
+@media (max-width:380px){
+  .nav-track{ padding:5px; gap:1px; }
+  .nav-item{ flex:0 0 46px; width:46px; height:46px; }
+  .nav-item svg{ width:20px; height:20px; }
+}

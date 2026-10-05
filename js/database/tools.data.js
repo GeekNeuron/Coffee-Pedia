@@ -1,5 +1,5 @@
 const FEATURED_IDS = [24, 38, 62, 85, 96, 97];
-const NAV_TABS = ['home','encyclopedia','tools','favorites'];
+const NAV_TABS = ['home','encyclopedia','tools','glossary','equipment','favorites'];
 const UNIT_OPTIONS = ['متریک (ml, g)', 'امپریال (oz, lb)'];
 const LANGUAGE_OPTIONS = ['فارسی', 'English', 'العربية'];
 
