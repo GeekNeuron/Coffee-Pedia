@@ -175,7 +175,7 @@ function renderIngredients(ingredients, unitSystem){
     }
     return `
       <div class="ingredient-row" data-ing="${i}">
-        <span class="check-circle" role="checkbox" aria-checked="false">${Icons.render('check', {fill:'currentColor'})}</span>
+        <span class="check-circle" role="checkbox" aria-checked="false">${Icons.render('check', {strokeWidth:'3'})}</span>
         <span class="ingredient-amount">${escapeHtml(label)}</span>
         <span class="ingredient-name">${escapeHtml(ing.name)}</span>
       </div>`;
@@ -191,7 +191,7 @@ function renderSteps(steps){
         <div class="step-text">${escapeHtml(s.text)}</div>
         ${s.meta ? `<div class="step-meta"><bdi dir="rtl">${escapeHtml(s.meta)}</bdi></div>` : ''}
       </div>
-      <span class="check-circle" role="checkbox" aria-checked="false">${Icons.render('check', {fill:'currentColor'})}</span>
+      <span class="check-circle" role="checkbox" aria-checked="false">${Icons.render('check', {strokeWidth:'3'})}</span>
     </div>`).join('');
 }
 
@@ -606,7 +606,7 @@ function renderRatioPresets(){
   const wrap = document.getElementById('ratioPresets');
   wrap.innerHTML = RATIOS.map(({r}) => {
     const selected = r === selectedRatio;
-    return `<button class="pill-choice ${selected?'active':''}" data-ratio="${r}">${selected?'✓ ':''}۱:${toPersianDigits(r)}</button>`;
+    return `<button class="pill-choice ${selected?'active':''}" data-ratio="${r}">${selected?Icons.render('check',{strokeWidth:'3'}):''}۱:${toPersianDigits(r)}</button>`;
   }).join('');
   wrap.querySelectorAll('[data-ratio]').forEach(el =>
     el.addEventListener('click', () => { selectedRatio = Number(el.dataset.ratio); renderRatioPresets(); updateRatioResult(); }));
