@@ -645,13 +645,36 @@ function renderRoastGuide(){
     </div>`).join('');
 }
 
+const GRIND_MAP = [
+  ['کلد برو'],
+  ['فرنچ پرس / پرکولاتور'],
+  ['کمکس','کلور دریپر'],
+  ['کالیتا ویو / قهوه\u200cساز قطره\u200cای','وی\u200cشصت (V60)'],
+  ['ایروپرس'],
+  ['اسپرسو','موکاپات'],
+  ['قهوه ترک / جذوه']
+];
 function renderGrindGuide(){
-  document.getElementById('grindGuideList').innerHTML = GRIND_GUIDE.map(g => `
-    <div class="grind-block">
-      <div class="grind-head"><h5>${g.name}</h5><div class="grind-dots">${Array.from({length:7}, (_,i) => `<span class="${i<g.dots?'filled':''}"></span>`).join('')}</div></div>
-      <div class="grind-bar"><div class="fill" style="width:${(g.dots/7*100).toFixed(0)}%;"></div></div>
-      <div class="grind-meta"><b>${g.like}</b> — ${g.used}</div>
-    </div>`).join('');
+  document.getElementById('grindGuideList').innerHTML = GRIND_GUIDE.map((g, gi) => {
+    const rows = (GRIND_MAP[gi] || []).map(n => GRIND_CHART.find(c => c.m === n)).filter(Boolean);
+    const full = rows.map(c => `
+      <div class="grind-full-row">
+        <h6>${c.m}</h6>
+        <div class="grind-meta"><b><bdi dir="rtl">${c.mic}</bdi></b> — ${c.like}</div>
+        <div class="grind-meta">زمان: <bdi dir="rtl">${c.time}</bdi></div>
+        <div class="grind-warn"><span>ریزتر از حد: ${c.bad_fine}</span><span>درشت‌تر از حد: ${c.bad_coarse}</span></div>
+        <div class="grind-note">${c.note}</div>
+      </div>`).join('');
+    return `
+    <details class="grind-block grind-more">
+      <summary>
+        <div class="grind-head"><h5>${g.name}</h5><div class="grind-dots">${Array.from({length:7}, (_,i) => `<span class="${i<g.dots?'filled':''}"></span>`).join('')}</div></div>
+        <div class="grind-bar"><div class="fill" style="width:${(g.dots/7*100).toFixed(0)}%;"></div></div>
+        <div class="grind-meta"><b>${g.like}</b> — ${g.used}</div>
+      </summary>
+      <div class="grind-full">${full}</div>
+    </details>`;
+  }).join('');
 }
 
 function renderFlavorWheel(){
@@ -765,16 +788,8 @@ function renderGlossaryChips(){
   }));
 }
 function renderEquipment(){
-  document.getElementById('grindChart').innerHTML = GRIND_CHART.slice().reverse().map(g => `
-    <div class="grind-block">
-      <div class="grind-head"><h5>${g.m}</h5><div class="grind-dots">${Array.from({length:9}, (_,i) => `<span class="${i<g.lv?'filled':''}"></span>`).join('')}</div></div>
-      <div class="grind-bar"><div class="fill" style="width:${((g.lv)/9*100).toFixed(0)}%;"></div></div>
-      <div class="grind-meta"><b><bdi dir="rtl">${g.mic}</bdi></b> — ${g.like}</div>
-      <div class="grind-meta">زمان: <bdi dir="rtl">${g.time}</bdi></div>
-      <div class="grind-warn"><span>ریزتر از حد: ${g.bad_fine}</span><span>درشت‌تر از حد: ${g.bad_coarse}</span></div>
-      <div class="grind-note">${g.note}</div>
-    </div>`).join('');
-  document.getElementById('equipmentList').innerHTML = EQUIPMENT.map(e => `
+  document.getElementById('eqCount').textContent = ' ('+EQUIPMENT.length.toLocaleString('fa')+')';
+  document.getElementById('eqGuideList').innerHTML = EQUIPMENT.map(e => `
     <details class="eq-card">
       <summary><span class="eq-ico">${Icons.render(e.icon)}</span><span class="eq-title"><b>${e.name}</b><small dir="ltr">${e.en}</small></span></summary>
       <p class="eq-sum">${e.sum}</p>

@@ -190,6 +190,7 @@
 
       <div class="tool-card">
         <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="1.5"/><circle cx="12" cy="6" r="1.5"/><circle cx="18" cy="6" r="1.5"/><circle cx="6" cy="12" r="1.5"/><circle cx="12" cy="12" r="1.5"/><circle cx="18" cy="12" r="1.5"/><circle cx="6" cy="18" r="1.5"/><circle cx="12" cy="18" r="1.5"/><circle cx="18" cy="18" r="1.5"/></svg>راهنمای اندازه آسیاب</h3>
+        <p class="grind-hint">هر اندازه را لمس کنید تا جزئیات کامل (اندازه‌ی ذرات، زمان، خطاهای رایج) باز شود. اندازه‌ها تقریبی‌اند و به آسیاب شما بستگی دارند؛ قاعده: هر چه زمان تماس آب با قهوه کوتاه‌تر، آسیاب ریزتر.</p>
         <div id="grindGuideList"></div>
       </div>
 
@@ -217,6 +218,11 @@
         </div>
         <p class="hint-error" id="cafWarning" style="display:none;">به سقف توصیه‌شده‌ی روزانه نزدیک شده‌اید یا از آن گذشته‌اید.</p>
       </div>
+      <details class="tool-card eq-collapse" id="eqCollapse">
+        <summary><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.4 2.4-2.1-.6-.6-2.1z"/></svg>راهنمای هر وسیله<small id="eqCount"></small></h3></summary>
+        <p class="grind-hint">روش دقیق کار، اشتباهات رایج و نکته‌ی هر وسیله.</p>
+        <div id="eqGuideList"></div>
+      </details>
     </section>
 
     <!-- ============ FAVORITES ============ -->
@@ -259,22 +265,6 @@
       <div class="empty-note" id="glossaryEmpty" style="display:none;"><h3>واژه‌ای پیدا نشد</h3></div>
     </section>
 
-    <!-- ============ EQUIPMENT ============ -->
-    <section class="view" id="view-equipment">
-      <div class="mast">
-        <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.4 2.4-2.1-.6-.6-2.1z"/></svg></div>
-        <div class="mast-titles">
-          <h1 class="lz">راهنمای تجهیزات</h1>
-          <p>آسیاب درست برای هر نوشیدنی و روش دقیق کار با هر وسیله</p>
-        </div>
-      </div>
-      <div class="torn-rule"></div>
-      <div class="ticket-label"><span class="dot"></span><h2>جدول اندازه‌ی آسیاب</h2></div>
-      <div class="eq-note">اندازه‌ها تقریبی‌اند و به آسیاب شما بستگی دارند. قاعده: <b>هر چه زمان تماس آب با قهوه کوتاه‌تر، آسیاب ریزتر</b>.</div>
-      <div id="grindChart"></div>
-      <div class="ticket-label"><span class="dot"></span><h2>راهنمای هر وسیله</h2></div>
-      <div id="equipmentList"></div>
-    </section>
 
     <!-- ============ DRINK / ENTRY DETAIL ============ -->
     <section class="view" id="view-detail">
@@ -436,9 +426,6 @@
       </button>
             <button aria-label="واژه‌نامه" title="واژه‌نامه" class="nav-item" data-tab="glossary" type="button" role="tab" aria-selected="false">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h16M4 12h10M4 19h16"/><path d="M18 9l3 3-3 3"/></svg><span class="nav-label">واژه‌نامه</span>
-      </button>
-      <button aria-label="تجهیزات" title="تجهیزات" class="nav-item" data-tab="equipment" type="button" role="tab" aria-selected="false">
-        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.7 6.3a4 4 0 0 0-5.4 5.4L3 18l3 3 6.3-6.3a4 4 0 0 0 5.4-5.4l-2.4 2.4-2.1-.6-.6-2.1z"/></svg><span class="nav-label">تجهیزات</span>
       </button>
 <button aria-label="علاقه‌مندی" title="علاقه‌مندی" class="nav-item" data-tab="favorites" type="button" role="tab" aria-selected="false">
         <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M20.8 4.6a5.5 5.5 0 0 0-7.8 0L12 5.6l-1-1a5.5 5.5 0 1 0-7.8 7.8l1 1L12 21l7.8-7.6 1-1a5.5 5.5 0 0 0 0-7.8z"/></svg><span class="nav-label">علاقه‌مندی</span>
