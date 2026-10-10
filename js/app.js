@@ -400,8 +400,8 @@ function showView(name){
 }
 document.querySelectorAll('.nav-item').forEach(el =>
   el.addEventListener('click', () => showView(el.dataset.tab)));
-document.getElementById('openSettingsBtn').addEventListener('click', () => showView('settings'));
-document.getElementById('settingsBackBtn').addEventListener('click', () => showView(state.currentTab));
+document.getElementById('openFavBtn').addEventListener('click', () => showView('favorites'));
+document.getElementById('favBackBtn').addEventListener('click', () => showView(state.currentTab));
 document.getElementById('searchBtn').addEventListener('click', () => showView('encyclopedia'));
 document.querySelector('[data-see-all]').addEventListener('click', () => {
   state.selectedGroup = 'all';
@@ -625,34 +625,56 @@ function updateRatioResult(){
 }
 document.getElementById('coffeeGramsInput').addEventListener('input', updateRatioResult);
 
+function srcLine(list){
+  return '<div class="src-box guide-src"><strong>منابع</strong><ul>' + list.map(x => `<li><a href="${x[1]}" target="_blank" rel="noopener">${x[0]}</a></li>`).join('') + '</ul></div>';
+}
 function renderTempGuide(){
   document.getElementById('tempGuideHeading').innerHTML = Icons.render('thermometer') + 'راهنمای دمای دم‌آوری';
   document.getElementById('tempGuideList').innerHTML = TEMP_GUIDE.map(t => `
-    <div class="guide-row">
-      <div class="guide-badge" style="background:${t.color}; color:#fff;">${Icons.render(t.icon || 'thermometer', {fill:'none'})}</div>
-      <div class="guide-text"><h5>${t.name}</h5><span class="meta">${t.c} • ${t.f}</span></div>
-    </div>`).join('');
+    <details class="guide-details">
+      <summary class="guide-row">
+        <div class="guide-badge" style="background:${t.color}; color:#fff;">${Icons.render(t.icon || 'thermometer', {fill:'none'})}</div>
+        <div class="guide-text"><h5>${t.name}</h5><span class="meta"><bdi dir="auto">${t.c}</bdi> • <bdi dir="auto">${t.f}</bdi></span></div>
+      </summary>
+      <ul class="guide-more">${(t.more||[]).map(x => `<li>${x}</li>`).join('')}</ul>
+    </details>`).join('') + srcLine(TEMP_SOURCES);
 }
 
 function renderRoastGuide(){
   document.getElementById('roastGuideList').innerHTML = ROAST_GUIDE.map(r => `
-    <div class="guide-row" style="align-items:flex-start;">
-      <div class="guide-badge" style="background:${r.bg}; color:${r.ink};">${Icons.render(r.icon || 'bean', {fill:'currentColor'})}</div>
-      <div class="guide-text">
-        <h5>${r.name}</h5><p style="font-style:italic;">${r.desc}</p>
-        <span class="meta">${r.temp}</span><br><span class="meta" style="direction:rtl;">${r.best}</span>
+    <details class="guide-details">
+      <summary class="guide-row" style="align-items:flex-start;">
+        <div class="guide-badge" style="background:${r.bg}; color:${r.ink};">${Icons.render(r.icon || 'bean', {fill:'currentColor'})}</div>
+        <div class="guide-text">
+          <h5>${r.name}</h5><p style="font-style:italic;">${r.desc}</p>
+          <span class="meta">دمای دانه در پایان: <bdi dir="ltr">${r.temp}</bdi></span>
+        </div>
+      </summary>
+      <div class="guide-more">
+        <table class="guide-table">${r.rows.map(x => `<tr><th>${x[0]}</th><td>${x[1]}</td></tr>`).join('')}</table>
+        <p class="guide-names"><b>نام‌های رایج:</b> <bdi dir="ltr">${r.names}</bdi></p>
+        ${r.tip ? `<p class="guide-tip">${r.tip}</p>` : ''}
       </div>
-    </div>`).join('');
+    </details>`).join('') +
+    `<ul class="guide-facts">${ROAST_FACTS.map(x => `<li>${x}</li>`).join('')}</ul>` + srcLine(ROAST_SOURCES);
 }
 
 const GRIND_MAP = [
-  ['کلد برو'],
-  ['فرنچ پرس / پرکولاتور'],
-  ['کمکس','کلور دریپر'],
-  ['کالیتا ویو / قهوه\u200cساز قطره\u200cای','وی\u200cشصت (V60)'],
+  ['کلد برو','قهوه کابویی'],
+  ['فرنچ پرس','پرکولاتور'],
+  ['کمکس'],
+  ['قهوه\u200cساز قطره\u200cای','وی\u200cشصت (V60) / پوراوور'],
   ['ایروپرس'],
   ['اسپرسو','موکاپات'],
   ['قهوه ترک / جذوه']
+];
+const GRIND_SOURCES = [
+  ['I\'m Not a Barista — Grind size chart','https://notabarista.org/grind-size-chart/'],
+  ['Beans & Barista — Grind size chart: what has actually been measured','https://beansandbarista.com/blog/coffee-grind-size-chart/'],
+  ['Wikipedia — Coffee grinder','https://en.wikipedia.org/wiki/Coffee_grinder'],
+  ['Wikipedia — Coffee preparation','https://en.wikipedia.org/wiki/Coffee_preparation'],
+  ['Wikipedia — Turkish coffee','https://en.wikipedia.org/wiki/Turkish_coffee'],
+  ['Wikipedia — Percolator','https://en.wikipedia.org/wiki/Percolator'],
 ];
 function renderGrindGuide(){
   document.getElementById('grindGuideList').innerHTML = GRIND_GUIDE.map((g, gi) => {
@@ -661,8 +683,8 @@ function renderGrindGuide(){
       <div class="grind-full-row">
         <h6>${c.m}</h6>
         <div class="grind-meta"><b><bdi dir="rtl">${c.mic}</bdi></b> — ${c.like}</div>
-        <div class="grind-meta">زمان: <bdi dir="rtl">${c.time}</bdi></div>
-        <div class="grind-warn"><span>ریزتر از حد: ${c.bad_fine}</span><span>درشت‌تر از حد: ${c.bad_coarse}</span></div>
+        ${c.time ? `<div class="grind-meta">زمان: <bdi dir="rtl">${c.time}</bdi></div>` : ''}
+        <div class="grind-warn"><span>${c.bad_fine}</span><span>${c.bad_coarse}</span></div>
         <div class="grind-note">${c.note}</div>
       </div>`).join('');
     return `
@@ -674,7 +696,7 @@ function renderGrindGuide(){
       </summary>
       <div class="grind-full">${full}</div>
     </details>`;
-  }).join('');
+  }).join('') + '<p class="grind-hint" style="margin-top:10px;">اعداد میکرونی تقریبی‌اند و منابع با هم اختلاف دارند؛ بازه‌ی هر روش را «نقطه‌ی شروع» بدانید. برای سایفون، کلور دریپر و برخی روش‌های دیگر منبع عدد میکرونی پیدا نشد.</p>' + srcLine(GRIND_SOURCES);
 }
 
 function renderFlavorWheel(){
@@ -717,6 +739,11 @@ function renderFlavorWheel(){
 function renderCafSelect(){
   const sel = document.getElementById('cafDrinkSelect');
   sel.innerHTML = CAFFEINE_TABLE.map((d, i) => `<option value="${i}">${d.name} — ${toPersianDigits(d.mg)} میلی‌گرم</option>`).join('');
+  if (!document.getElementById('cafSrc')) {
+    const n = document.createElement('div'); n.id = 'cafSrc';
+    n.innerHTML = srcLine(CAFFEINE_SOURCES);
+    sel.parentNode.insertBefore(n, sel.nextSibling);
+  }
 }
 function renderCafLog(){
   const list = document.getElementById('cafLogList');
@@ -774,6 +801,7 @@ function renderGlossary(resetLimit){
       <div class="gl-head"><h3>${escapeHtml(t.fa)}</h3><span class="gl-en" dir="ltr">${escapeHtml(t.en)}</span></div>
       <p>${escapeHtml(t.d)}</p>
       <span class="gl-tag">${GLOSSARY_CATS[t.cat]}</span>
+      <div class="gl-src">منبع: ${(t.s||[]).map(x => `<a href="${x[1]}" target="_blank" rel="noopener">${escapeHtml(x[0])}</a>`).join('، ')}</div>
     </article>`).join('') + (list.length > glossLimit ? `<button type="button" class="btn gl-more" id="glossaryMore">نمایش بیشتر (${(list.length-glossLimit).toLocaleString('fa')} مورد دیگر)</button>` : '');
   const more = document.getElementById('glossaryMore');
   if (more) more.addEventListener('click', () => { glossLimit += 80; renderGlossary('more'); });

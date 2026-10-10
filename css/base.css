@@ -73,3 +73,61 @@ button:active, .stub:active, .pill-choice:active, .nav-item:active,
     scroll-behavior:auto !important;
   }
 }
+
+/* ===== Smooth motion everywhere ===== */
+.stat-card, .settings-row, .detail-tab, .pill-choice, .stub, .btn, .buy-btn, .stamp-btn, .gl-chip, .gl-item, .eq-card, .grind-block, .enc-item, .tool-card, .paper-card, .cat-card, .drink-card, .feature-card, .switch, .switch .knob, input, select, textarea{
+  transition-property:background-color,border-color,color,opacity,transform,box-shadow,filter;
+  transition-duration:.22s; transition-timing-function:cubic-bezier(.22,1,.36,1);
+}
+.stamp-btn:active, .btn:active, .buy-btn:active, .settings-row:active, .gl-chip:active{ transform:scale(.96); }
+details > summary{ transition:background-color .2s ease, color .2s ease; }
+details[open] > :not(summary){ animation:detailsIn .3s cubic-bezier(.22,1,.36,1); }
+@keyframes detailsIn{ from{opacity:0; transform:translateY(-6px);} to{opacity:1; transform:translateY(0);} }
+details > summary::after, details > summary .chev{ transition:transform .25s ease; }
+.drink-grid > *, .gl-list > *, #favList > *{ animation:pageIn .3s cubic-bezier(.22,1,.36,1) both; }
+.toast{ transition:opacity .25s ease, transform .25s cubic-bezier(.22,1,.36,1); }
+html{ scroll-behavior:smooth; }
+#appBody{ scroll-behavior:smooth; }
+
+/* ===== Staggered section entrance (every view) ===== */
+:root{ --ease-out:cubic-bezier(.22,1,.36,1); }
+@keyframes riseIn{ from{opacity:0; transform:translateY(14px);} to{opacity:1; transform:none;} }
+@keyframes popIn{ from{opacity:0; transform:scale(.92);} to{opacity:1; transform:none;} }
+@keyframes slideIn{ from{opacity:0; transform:translateX(-14px);} to{opacity:1; transform:none;} }
+.view.active > *{ animation:riseIn .45s var(--ease-out) both; }
+.view.active > *:nth-child(1){ animation-delay:0s; }
+.view.active > *:nth-child(2){ animation-delay:.04s; }
+.view.active > *:nth-child(3){ animation-delay:.08s; }
+.view.active > *:nth-child(4){ animation-delay:.12s; }
+.view.active > *:nth-child(5){ animation-delay:.16s; }
+.view.active > *:nth-child(6){ animation-delay:.2s; }
+.view.active > *:nth-child(n+7){ animation-delay:.24s; }
+.view.active .tool-card, .view.active .paper-card, .view.active .stat-card, .view.active .settings-row{ animation:riseIn .45s var(--ease-out) both; }
+.stat-card:nth-child(2){ animation-delay:.06s; } .stat-card:nth-child(3){ animation-delay:.12s; }
+.drink-grid > *:nth-child(2n){ animation-delay:.05s; }
+.drink-grid > *:nth-child(3n){ animation-delay:.1s; }
+.cat-card{ animation:slideIn .4s var(--ease-out) both; }
+.cat-card:nth-child(2){animation-delay:.04s}.cat-card:nth-child(3){animation-delay:.08s}.cat-card:nth-child(4){animation-delay:.12s}.cat-card:nth-child(5){animation-delay:.16s}.cat-card:nth-child(n+6){animation-delay:.2s}
+.feature-card{ animation:popIn .5s var(--ease-out) both; }
+.enc-item .rich-inner{ transition:opacity .3s ease; }
+/* nav: icon lift on active, soft press */
+.nav-item svg{ transition:transform .3s var(--ease-out); }
+.nav-item.active svg{ transform:translateY(-1px) scale(1.12); }
+.nav-item:active svg{ transform:scale(.88); }
+/* heart / favorite pop */
+.fav-btn, .heart-btn, [class*="fav"] svg{ transition:transform .25s var(--ease-out), color .2s ease, fill .2s ease; }
+.on svg, .is-fav svg, .active.fav svg{ animation:popIn .35s var(--ease-out); }
+/* detail panels, modal content, toast */
+.detail-tab-panel.active{ animation:riseIn .35s var(--ease-out) both; }
+.modal-sheet > *{ animation:riseIn .35s var(--ease-out) both; }
+/* progress & meters */
+.ring-timer .progress{ transition:stroke-dashoffset .5s linear, stroke .3s ease; }
+.caf-meter .fill{ transition:width .6s var(--ease-out), background-color .3s ease; }
+/* theme swap: smooth colors everywhere */
+body, .paper-card, .tool-card, .nav-track, .modal-sheet, input, select{ transition:background-color .35s ease, color .35s ease, border-color .35s ease; }
+/* views must keep their own entrance when switching */
+.view.active > .mast{ animation-name:riseIn; }
+@media (prefers-reduced-motion: reduce){
+  .view.active > *, .cat-card, .feature-card, .modal-sheet > *, .drink-grid > *, .gl-list > *{ animation:none !important; }
+  html, #appBody{ scroll-behavior:auto; }
+}

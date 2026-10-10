@@ -77,8 +77,10 @@
 
 .tag-pill{ padding:5px 12px; border-radius:999px; font-size:11px; font-weight:800; border:1.5px solid; }
 
-.modal-backdrop{ position:absolute; inset:0; background:rgba(20,12,6,.45); display:none; align-items:flex-end; z-index:50; }
-.modal-backdrop.show{ display:flex; }
+.modal-backdrop{ position:absolute; inset:0; background:rgba(20,12,6,.45); display:flex; align-items:flex-end; z-index:50; opacity:0; visibility:hidden; pointer-events:none; transition:opacity .28s ease, visibility 0s linear .28s; }
+.modal-backdrop.show{ opacity:1; visibility:visible; pointer-events:auto; transition:opacity .28s ease, visibility 0s; }
+.modal-sheet{ transform:translateY(40px); transition:transform .32s cubic-bezier(.22,1,.36,1); }
+.modal-backdrop.show .modal-sheet{ transform:translateY(0); }
 .modal-sheet{ width:100%; background:var(--paper-card); border-radius:24px 24px 0 0; padding:22px 20px 26px; max-height:70%; overflow-y:auto; border-top:1.5px dashed var(--line); }
 .modal-sheet h3{ margin:0 0 16px; font-size:16px; font-weight:800; }
 .option-row{ display:flex; align-items:center; justify-content:space-between; padding:13px 4px; cursor:pointer; border-radius:10px; font-size:14px; }
