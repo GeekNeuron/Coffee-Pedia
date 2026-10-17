@@ -64,7 +64,12 @@
     "steps": "<path d=\"M10 6.5h10.5M10 12h10.5M10 17.5h10.5\"/><circle cx=\"5\" cy=\"6.5\" r=\"1.2\"/><circle cx=\"5\" cy=\"12\" r=\"1.2\"/><circle cx=\"5\" cy=\"17.5\" r=\"1.2\"/>",
     "bulb": "<path d=\"M9.5 17.5h5M10.5 21h3\"/><path d=\"M12 3a6 6 0 0 0-3.6 10.8c.7.6 1.1 1.3 1.1 2.2v1.5h5V16c0-.9.4-1.6 1.1-2.2A6 6 0 0 0 12 3z\"/>",
     "route": "<circle cx=\"6\" cy=\"18\" r=\"2.2\"/><circle cx=\"18\" cy=\"6\" r=\"2.2\"/><path d=\"M8.2 18H15a3 3 0 0 0 0-6H9a3 3 0 0 1 0-6h6.8\"/>",
-    "ruler": "<rect x=\"2.5\" y=\"8\" width=\"19\" height=\"8\" rx=\"1.5\"/><path d=\"M6.5 8v3M10.5 8v4M14.5 8v3M18.5 8v4\"/>"
+    "ruler": "<rect x=\"2.5\" y=\"8\" width=\"19\" height=\"8\" rx=\"1.5\"/><path d=\"M6.5 8v3M10.5 8v4M14.5 8v3M18.5 8v4\"/>",
+    "textSize": "<path d=\"M3.5 19 8.5 6l5 13M5.3 14.5h6.4\"/><path d=\"M15.5 19l2.5-6.5 2.5 6.5M16.4 17h3.2\"/>",
+    "download": "<path d=\"M12 4v10M7.5 10 12 14.5 16.5 10\"/><path d=\"M5 19.5h14\"/>",
+    "upload": "<path d=\"M12 15V5M7.5 9 12 4.5 16.5 9\"/><path d=\"M5 19.5h14\"/>",
+    "volume": "<path d=\"M4 9.5h3.5L12 6v12l-4.5-3.5H4z\"/><path d=\"M15.5 9a4 4 0 0 1 0 6M18 6.5a7.5 7.5 0 0 1 0 11\"/>",
+    "vibrate": "<rect x=\"8\" y=\"3.5\" width=\"8\" height=\"17\" rx=\"2\"/><path d=\"M4 8v8M20 8v8\"/>"
   };
 
   function renderIcon(key, opts){

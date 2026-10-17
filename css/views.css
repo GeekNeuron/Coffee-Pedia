@@ -494,3 +494,15 @@ html[data-theme="dark"] .wr-svg .mk.on text{ fill:#1A0F08; }
 .wr-care-foot{ display:flex; justify-content:space-between; align-items:center; margin-top:6px; font-size:11px; color:var(--ink-soft); }
 #wrenchBody .tool-card{ animation:none !important; }
 @media (min-width:860px){ #view-wrench .tool-card{ margin-inline:30px; } .wr-chips{ padding:0 30px 14px; } }
+
+/* اندازه‌ی فونت (تنظیمات) و بازیابی */
+.view, .modal-sheet{ zoom:var(--ui-zoom,1); }
+.fs-sample{ font-size:13px; color:var(--ink-soft); margin:12px 4px 4px; line-height:1.9; }
+.rs-list{ margin:6px 18px 12px; padding:0; font-size:13px; line-height:2; color:var(--ink); }
+
+/* ترجیح‌های ظاهر */
+html.recipe-big .step-row, html.recipe-big .ingredient-row{ zoom:1.22; }
+html.recipe-big .g-text{ font-size:26px; }
+html.calm *, html.calm *::before, html.calm *::after{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important; }
+.switch.on{ background:var(--rust); }
+.switch.on .knob{ background:var(--paper-card); }

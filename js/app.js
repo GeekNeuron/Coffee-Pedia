@@ -434,21 +434,8 @@ function showToast(msg){
 
 function applyTheme(){
   document.documentElement.setAttribute('data-theme', state.theme);
-  document.getElementById('themeSwitch').classList.toggle('on', state.theme === 'dark');
-  document.getElementById('themeSwitch').setAttribute('aria-checked', state.theme === 'dark' ? 'true' : 'false');
   document.getElementById('themeModeLabel').textContent = state.theme === 'dark' ? 'حالت تیره' : 'حالت روشن';
 }
-document.getElementById('themeToggleRow').addEventListener('click', (e) => {
-  if (e.target.closest('.switch')) return;
-  state.theme = state.theme === 'dark' ? 'light' : 'dark';
-  applyTheme();
-});
-document.getElementById('themeSwitch').addEventListener('click', (e) => {
-  e.stopPropagation();
-  state.theme = state.theme === 'dark' ? 'light' : 'dark';
-  applyTheme();
-});
-
 function openModal(html){
   document.getElementById('modalSheet').innerHTML = html;
   document.getElementById('modalBackdrop').classList.add('show');

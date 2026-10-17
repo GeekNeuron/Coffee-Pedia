@@ -175,6 +175,7 @@ function totals(){
 function cartText(){
   return totals().map(r => '• ' + r.name + (r.num ? ': ' + (r.lo === r.hi ? fmt(r.lo) : fmt(r.lo) + '–' + fmt(r.hi)) + (r.unit ? ' ' + r.unit : '') : '') ).join('\n');
 }
+window.cpCartText = cartText;
 function cartView(){
   const ids = Object.keys(cart).filter(k => cart[k] > 0);
   const q = cartQ.trim().toLowerCase();

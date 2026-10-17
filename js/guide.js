@@ -13,13 +13,13 @@ function dur(s){
 }
 const mmss = s => fa(String(Math.floor(s / 60)).padStart(2, '0') + ':' + String(s % 60).padStart(2, '0'));
 function beep(){
-  try {
+  if (cpPref('sound', true)) try {
     ac = ac || new (window.AudioContext || window.webkitAudioContext)();
     [0, .25, .5].forEach(t => { const o = ac.createOscillator(), g = ac.createGain(); o.frequency.value = 880; g.gain.value = .15; o.connect(g); g.connect(ac.destination); o.start(ac.currentTime + t); o.stop(ac.currentTime + t + .15); });
   } catch (e) {}
-  try { navigator.vibrate && navigator.vibrate([200, 100, 200]); } catch (e) {}
+  if (cpPref('vibe', true)) try { navigator.vibrate && navigator.vibrate([200, 100, 200]); } catch (e) {}
 }
-async function lock(){ try { if (navigator.wakeLock) wake = await navigator.wakeLock.request('screen'); } catch (e) {} }
+async function lock(){ try { if (cpPref('wake', true) && navigator.wakeLock) wake = await navigator.wakeLock.request('screen'); } catch (e) {} }
 function unlock(){ try { wake && wake.release(); } catch (e) {} wake = null; }
 function stop(){ clearInterval(tm); tm = null; }
 function begin(){
