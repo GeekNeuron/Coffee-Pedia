@@ -1,0 +1,80 @@
+(function(global){
+  var ICONS = {
+    "coffee": "<path d=\"M4 9h13v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z\"/><path d=\"M17 11h1.5a2.5 2.5 0 0 1 0 5H16.5\"/><path d=\"M8 3.5c0 1 1 1.5 1 2.5M12 3.5c0 1 1 1.5 1 2.5\"/>",
+    "cup": "<path d=\"M4 9h13v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z\"/><path d=\"M17 11h1.5a2.5 2.5 0 0 1 0 5H16.5\"/>",
+    "home": "<path d=\"M3.5 11 12 4l8.5 7\"/><path d=\"M6 9.5V20h12V9.5\"/><path d=\"M10 20v-5h4v5\"/>",
+    "book": "<path d=\"M5 4.5h11a3 3 0 0 1 3 3V20H8a3 3 0 0 1-3-3z\"/><path d=\"M5 17a3 3 0 0 1 3-3h11\"/>",
+    "heart": "<path d=\"M12 20C7 16.5 3.5 13.5 3.5 9.5A4.5 4.5 0 0 1 12 7.5a4.5 4.5 0 0 1 8.5 2C20.5 13.5 17 16.5 12 20z\"/>",
+    "gear": "<path d=\"M4 7h9M17 7h3M4 12h3M11 12h9M4 17h11M19 17h1\"/><circle cx=\"15\" cy=\"7\" r=\"2\"/><circle cx=\"9\" cy=\"12\" r=\"2\"/><circle cx=\"17\" cy=\"17\" r=\"2\"/>",
+    "search": "<circle cx=\"10.5\" cy=\"10.5\" r=\"6.5\"/><path d=\"M15.5 15.5 20 20\"/>",
+    "check": "<path d=\"M5 12.5 10 17.5 19 7.5\"/>",
+    "chevronRight": "<path d=\"M9.5 5.5 16 12l-6.5 6.5\"/>",
+    "chevronLeft": "<path d=\"M14.5 5.5 8 12l6.5 6.5\"/>",
+    "play": "<path d=\"M7.5 4.5v15L19 12z\"/>",
+    "pause": "<rect x=\"6\" y=\"5\" width=\"4\" height=\"14\" rx=\"1\"/><rect x=\"14\" y=\"5\" width=\"4\" height=\"14\" rx=\"1\"/>",
+    "rotateCcw": "<path d=\"M4.5 12a7.5 7.5 0 1 0 2.4-5.5\"/><path d=\"M5 3.5v4h4\"/>",
+    "arrowDown": "<path d=\"M12 4.5v15M6 13.5l6 6 6-6\"/>",
+    "bean": "<g transform=\"rotate(35 12 12)\"><ellipse cx=\"12\" cy=\"12\" rx=\"5.5\" ry=\"8.5\"/><path d=\"M12 3.5c-3 3 3 5 0 8.5s3 5 0 8.5\"/></g>",
+    "gridDots": "<circle cx=\"6\" cy=\"6\" r=\"1.3\"/><circle cx=\"12\" cy=\"6\" r=\"1.3\"/><circle cx=\"18\" cy=\"6\" r=\"1.3\"/><circle cx=\"6\" cy=\"12\" r=\"1.3\"/><circle cx=\"12\" cy=\"12\" r=\"1.3\"/><circle cx=\"18\" cy=\"12\" r=\"1.3\"/><circle cx=\"6\" cy=\"18\" r=\"1.3\"/><circle cx=\"12\" cy=\"18\" r=\"1.3\"/><circle cx=\"18\" cy=\"18\" r=\"1.3\"/>",
+    "sunburst": "<path d=\"M12 3v4.5M12 16.5V21M3 12h4.5M16.5 12H21M5.6 5.6l3.2 3.2M15.2 15.2l3.2 3.2M5.6 18.4l3.2-3.2M15.2 8.8l3.2-3.2\"/>",
+    "sunSmall": "<path d=\"M6.5 16a5.5 5.5 0 0 1 11 0\"/><path d=\"M3 19h18M12 5v2.5M4.8 9.3l1.8 1.5M19.2 9.3l-1.8 1.5\"/>",
+    "sun": "<circle cx=\"12\" cy=\"12\" r=\"3.5\"/><path d=\"M12 3.5v2.5M12 18v2.5M3.5 12H6M18 12h2.5M6 6l1.7 1.7M16.3 16.3 18 18M6 18l1.7-1.7M16.3 7.7 18 6\"/>",
+    "calculator": "<rect x=\"5\" y=\"3\" width=\"14\" height=\"18\" rx=\"2.5\"/><path d=\"M8.5 7.5h7\"/><path d=\"M9 12h.01M12 12h.01M15 12h.01M9 16h.01M12 16h.01M15 16h.01\"/>",
+    "infoCircle": "<circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 11v5.5\"/><path d=\"M12 7.6h.01\"/>",
+    "droplet": "<path d=\"M12 3.5c3.5 4.2 6 7.2 6 10.3a6 6 0 0 1-12 0c0-3.1 2.5-6.1 6-10.3z\"/>",
+    "language": "<path d=\"M4 5h16a1.5 1.5 0 0 1 1.5 1.5v9A1.5 1.5 0 0 1 20 17h-8l-5 4v-4H4a1.5 1.5 0 0 1-1.5-1.5v-9A1.5 1.5 0 0 1 4 5z\"/><path d=\"M7 9.5h10M7 13h6\"/>",
+    "globe": "<circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M3 12h18\"/><ellipse cx=\"12\" cy=\"12\" rx=\"4\" ry=\"9\"/>",
+    "contact": "<rect x=\"3\" y=\"5\" width=\"18\" height=\"14\" rx=\"2.5\"/><circle cx=\"9\" cy=\"11\" r=\"2.2\"/><path d=\"M5.8 16c.5-1.7 1.8-2.6 3.2-2.6s2.7.9 3.2 2.6\"/><path d=\"M15 10h3M15 13.5h3\"/>",
+    "clock": "<circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"M12 7v5.2l3.2 2\"/>",
+    "x": "<path d=\"M6 6l12 12M18 6 6 18\"/>",
+    "history": "<path d=\"M4 12a8 8 0 1 0 2.4-5.7\"/><path d=\"M4 4v3.5h3.5\"/><path d=\"M12 8v4.2l2.8 1.8\"/>",
+    "botany": "<path d=\"M12 21v-9\"/><path d=\"M12 12c0-4 3-6.5 8-6.5 0 4.5-3 6.5-8 6.5z\"/><path d=\"M12 15.5c0-3-2.2-5-6.5-5 0 3.5 2.2 5 6.5 5z\"/>",
+    "roast": "<path d=\"M12 3c.5 3.5 5 5.6 5 10.2A5 5 0 0 1 7 13.2c0-2 1-3.2 2-4.2.2 1.2.8 1.8 1.7 2C10.5 8 11 5.5 12 3z\"/>",
+    "chemistry": "<path d=\"M9.5 3.5h5M10.5 3.5v5.2L5 18.2A2 2 0 0 0 6.7 21h10.6a2 2 0 0 0 1.7-2.8L13.5 8.7V3.5\"/><path d=\"M8 14.5h8\"/>",
+    "flask": "<path d=\"M9.5 3.5h5M10.5 3.5v5.2L5 18.2A2 2 0 0 0 6.7 21h10.6a2 2 0 0 0 1.7-2.8L13.5 8.7V3.5\"/><path d=\"M8 14.5h8\"/>",
+    "technique": "<circle cx=\"12\" cy=\"12\" r=\"8.5\"/><circle cx=\"12\" cy=\"12\" r=\"4.5\"/><path d=\"M12 12h.01\"/>",
+    "equipment": "<rect x=\"3\" y=\"8\" width=\"18\" height=\"12\" rx=\"2.5\"/><path d=\"M9 8V6a1.5 1.5 0 0 1 1.5-1.5h3A1.5 1.5 0 0 1 15 6v2\"/><path d=\"M3 13.5h18M10.5 12v3h3v-3\"/>",
+    "wrench": "<g transform=\"rotate(45 12 12)\"><path d=\"M10.5 3H8v4.5a4 4 0 0 0 8 0V3h-2.5v5h-3z\"/><rect x=\"10.5\" y=\"11.3\" width=\"3\" height=\"9.7\" rx=\"1.5\"/></g>",
+    "additive": "<rect x=\"6\" y=\"8\" width=\"12\" height=\"12\" rx=\"3\"/><path d=\"M8 8V5.5h8V8\"/><path d=\"M10 13h4\"/>",
+    "dessert": "<path d=\"M7.5 11 12 21l4.5-10\"/><path d=\"M6.5 11a5.5 5.5 0 0 1 11 0z\"/>",
+    "sensory": "<path d=\"M2.5 12S6 5.5 12 5.5 21.5 12 21.5 12 18 18.5 12 18.5 2.5 12 2.5 12z\"/><circle cx=\"12\" cy=\"12\" r=\"2.8\"/>",
+    "health": "<path d=\"M12 20S4 15.5 4 9.8A4.3 4.3 0 0 1 12 8a4.3 4.3 0 0 1 8 1.8C20 15.5 12 20 12 20z\"/><path d=\"M8 12h2l1.5-2.5L13 14l1-2h2\"/>",
+    "economics": "<ellipse cx=\"12\" cy=\"7\" rx=\"7\" ry=\"3\"/><path d=\"M5 7v5c0 1.7 3.1 3 7 3s7-1.3 7-3V7\"/><path d=\"M5 12v5c0 1.7 3.1 3 7 3s7-1.3 7-3v-5\"/>",
+    "culture": "<path d=\"M3 9.5 12 4l9 5.5z\"/><path d=\"M5.5 11.5V18M10 11.5V18M14 11.5V18M18.5 11.5V18\"/><path d=\"M3.5 20h17\"/>",
+    "art": "<path d=\"M12 3.5a8.5 8.5 0 1 0 0 17c1.4 0 2-1 1.6-2-.5-1.2.2-2.5 1.6-2.5H18a3 3 0 0 0 3-3C21 7.5 17 3.5 12 3.5z\"/><path d=\"M7.5 11h.01M10 7.5h.01M14.5 7.5h.01M17 10.5h.01\"/>",
+    "folklore": "<path d=\"M19.5 14.5A8 8 0 0 1 9.5 4.5a8 8 0 1 0 10 10z\"/><path d=\"M17 4v3M15.5 5.5h3\"/>",
+    "vocabulary": "<path d=\"M3.5 12.2V4.5a1 1 0 0 1 1-1h7.7L20.5 11.8a1.5 1.5 0 0 1 0 2.1l-6.6 6.6a1.5 1.5 0 0 1-2.1 0z\"/><path d=\"M8 8h.01\"/>",
+    "safety": "<path d=\"M12 3.5 19 6v5.5c0 4.3-3 7.5-7 9-4-1.5-7-4.7-7-9V6z\"/><path d=\"m9 12 2.2 2.2L15.5 10\"/>",
+    "future": "<circle cx=\"12\" cy=\"12\" r=\"9\"/><path d=\"m15.5 8.5-2 5-5 2 2-5z\"/>",
+    "milk": "<path d=\"M8 3.5h8l1.5 4v13h-11v-13z\"/><path d=\"M6.5 7.5h11M10 12h4\"/>",
+    "sparkle": "<path d=\"M12 3.5c.6 4.2 2.3 5.9 6.5 6.5-4.2.6-5.9 2.3-6.5 6.5-.6-4.2-2.3-5.9-6.5-6.5 4.2-.6 5.9-2.3 6.5-6.5z\"/><path d=\"M18.5 16v4M16.5 18h4\"/>",
+    "pourover": "<path d=\"M5 4.5h14l-4.5 8h-5z\"/><path d=\"M6.5 15h11v2.5a3 3 0 0 1-3 3h-5a3 3 0 0 1-3-3z\"/>",
+    "immersion": "<path d=\"M7 7.5h10v12.5a1 1 0 0 1-1 1H8a1 1 0 0 1-1-1z\"/><path d=\"M12 3v8M9.5 3.5h5\"/><path d=\"M7 14.5h10\"/><path d=\"M17 10h1.5a2 2 0 0 1 0 4H17\"/>",
+    "autodrip": "<rect x=\"4\" y=\"3.5\" width=\"14\" height=\"17\" rx=\"2\"/><path d=\"M4 8.5h14\"/><path d=\"M11 8.5v3.5\"/><path d=\"M8 20.5v-3.5h6v3.5\"/>",
+    "cold": "<rect x=\"5\" y=\"5\" width=\"14\" height=\"14\" rx=\"3\"/><path d=\"M8.5 9.5l2-1.5M9 15.5h3\"/>",
+    "traditional": "<path d=\"M7 8h9l1 11.5H6z\"/><path d=\"M7 8c.5-1.8 1.7-2.7 4.5-2.7S15.5 6.2 16 8\"/><path d=\"M17 12h4.5\"/>",
+    "unusual": "<rect x=\"4\" y=\"4\" width=\"16\" height=\"16\" rx=\"3\"/><path d=\"M8.5 8.5h.01M15.5 8.5h.01M12 12h.01M8.5 15.5h.01M15.5 15.5h.01\"/>",
+    "rarebeans": "<path d=\"M7 4h10l4 5.5-9 10.5-9-10.5z\"/><path d=\"M3 9.5h18M9.5 4 8 9.5l4 10.5 4-10.5L14.5 4\"/>",
+    "thermometer": "<path d=\"M10 14.5V5a2 2 0 0 1 4 0v9.5a4 4 0 1 1-4 0z\"/><path d=\"M12 9v7\"/>",
+    "notebook": "<rect x=\"5\" y=\"3.5\" width=\"14\" height=\"17\" rx=\"2\"/><path d=\"M9 3.5v17M12.5 8h3.5M12.5 12h3.5\"/>",
+    "queue": "<path d=\"M4 6h12M4 12h8M4 18h12\"/><path d=\"M17 12h4M19 10l2 2-2 2\"/>",
+    "link": "<g transform=\"rotate(-45 12 12)\"><rect x=\"2.5\" y=\"9\" width=\"11\" height=\"6\" rx=\"3\"/><rect x=\"10.5\" y=\"9\" width=\"11\" height=\"6\" rx=\"3\"/></g>",
+    "timer": "<circle cx=\"12\" cy=\"13.5\" r=\"7.5\"/><path d=\"M12 9.5v4l2.5 2M9.5 3h5M12 3v3\"/>",
+    "basket": "<path d=\"M3.5 10h17l-1.8 9a2 2 0 0 1-2 1.6H7.3a2 2 0 0 1-2-1.6z\"/><path d=\"M8 10l3-6M16 10l-3-6\"/><path d=\"M9.5 14v3M14.5 14v3\"/>",
+    "steps": "<path d=\"M10 6.5h10.5M10 12h10.5M10 17.5h10.5\"/><circle cx=\"5\" cy=\"6.5\" r=\"1.2\"/><circle cx=\"5\" cy=\"12\" r=\"1.2\"/><circle cx=\"5\" cy=\"17.5\" r=\"1.2\"/>",
+    "bulb": "<path d=\"M9.5 17.5h5M10.5 21h3\"/><path d=\"M12 3a6 6 0 0 0-3.6 10.8c.7.6 1.1 1.3 1.1 2.2v1.5h5V16c0-.9.4-1.6 1.1-2.2A6 6 0 0 0 12 3z\"/>",
+    "route": "<circle cx=\"6\" cy=\"18\" r=\"2.2\"/><circle cx=\"18\" cy=\"6\" r=\"2.2\"/><path d=\"M8.2 18H15a3 3 0 0 0 0-6H9a3 3 0 0 1 0-6h6.8\"/>",
+    "ruler": "<rect x=\"2.5\" y=\"8\" width=\"19\" height=\"8\" rx=\"1.5\"/><path d=\"M6.5 8v3M10.5 8v4M14.5 8v3M18.5 8v4\"/>"
+  };
+
+  function renderIcon(key, opts){
+    opts = opts || {};
+    var body = ICONS[key] || ICONS[opts.fallback || 'coffee'];
+    var fill = opts.fill || 'none';
+    var sw = opts.strokeWidth || '2';
+    var cls = opts.className ? ' class="' + opts.className + '"' : '';
+    return '<svg' + cls + ' viewBox="0 0 24 24" fill="' + fill + '" stroke="currentColor" stroke-width="' + sw + '">' + body + '</svg>';
+  }
+
+  global.Icons = { registry: ICONS, render: renderIcon };
+})(window);

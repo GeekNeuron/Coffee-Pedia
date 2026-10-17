@@ -1,0 +1,619 @@
+<!DOCTYPE html>
+<html lang="fa" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0">
+<meta name="description" content="دانشنامه‌ی جامع قهوه: تاریخ، علم، فرهنگ و بیش از ۸۰ روش دم‌آوری قهوه از سراسر جهان، به همراه ابزارهای حرفه‌ای دم‌آوری.">
+<meta name="application-name" content="Coffee Pedia">
+<meta name="application-id" content="com.coffeepedia.app">
+<meta name="theme-color" content="#B5502F">
+<title>Coffee Pedia — دانشنامه قهوه</title>
+
+<link rel="stylesheet" href="fonts/fonts.css">
+<link rel="stylesheet" href="css/variables.css">
+<link rel="stylesheet" href="css/base.css">
+<link rel="stylesheet" href="css/layout.css">
+<link rel="stylesheet" href="css/components.css">
+<link rel="stylesheet" href="css/views.css">
+<link rel="stylesheet" href="css/desktop.css">
+</head>
+<body>
+<a class="skip-link" href="#appBody">رفتن به محتوای اصلی</a>
+
+<div class="journal">
+  <div class="app-body" id="appBody">
+
+    <!-- ============ HOME ============ -->
+    <section class="view active" id="view-home">
+      <div class="mast">
+        <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9h13v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z"/><path d="M17 11h1.5a2.5 2.5 0 0 1 0 5H16.5"/><path d="M8 3.5c0 1 1 1.5 1 2.5M12 3.5c0 1 1 1.5 1 2.5"/></svg></div>
+        <div class="mast-titles">
+          <h1 class="lz">Coffee Pedia</h1>
+          <p>دانشنامه‌ی قهوه — هر فنجان یک داستان دارد</p>
+        </div>
+        <button class="stamp-btn" id="searchBtn" aria-label="جست‌وجو">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 20 20"/></svg>
+        </button>
+        <button class="stamp-btn" id="openFavBtn" aria-label="علاقه‌مندی‌ها"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20C7 16.5 3.5 13.5 3.5 9.5A4.5 4.5 0 0 1 12 7.5a4.5 4.5 0 0 1 8.5 2C20.5 13.5 17 16.5 12 20z"/></svg></button>
+      </div>
+      <div class="torn-rule"></div>
+
+      <div class="dashboard-stats" id="dashboardStats">
+        <div class="stat-card">
+          <div class="stat-num" id="statDrinks">—</div>
+          <div class="stat-lbl">نوشیدنی</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="statCategories">—</div>
+          <div class="stat-lbl">دسته‌بندی</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="statEncyclopedia">—</div>
+          <div class="stat-lbl">مقاله‌ی دانشنامه</div>
+        </div>
+        <div class="stat-card">
+          <div class="stat-num" id="statFavorites">—</div>
+          <div class="stat-lbl">علاقه‌مندی</div>
+        </div>
+      </div>
+
+      <div class="ticket-label"><span class="dot"></span><h2 class="lz">نوشیدنی‌های ویژه</h2></div>
+      <div class="feature-scroll" id="featuredCarousel"></div>
+      <div class="feature-dots" id="featuredDots"></div>
+
+      <div class="ticket-label">
+        <span class="dot"></span><h2 class="lz">دسته‌بندی‌ها</h2>
+        <span class="link" data-see-all>همه</span>
+      </div>
+      <div class="stub-row" id="categoryChips"></div>
+
+      <div class="card-grid" id="drinkGrid"></div>
+    </section>
+
+    <!-- ============ ENCYCLOPEDIA ============ -->
+    <section class="view" id="view-encyclopedia">
+      <div class="mast">
+        <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4.5h11a3 3 0 0 1 3 3V20H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h11"/></svg></div>
+        <div class="mast-titles">
+          <h1 class="lz">دانشنامه‌ی قهوه</h1>
+          <p>علم، تاریخ، فرهنگ و یه فنجون قهوه</p>
+        </div>
+      </div>
+      <div class="torn-rule"></div>
+      <div style="padding:0 22px 16px;">
+        <div class="line-field">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 20 20"/></svg>
+          <input id="encyclopediaSearch" type="text" placeholder="جست‌وجو در همه‌ی مباحث…">
+        </div>
+      </div>
+      <div class="encyclopedia-split" id="encyclopediaSplit">
+      <div id="categoryListPanel">
+        <div id="categoryList"></div>
+        <div class="empty-note" id="encyclopediaSearchEmpty" style="display:none;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 20 20"/></svg>
+          <h3>نتیجه‌ای یافت نشد</h3>
+        </div>
+      </div>
+      <div id="categoryDetailPanel" class="is-hidden">
+        <div style="padding:2px 22px 14px; display:flex; align-items:center; gap:12px;">
+          <button class="back-stamp" id="categoryBackBtn" aria-label="بازگشت به فهرست">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.5 5.5 16 12l-6.5 6.5"/></svg>
+          </button>
+          <div class="seal" id="categoryIcon" style="width:40px; height:40px; font-size:16px;"></div>
+          <div class="mast-titles">
+            <h1 class="lz" id="categoryTitle" style="font-size:17px;">—</h1>
+            <p id="categoryCount"></p>
+          </div>
+        </div>
+        <div id="categoryItemsWrap"></div>
+      </div>
+      </div>
+    </section>
+
+    <!-- ============ TOOLS ============ -->
+    <section class="view" id="view-tools">
+      <div class="mast">
+        <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9h13v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z"/><path d="M17 11h1.5a2.5 2.5 0 0 1 0 5H16.5"/><path d="M8 3.5c0 1 1 1.5 1 2.5M12 3.5c0 1 1 1.5 1 2.5"/></svg></div>
+        <div class="mast-titles">
+          <h1 class="lz">دفتر دم‌آوری</h1>
+          <p>ابزارهای حرفه‌ای دم‌آوری</p>
+        </div>
+      </div>
+      <div class="torn-rule"></div>
+      <p style="padding:0 22px 16px; font-size:12.5px; color:var(--ink-soft); line-height:1.6;">
+        ابزارها و راهنماهای ضروری برای دم‌آوری بهترین فنجان قهوه.
+      </p>
+
+      <div class="tool-card lab-entry">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 3.5h5M10.5 3.5v5.2L5 18.2A2 2 0 0 0 6.7 21h10.6a2 2 0 0 0 1.7-2.8L13.5 8.7V3.5"/><path d="M8 14.5h8"/></svg>آزمایشگاه و آزمون باریستا</h3>
+        <p class="lab-entry-text">ترکیب نوشیدنی‌ها را خودتان انتخاب کنید و اگر اشتباه بود، پاسخ درست و دلیلش را ببینید. بعد با آزمون واژه‌نامه خودتان را بسنجید. پیشرفتتان ذخیره می‌شود.</p>
+        <button class="btn btn-ink" id="openLabBtn" type="button">ورود به آزمایشگاه</button>
+      </div>
+
+      <div class="tool-card lab-entry">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><g transform="rotate(45 12 12)"><path d="M10.5 3H8v4.5a4 4 0 0 0 8 0V3h-2.5v5h-3z"/><rect x="10.5" y="11.3" width="3" height="9.7" rx="1.5"/></g></svg>دست به آچار</h3>
+        <p class="lab-entry-text">قطعات موکاپات، دستگاه اسپرسو، آسیاب، فرنچ پرس و ایروپرس را بشناسید و برنامه‌ی تمیزکاری و نگهداری‌شان را دنبال کنید.</p>
+        <button class="btn btn-ink" id="openWrenchBtn" type="button">ورود به دست به آچار</button>
+      </div>
+
+      <div class="tool-card lab-entry">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3.5" width="14" height="17" rx="2"/><path d="M9 3.5v17M12.5 8h3.5M12.5 12h3.5"/></svg>کارگاه باریستا</h3>
+        <p class="lab-entry-text">دفترچه‌ی دم‌آوری، عیب‌یاب طعم، تجهیزات من و لیست خرید برای چند فنجان؛ همه روی همین دستگاه ذخیره می‌شوند.</p>
+        <button class="btn btn-ink" id="openStudioBtn" type="button">ورود به کارگاه</button>
+      </div>
+
+      <div class="tool-card">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="13.5" r="7.5"/><path d="M12 9.5v4l2.5 2M9.5 3h5M12 3v3"/></svg>تایمر دم‌آوری</h3>
+        <div class="pill-choice-row" id="timerPresets"></div>
+        <div class="timer-body">
+          <div class="ring-wrap">
+            <div class="ring-timer">
+              <svg width="196" height="196" viewBox="0 0 196 196" class="ring-track-svg">
+                <circle class="track" cx="98" cy="98" r="86"/>
+                <circle class="progress" id="timerProgress" cx="98" cy="98" r="86" stroke-dasharray="540" stroke-dashoffset="0"/>
+              </svg>
+              <div class="ring-center">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" id="timerIcon"><path d="M4 9h13v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z"/><path d="M17 11h1.5a2.5 2.5 0 0 1 0 5H16.5"/><path d="M8 3.5c0 1 1 1.5 1 2.5M12 3.5c0 1 1 1.5 1 2.5"/></svg>
+                <div class="ring-clock" id="timerClock">00:25</div>
+              </div>
+            </div>
+          </div>
+          <div class="btn-row">
+            <button class="btn btn-ink" id="timerStartBtn">
+              <svg viewBox="0 0 24 24" fill="currentColor"><path d="M7.5 4.5v15L19 12z"/></svg>شروع
+            </button>
+            <button class="btn btn-line" id="timerResetBtn">
+              <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12a7.5 7.5 0 1 0 2.4-5.5"/><path d="M5 3.5v4h4"/></svg>ریست
+            </button>
+          </div>
+        </div>
+      </div>
+
+      <div class="tool-card">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="5" y="3" width="14" height="18" rx="2.5"/><path d="M8.5 7.5h7"/><path d="M9 12h.01M12 12h.01M15 12h.01M9 16h.01M12 16h.01M15 16h.01"/></svg>نسبت قهوه به آب</h3>
+        <p class="field-label" style="margin-bottom:10px;">انتخاب نسبت</p>
+        <div class="pill-choice-row" id="ratioPresets"></div>
+        <p class="field-label">قهوه (گرم)</p>
+        <div class="line-field">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9h13v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z"/><path d="M17 11h1.5a2.5 2.5 0 0 1 0 5H16.5"/><path d="M8 3.5c0 1 1 1.5 1 2.5M12 3.5c0 1 1 1.5 1 2.5"/></svg>
+          <input id="coffeeGramsInput" type="text" inputmode="decimal" placeholder="مقدار قهوه" value="۲۰">
+        </div>
+        <div class="arrow-down"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 4.5v15M6 13.5l6 6 6-6"/></svg></div>
+        <p class="field-label">آب (گرم/میلی‌لیتر)</p>
+        <div class="line-field">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3.5c3.5 4.2 6 7.2 6 10.3a6 6 0 0 1-12 0c0-3.1 2.5-6.1 6-10.3z"/></svg>
+          <input id="waterResultInput" type="text" readonly value="۳۲۰">
+        </div>
+        <div class="info-box" id="ratioInfoBox">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5"/><path d="M12 7.6h.01"/></svg>
+          <p id="ratioInfoText">استاندارد: متعادل و کامل، عالی برای بیشتر روش‌های دم‌آوری</p>
+        </div>
+        <p class="hint-error" id="ratioError" style="display:none;">مقداری بزرگ‌تر از صفر برای قهوه وارد کنید.</p>
+      </div>
+
+      <!-- BUGFIX: this card used to reuse the Brew Timer's clock/stopwatch icon
+           (copy-paste leftover), which had nothing to do with temperature.
+           It now uses a real thermometer glyph. -->
+      <div class="tool-card">
+        <h3 id="tempGuideHeading">راهنمای دمای دم‌آوری</h3>
+        <div id="tempGuideList"></div>
+      </div>
+
+      <div class="tool-card">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3c.5 3.5 5 5.6 5 10.2A5 5 0 0 1 7 13.2c0-2 1-3.2 2-4.2.2 1.2.8 1.8 1.7 2C10.5 8 11 5.5 12 3z"/></svg>راهنمای سطح برشته‌کاری</h3>
+        <div id="roastGuideList"></div>
+      </div>
+
+      <div class="tool-card">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="6" cy="6" r="1.3"/><circle cx="12" cy="6" r="1.3"/><circle cx="18" cy="6" r="1.3"/><circle cx="6" cy="12" r="1.3"/><circle cx="12" cy="12" r="1.3"/><circle cx="18" cy="12" r="1.3"/><circle cx="6" cy="18" r="1.3"/><circle cx="12" cy="18" r="1.3"/><circle cx="18" cy="18" r="1.3"/></svg>راهنمای اندازه آسیاب</h3>
+        <p class="grind-hint">هر اندازه را لمس کنید تا جزئیات کامل (اندازه‌ی ذرات، زمان، خطاهای رایج) باز شود. اندازه‌ها تقریبی‌اند و به آسیاب شما بستگی دارند؛ قاعده: هر چه زمان تماس آب با قهوه کوتاه‌تر، آسیاب ریزتر.</p>
+        <div id="grindGuideList"></div>
+      </div>
+
+      <!-- NEW — Coffee Flavor Wheel (see js/database/tools.data.js → FLAVOR_WHEEL) -->
+      <div class="tool-card">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3c.5 3.5 5 5.6 5 10.2A5 5 0 0 1 7 13.2c0-2 1-3.2 2-4.2.2 1.2.8 1.8 1.7 2C10.5 8 11 5.5 12 3z"/></svg>چرخ طعم قهوه</h3>
+        <p style="font-size:11.5px; color:var(--ink-soft); margin:0 0 14px; line-height:1.6;">۹ خانواده‌ی اصلی طعمی که کاپرها (چشنده‌های حرفه‌ای قهوه) برای توصیف طعم قهوه استفاده می‌کنند — واژگان پایه‌ی چرخ طعم SCA/WCR.</p>
+        <div class="flavor-wheel-wrap" id="flavorWheel"></div>
+        <p class="flavor-wheel-caption">هر خانواده را لمس/کلیک کنید تا نمونه‌طعم‌هایش را ببینید</p>
+        <div class="flavor-legend" id="flavorLegend"></div>
+      </div>
+
+      <div class="tool-card">
+        <h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 3v4.5M12 16.5V21M3 12h4.5M16.5 12H21M5.6 5.6l3.2 3.2M15.2 15.2l3.2 3.2M5.6 18.4l3.2-3.2M15.2 8.8l3.2-3.2"/></svg>ردیاب کافئین روزانه</h3>
+        <p style="font-size:11.5px; color:var(--ink-soft); margin:0 0 14px; line-height:1.6;">نوشیدنی‌هایی که امروز خورده‌اید را ثبت کنید تا مجموع کافئین‌تان را نسبت به سقف روزانه (۴۰۰ میلی‌گرم) ببینید.</p>
+        <div class="caf-select-row">
+          <select id="cafDrinkSelect"></select>
+          <button id="cafAddBtn">افزودن</button>
+        </div>
+        <div id="cafLogList"></div>
+        <div class="caf-meter"><div class="fill" id="cafMeterFill" style="width:0%; background:var(--good);"></div></div>
+        <div style="display:flex; justify-content:space-between; font-size:11.5px; color:var(--ink-soft);">
+          <span id="cafTotalLabel">۰ میلی‌گرم مصرف‌شده</span>
+          <span>سقف روزانه: ۴۰۰ میلی‌گرم</span>
+        </div>
+        <p class="hint-error" id="cafWarning" style="display:none;">به سقف توصیه‌شده‌ی روزانه نزدیک شده‌اید یا از آن گذشته‌اید.</p>
+      </div>
+      <details class="tool-card eq-collapse" id="eqCollapse">
+        <summary><h3><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><g transform="rotate(45 12 12)"><path d="M10.5 3H8v4.5a4 4 0 0 0 8 0V3h-2.5v5h-3z"/><rect x="10.5" y="11.3" width="3" height="9.7" rx="1.5"/></g></svg>راهنمای هر وسیله<small id="eqCount"></small></h3></summary>
+        <p class="grind-hint">روش دقیق کار، اشتباهات رایج و نکته‌ی هر وسیله.</p>
+        <div id="eqGuideList"></div>
+      </details>
+    </section>
+
+    <!-- ============ FAVORITES ============ -->
+    <section class="view" id="view-favorites">
+      <div class="mast">
+        <button class="stamp-btn" id="favBackBtn" aria-label="بازگشت">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.5 5.5 16 12l-6.5 6.5"/></svg>
+        </button>
+        <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20C7 16.5 3.5 13.5 3.5 9.5A4.5 4.5 0 0 1 12 7.5a4.5 4.5 0 0 1 8.5 2C20.5 13.5 17 16.5 12 20z"/></svg></div>
+        <div class="mast-titles">
+          <h1 class="lz">علاقه‌مندی‌ها</h1>
+          <p>نوشیدنی‌های نشان‌شده‌ی شما</p>
+        </div>
+      </div>
+      <div class="torn-rule"></div>
+      <div class="card-grid" id="favGrid"></div>
+      <div class="empty-note" id="favEmpty" style="display:none;">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20C7 16.5 3.5 13.5 3.5 9.5A4.5 4.5 0 0 1 12 7.5a4.5 4.5 0 0 1 8.5 2C20.5 13.5 17 16.5 12 20z"/></svg>
+        <h3>هنوز چیزی ذخیره نشده</h3>
+        <p>روی مهر قلب هر نوشیدنی بزنید تا اینجا ذخیره شود.</p>
+      </div>
+    </section>
+
+
+    <!-- ============ GLOSSARY ============ -->
+    <section class="view" id="view-glossary">
+      <div class="mast">
+        <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h12M4 12h8M4 18h12"/><path d="M17 12h4M19 10l2 2-2 2"/></svg></div>
+        <div class="mast-titles">
+          <h1 class="lz">واژه‌نامه‌ی قهوه</h1>
+          <p id="glossaryCount">اصطلاحات فرهنگ قهوه</p>
+        </div>
+      </div>
+      <div class="torn-rule"></div>
+      <div style="padding:0 22px 12px;">
+        <div class="line-field">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 20 20"/></svg>
+          <input id="glossarySearch" type="text" placeholder="جست‌وجوی واژه (فارسی یا English)…">
+        </div>
+      </div>
+      <div class="stub-row" id="glossaryChips"></div>
+      <div id="glossaryList" class="gl-list"></div>
+      <div class="empty-note" id="glossaryEmpty" style="display:none;"><h3>واژه‌ای پیدا نشد</h3></div>
+    </section>
+
+
+    <!-- ============ DRINK / ENTRY DETAIL ============ -->
+    <section class="view" id="view-detail">
+      <div class="detail-mast">
+        <button class="back-stamp" id="detailBackBtn" aria-label="بازگشت">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.5 5.5 16 12l-6.5 6.5"/></svg>
+        </button>
+        <div class="detail-ring" id="detailRing"></div>
+        <div class="detail-names">
+          <h2 id="detailName">—</h2>
+          <span class="en" id="detailNameEn"></span>
+        </div>
+        <button class="back-stamp" id="detailFavBtn" aria-label="افزودن به علاقه‌مندی‌ها" style="margin-inline-start:auto;">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 20C7 16.5 3.5 13.5 3.5 9.5A4.5 4.5 0 0 1 12 7.5a4.5 4.5 0 0 1 8.5 2C20.5 13.5 17 16.5 12 20z"/></svg>
+        </button>
+      </div>
+      <div class="torn-rule" style="margin-top:14px;"></div>
+
+      <!-- Recipe-only: difficulty + total time badges -->
+      <div id="detailPhoto"></div>
+      <div class="detail-badges" id="detailBadges" style="display:none;">
+        <span class="badge-pill" id="detailDifficultyBadge"></span>
+        <span class="badge-pill badge-pill-outline" id="detailTimeBadge"></span>
+      </div>
+
+      <!-- Recipe-only: Ingredients / Steps / Info tabs -->
+      <div class="detail-tabs" id="detailTabs" style="display:none;">
+        <button class="detail-tab active" data-detail-tab="ingredients" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3.5 10h17l-1.8 9a2 2 0 0 1-2 1.6H7.3a2 2 0 0 1-2-1.6z"/><path d="M8 10l3-6M16 10l-3-6"/><path d="M9.5 14v3M14.5 14v3"/></svg>مواد لازم
+        </button>
+        <button class="detail-tab" data-detail-tab="steps" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M10 6.5h10.5M10 12h10.5M10 17.5h10.5"/><circle cx="5" cy="6.5" r="1.2"/><circle cx="5" cy="12" r="1.2"/><circle cx="5" cy="17.5" r="1.2"/></svg>مراحل
+        </button>
+        <button class="detail-tab" data-detail-tab="info" type="button">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5"/><path d="M12 7.6h.01"/></svg>اطلاعات
+        </button>
+      </div>
+
+      <div class="detail-tab-panel active" id="panelIngredients">
+        <div class="unit-toggle" id="unitToggle">
+          <button class="unit-btn active" data-unit-sys="metric" type="button">متریک (g, ml)</button>
+          <button class="unit-btn" data-unit-sys="imperial" type="button">امپریال (oz)</button>
+        </div>
+        <div id="ingredientsList"></div>
+      </div>
+
+      <div class="detail-tab-panel" id="panelSteps">
+        <button class="btn btn-ink" id="guideStartBtn" type="button" style="width:100%;margin-bottom:12px">حالت آموزش مرحله‌به‌مرحله با تایمر</button>
+        <div id="stepsList"></div>
+      </div>
+
+      <div class="detail-tab-panel" id="panelInfo">
+        <div id="equipmentBlock">
+          <h4 class="info-tab-heading">تجهیزات</h4>
+          <div class="equipment-row" id="equipmentList"></div>
+        </div>
+        <h4 class="info-tab-heading">خاستگاه و اطلاعات</h4>
+        <div class="origin-card" id="originInfoCard"></div>
+        <div id="historyBlock" style="display:none;">
+          <h4 class="info-tab-heading"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 12a8 8 0 1 0 2.4-5.7"/><path d="M4 4v3.5h3.5"/><path d="M12 8v4.2l2.8 1.8"/></svg>تاریخچه</h4>
+          <div class="history-box" id="historyText"></div>
+        </div>
+        <div id="proTipBlock" style="display:none;">
+          <h4 class="info-tab-heading"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.5 17.5h5M10.5 21h3"/><path d="M12 3a6 6 0 0 0-3.6 10.8c.7.6 1.1 1.3 1.1 2.2v1.5h5V16c0-.9.4-1.6 1.1-2.2A6 6 0 0 0 12 3z"/></svg>نکات حرفه‌ای</h4>
+          <div class="tip-box" id="proTipText"></div>
+        </div>
+        <div id="variationBlock" style="display:none;">
+          <h4 class="info-tab-heading"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="6" cy="18" r="2.2"/><circle cx="18" cy="6" r="2.2"/><path d="M8.2 18H15a3 3 0 0 0 0-6H9a3 3 0 0 1 0-6h6.8"/></svg>تغییرات و انواع دیگر</h4>
+          <div class="tip-box" id="variationText"></div>
+        </div>
+      </div>
+
+      <!-- Encyclopedia-entry fallback: hero illustration + rich body -->
+      <div class="detail-hero" id="detailHero" style="display:none;"></div>
+      <div class="detail-body" id="detailBodyWrap">
+        <div class="pill-row" id="detailPills"></div>
+        <div class="rich" id="detailRich"></div>
+      </div>
+    </section>
+
+    <!-- ============ GLOBAL SEARCH ============ -->
+    <section class="view" id="view-search">
+      <div class="mast">
+        <button class="stamp-btn" id="searchBackBtn" aria-label="بازگشت">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.5 5.5 16 12l-6.5 6.5"/></svg>
+        </button>
+        <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 20 20"/></svg></div>
+        <div class="mast-titles">
+          <h1 class="lz">جست‌وجو در همه‌جا</h1>
+          <p>دستورها، واژه‌نامه، دانشنامه و رویدادها</p>
+        </div>
+      </div>
+      <div class="torn-rule"></div>
+      <div style="padding:0 22px 12px;">
+        <div class="line-field">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="10.5" cy="10.5" r="6.5"/><path d="M15.5 15.5 20 20"/></svg>
+          <input id="globalSearchInput" type="text" placeholder="مثلاً کرما، V60، قاجار…">
+        </div>
+      </div>
+      <div id="globalSearchResults"></div>
+    </section>
+
+    <!-- ============ EVENTS ============ -->
+    <!-- ============ LAB ============ -->
+    <section class="view" id="view-lab">
+      <div class="mast">
+        <button class="stamp-btn" id="labBackBtn" aria-label="بازگشت">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.5 5.5 16 12l-6.5 6.5"/></svg>
+        </button>
+        <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9.5 3.5h5M10.5 3.5v5.2L5 18.2A2 2 0 0 0 6.7 21h10.6a2 2 0 0 0 1.7-2.8L13.5 8.7V3.5"/><path d="M8 14.5h8"/></svg></div>
+        <div class="mast-titles">
+          <h1 class="lz">آزمایشگاه باریستا</h1>
+          <p id="labSub"></p>
+        </div>
+      </div>
+      <div class="torn-rule"></div>
+      <div class="lab-tabs" role="tablist">
+        <button class="pill-choice active" data-labtab="lab" type="button" role="tab">آزمایشگاه نوشیدنی</button>
+        <button class="pill-choice" data-labtab="quiz" type="button" role="tab">آزمون واژه‌نامه</button>
+      </div>
+      <div id="labBody"></div>
+    </section>
+
+    <section class="view" id="view-studio">
+      <div class="mast">
+        <button class="stamp-btn" id="studioBackBtn" aria-label="بازگشت">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.5 5.5 16 12l-6.5 6.5"/></svg>
+        </button>
+        <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="5" y="3.5" width="14" height="17" rx="2"/><path d="M9 3.5v17M12.5 8h3.5M12.5 12h3.5"/></svg></div>
+        <div class="mast-titles">
+          <h1 class="lz">کارگاه باریستا</h1>
+          <p id="studioSub"></p>
+        </div>
+      </div>
+      <div class="torn-rule"></div>
+      <div class="lab-tabs" role="tablist">
+        <button class="pill-choice active" data-studiotab="journal" type="button" role="tab">دفترچه</button>
+        <button class="pill-choice" data-studiotab="trouble" type="button" role="tab">عیب‌یاب</button>
+        <button class="pill-choice" data-studiotab="gear" type="button" role="tab">تجهیزات من</button>
+        <button class="pill-choice" data-studiotab="cart" type="button" role="tab">لیست خرید</button>
+      </div>
+      <div id="studioBody"></div>
+    </section>
+
+    <section class="view" id="view-wrench">
+      <div class="mast">
+        <button class="stamp-btn" id="wrenchBackBtn" aria-label="بازگشت">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.5 5.5 16 12l-6.5 6.5"/></svg>
+        </button>
+        <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><g transform="rotate(45 12 12)"><path d="M10.5 3H8v4.5a4 4 0 0 0 8 0V3h-2.5v5h-3z"/><rect x="10.5" y="11.3" width="3" height="9.7" rx="1.5"/></g></svg></div>
+        <div class="mast-titles">
+          <h1 class="lz">دست به آچار</h1>
+          <p>قطعات و نگهداری دستگاه‌ها</p>
+        </div>
+      </div>
+      <div class="torn-rule"></div>
+      <div id="wrenchBody"></div>
+    </section>
+
+    <section class="view" id="view-events">
+      <div class="mast">
+        <button class="stamp-btn" id="eventsBackBtn" aria-label="بازگشت">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.5 5.5 16 12l-6.5 6.5"/></svg>
+        </button>
+        <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5.2l3.2 2"/></svg></div>
+        <div class="mast-titles">
+          <h1 class="lz">رویدادهای قهوه</h1>
+          <p id="eventsSub"></p>
+        </div>
+      </div>
+      <div class="torn-rule"></div>
+      <div id="eventsList"></div>
+    </section>
+
+    <!-- ============ SOURCES ============ -->
+    <section class="view" id="view-sources">
+      <div class="mast">
+        <button class="stamp-btn" id="sourcesBackBtn" aria-label="بازگشت">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M9.5 5.5 16 12l-6.5 6.5"/></svg>
+        </button>
+        <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><g transform="rotate(-45 12 12)"><rect x="2.5" y="9" width="11" height="6" rx="3"/><rect x="10.5" y="9" width="11" height="6" rx="3"/></g></svg></div>
+        <div class="mast-titles">
+          <h1 class="lz">منابع و مراجع</h1>
+          <p id="sourcesSub"></p>
+        </div>
+      </div>
+      <div class="torn-rule"></div>
+      <div id="sourcesList"></div>
+    </section>
+
+    <section class="view" id="view-settings">
+      <div class="mast">
+        <div class="seal"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h9M17 7h3M4 12h3M11 12h9M4 17h11M19 17h1"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="17" cy="17" r="2"/></svg></div>
+        <div class="mast-titles">
+          <h1 class="lz">تنظیمات</h1>
+          <p>تجربه‌ی خود را شخصی‌سازی کنید</p>
+        </div>
+      </div>
+      <div class="torn-rule"></div>
+
+      <div class="group-label">ظاهر</div>
+      <div class="paper-card">
+        <button class="settings-row" id="themeToggleRow" type="button">
+          <div class="settings-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="3.5"/><path d="M12 3.5v2.5M12 18v2.5M3.5 12H6M18 12h2.5M6 6l1.7 1.7M16.3 16.3 18 18M6 18l1.7-1.7M16.3 7.7 18 6"/></svg></div>
+          <div class="settings-text">
+            <div class="t">حالت نمایش</div>
+            <div class="s" id="themeModeLabel">حالت روشن</div>
+          </div>
+          <span class="switch" id="themeSwitch" role="switch" aria-checked="false"><span class="knob"></span></span>
+        </button>
+      </div>
+
+      <div class="group-label">تنظیمات ترجیحی</div>
+      <div class="paper-card">
+        <button class="settings-row" id="unitsRow" type="button">
+          <div class="settings-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><rect x="2.5" y="8" width="19" height="8" rx="1.5"/><path d="M6.5 8v3M10.5 8v4M14.5 8v3M18.5 8v4"/></svg></div>
+          <div class="settings-text"><div class="t">واحدها</div><div class="s" id="unitsLabel">متریک (ml, g)</div></div>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 5.5 8 12l6.5 6.5"/></svg>
+        </button>
+        <button class="settings-row" id="languageRow" type="button">
+          <div class="settings-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M3 12h18"/><ellipse cx="12" cy="12" rx="4" ry="9"/></svg></div>
+          <div class="settings-text"><div class="t">زبان</div><div class="s" id="languageLabel">فارسی</div></div>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 5.5 8 12l6.5 6.5"/></svg>
+        </button>
+      </div>
+
+      <div class="group-label">داده‌ها</div>
+      <div class="paper-card">
+        <button class="settings-row" id="resetDataRow" type="button">
+          <div class="settings-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4.5 12a7.5 7.5 0 1 0 2.4-5.5"/><path d="M5 3.5v4h4"/></svg></div>
+          <div class="settings-text"><div class="t" id="resetDataTitle">بازنشانی پیشرفت</div><div class="s" id="resetDataSub">پیشرفت آزمایشگاه و آزمون پاک می‌شود</div></div>
+        </button>
+      </div>
+
+      <div class="group-label">پشتیبانی</div>
+      <div class="paper-card">
+        <button class="settings-row" id="feedbackRow" type="button">
+          <div class="settings-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 5h16a1.5 1.5 0 0 1 1.5 1.5v9A1.5 1.5 0 0 1 20 17h-8l-5 4v-4H4a1.5 1.5 0 0 1-1.5-1.5v-9A1.5 1.5 0 0 1 4 5z"/><path d="M7 9.5h10M7 13h6"/></svg></div>
+          <div class="settings-text"><div class="t">ارسال بازخورد</div><div class="s">به بهبود اپلیکیشن کمک کنید</div></div>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 5.5 8 12l6.5 6.5"/></svg>
+        </button>
+        <button class="settings-row" id="sourcesRow" type="button">
+          <div class="settings-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><g transform="rotate(-45 12 12)"><rect x="2.5" y="9" width="11" height="6" rx="3"/><rect x="10.5" y="9" width="11" height="6" rx="3"/></g></svg></div>
+          <div class="settings-text"><div class="t">منابع و مراجع</div><div class="s">فهرست صفحه‌های مرجع محتوا، به تفکیک بخش</div></div>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 5.5 8 12l6.5 6.5"/></svg>
+        </button>
+        <button class="settings-row" id="aboutRow" type="button">
+          <div class="settings-icon"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="12" r="9"/><path d="M12 11v5.5"/><path d="M12 7.6h.01"/></svg></div>
+          <div class="settings-text"><div class="t">درباره ما</div><div class="s">معرفی اپلیکیشن، اعتبارها و نسخه</div></div>
+          <svg class="chev" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M14.5 5.5 8 12l6.5 6.5"/></svg>
+        </button>
+      </div>
+
+      <div class="support-card">
+        <div class="seal" style="margin:0 auto 14px;"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9h13v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z"/><path d="M17 11h1.5a2.5 2.5 0 0 1 0 5H16.5"/><path d="M8 3.5c0 1 1 1.5 1 2.5M12 3.5c0 1 1 1.5 1 2.5"/></svg></div>
+        <h3 class="lz" style="font-size:19px;">از اپلیکیشن لذت می‌برید؟</h3>
+        <p>این اپلیکیشن حاصل تلاش یک‌نفره است. قهوه‌ای که برایم می‌خرید، دستورها و امکانات تازه را ادامه‌دار می‌کند!</p>
+        <button class="buy-btn" id="buyMeCoffeeBtn">
+          <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9h13v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z"/><path d="M17 11h1.5a2.5 2.5 0 0 1 0 5H16.5"/><path d="M8 3.5c0 1 1 1.5 1 2.5M12 3.5c0 1 1 1.5 1 2.5"/></svg>
+          یه قهوه برام بخر
+        </button>
+      </div>
+      <div class="pkg-tag">Coffee Pedia · com.coffeepedia.app · نسخه‌ی ۳.۰.۱</div>
+    </section>
+
+  </div>
+
+  <!-- ============ Bottom nav (side rail on desktop — see css/desktop.css) ============ -->
+  <div class="nav-wrap" id="navWrap">
+    <div class="nav-track" role="tablist" aria-label="بخش‌های اصلی">
+      <div class="nav-indicator" id="navIndicator" aria-hidden="true"></div>
+      <button aria-label="ابزار" title="ابزار" class="nav-item" data-tab="tools" type="button" role="tab" aria-selected="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 9h13v6a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z"/><path d="M17 11h1.5a2.5 2.5 0 0 1 0 5H16.5"/><path d="M8 3.5c0 1 1 1.5 1 2.5M12 3.5c0 1 1 1.5 1 2.5"/></svg><span class="nav-label">ابزار</span>
+      </button>
+      <button aria-label="دانشنامه" title="دانشنامه" class="nav-item" data-tab="encyclopedia" type="button" role="tab" aria-selected="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 4.5h11a3 3 0 0 1 3 3V20H8a3 3 0 0 1-3-3z"/><path d="M5 17a3 3 0 0 1 3-3h11"/></svg><span class="nav-label">دانشنامه</span>
+      </button>
+      <button aria-label="خانه" title="خانه" class="nav-item active" data-tab="home" type="button" role="tab" aria-selected="true">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M3.5 11 12 4l8.5 7"/><path d="M6 9.5V20h12V9.5"/><path d="M10 20v-5h4v5"/></svg><span class="nav-label">خانه</span>
+      </button>
+            <button aria-label="واژه‌نامه" title="واژه‌نامه" class="nav-item" data-tab="glossary" type="button" role="tab" aria-selected="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 6h12M4 12h8M4 18h12"/><path d="M17 12h4M19 10l2 2-2 2"/></svg><span class="nav-label">واژه‌نامه</span>
+      </button>
+      <button aria-label="تنظیمات" title="تنظیمات" class="nav-item" data-tab="settings" type="button" role="tab" aria-selected="false">
+        <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M4 7h9M17 7h3M4 12h3M11 12h9M4 17h11M19 17h1"/><circle cx="15" cy="7" r="2"/><circle cx="9" cy="12" r="2"/><circle cx="17" cy="17" r="2"/></svg><span class="nav-label">تنظیمات</span>
+      </button>
+    </div>
+  </div>
+
+  <div class="guide-overlay" id="guideOverlay" role="dialog" aria-modal="true"></div>
+  <div class="modal-backdrop" id="modalBackdrop"><div class="modal-sheet" id="modalSheet"></div></div>
+  <div class="toast" id="toast" role="status" aria-live="polite"></div>
+</div>
+
+<script src="js/icons.js"></script>
+<script src="js/database/encyclopedia.data.js"></script>
+<script src="js/database/recipes.data.js"></script>
+<script src="js/database/glossary.data.js"></script>
+<script src="js/database/glossary.more.data.js"></script>
+<script src="js/database/equipment.data.js"></script>
+<script src="js/database/tools.data.js"></script>
+<script src="js/database/events.data.js"></script>
+<script src="js/database/lab.data.js"></script>
+<script src="js/database/studio.data.js"></script>
+<script src="js/database/wrench.data.js"></script>
+<script src="js/photos.config.js"></script>
+<script src="js/app.js"></script>
+<script src="js/lab.js"></script>
+<script src="js/studio.js"></script>
+<script src="js/wrench.js"></script>
+<script>
+(function(){
+var b=document.getElementById("openWrenchBtn");if(!b)return;
+function load(src,cb){var t=document.createElement("script");t.src=src+"?v="+Date.now();t.onload=function(){cb(false)};t.onerror=function(){cb(true)};document.body.appendChild(t);}
+b.addEventListener("click",function(){
+  if(typeof window.openWrench==="function"){window.openWrench();return;}
+  showView("wrench");
+  var box=document.getElementById("wrenchBody");
+  box.innerHTML='<div class="tool-card"><p class="lab-muted">در حال بارگذاری…</p></div>';
+  load("js/database/wrench.data.js",function(e1){
+    if(e1){box.innerHTML='<div class="tool-card"><p class="lab-muted">فایل js/database/wrench.data.js روی سایت پیدا نشد؛ آن را آپلود کنید.</p></div>';return;}
+    load("js/wrench.js",function(e2){
+      if(e2||typeof window.openWrench!=="function"){box.innerHTML='<div class="tool-card"><p class="lab-muted">فایل js/wrench.js روی سایت پیدا نشد؛ آن را آپلود کنید.</p></div>';return;}
+      window.openWrench();
+    });
+  });
+});
+})();
+</script>
+<script src="js/guide.js"></script>
+<script>if ("serviceWorker" in navigator && /^https?:/.test(location.protocol)) navigator.serviceWorker.register("sw.js").catch(function(){});</script>
+</body>
+</html>
