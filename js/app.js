@@ -40,6 +40,23 @@ const state = {
   caffeineLog: [], // {name, mg}
 };
 
+
+/* زبان و تاریخ */
+const LOCALES = { 'فارسی': 'fa-IR', 'English': 'en-GB', 'العربية': 'ar-EG' };
+function cpLocale(){ return LOCALES[state.language] || 'fa-IR'; }
+function cpDate(ts, withTime){
+  try {
+    const o = { year: 'numeric', month: '2-digit', day: '2-digit' };
+    if (withTime){ o.hour = '2-digit'; o.minute = '2-digit'; o.hour12 = false; }
+    return new Intl.DateTimeFormat(cpLocale(), o).format(new Date(ts));
+  } catch (e) { return new Date(ts).toLocaleString(); }
+}
+/* انیمیشن نرم هنگام عوض‌شدن محتوا */
+function softSwap(el){
+  if (!el) return;
+  el.classList.remove('soft-swap'); void el.offsetWidth; el.classList.add('soft-swap');
+}
+
 const heartOutlineSVG = (color) => `<svg viewBox="0 0 24 24" fill="none" stroke="${color}" stroke-width="2"><path d="M12 20C7 16.5 3.5 13.5 3.5 9.5A4.5 4.5 0 0 1 12 7.5a4.5 4.5 0 0 1 8.5 2C20.5 13.5 17 16.5 12 20z"/></svg>`;
 const heartFilledSVG = (color) => `<svg viewBox="0 0 24 24" fill="${color}"><path d="M12 20C7 16.5 3.5 13.5 3.5 9.5A4.5 4.5 0 0 1 12 7.5a4.5 4.5 0 0 1 8.5 2C20.5 13.5 17 16.5 12 20z"/></svg>`;
 

@@ -196,7 +196,7 @@ document.getElementById('csvRow').addEventListener('click', () => {
   if (!Array.isArray(j) || !j.length){ showToast('دفترچه خالی است'); return; }
   const q = v => '"' + String(v == null ? '' : v).replace(/"/g, '""') + '"';
   const head = ['تاریخ','نوشیدنی','دوز (گرم)','آب (گرم)','دما (درجه)','زمان (ثانیه)','آسیاب','امتیاز','یادداشت'];
-  const rows = j.map(e => [new Date(e.t || 0).toISOString().slice(0, 16).replace('T', ' '), e.name, e.dose || '', e.water || '', e.temp || '', e.time || '', e.grind, e.rating, e.note].map(q).join(','));
+  const rows = j.map(e => [cpDate(e.t || 0, true), e.name, e.dose || '', e.water || '', e.temp || '', e.time || '', e.grind, e.rating, e.note].map(q).join(','));
   saveText('coffee-pedia-journal-' + day() + '.csv', '\ufeff' + [head.map(q).join(','), ...rows].join('\r\n'), 'text/csv;charset=utf-8');
   showToast('فایل CSV ساخته شد');
 });

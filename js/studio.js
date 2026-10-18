@@ -106,8 +106,8 @@ function journalView(){
           <div class="j-top"><b>${esc(e.name || 'دم‌آوری دلخواه')}</b><span class="j-stars">${stars(e.rating)}</span></div>
           <div class="j-meta">${esc(entryLine(e)) || '—'}</div>
           ${e.note ? `<div class="j-note">${esc(e.note)}</div>` : ''}
-          <div class="j-foot"><span>${esc(new Date(e.t).toLocaleDateString('fa-IR'))}</span>
-            <button type="button" class="j-del${delArm === e.t ? ' armed' : ''}" data-jdel="${e.t}">${delArm === e.t ? 'مطمئنید؟' : 'حذف'}</button></div>
+          <div class="j-foot"><span>${esc(cpDate(e.t))}</span>
+            <span><button type="button" class="j-del" data-jrep="${e.t}">تکرار</button><button type="button" class="j-del${delArm === e.t ? ' armed' : ''}" data-jdel="${e.t}">${delArm === e.t ? 'مطمئنید؟' : 'حذف'}</button></span></div>
         </div>`).join('') : '<p class="lab-muted">هنوز چیزی ثبت نکرده‌اید. بعد از هر دم‌آوری مقادیر و امتیازتان را اینجا بنویسید تا دفعه‌ی بعد بهترین تنظیم را پیدا کنید.</p>'}
     </div>`;
 }
@@ -216,6 +216,11 @@ body.addEventListener('click', e => {
   if (t.dataset.star){ readForm(); form.rating = Number(t.dataset.star); render(true); return; }
   if (t.id === 'jSave'){ saveEntry(); return; }
   if (t.id === 'jUse'){ readForm(); const b = bestFor(Number(form.drink)); if (b){ form.dose = b.dose || ''; form.water = b.water || ''; form.temp = b.temp || ''; form.time = b.time || ''; form.grind = b.grind || ''; render(true); } return; }
+  if (t.dataset.jrep){
+    const e0 = journal.find(x => x.t === Number(t.dataset.jrep));
+    if (e0){ form = {rating: 0, drink: e0.drink || '', dose: e0.dose || '', water: e0.water || '', temp: e0.temp || '', time: e0.time || '', grind: e0.grind || '', note: ''}; render(); softSwap(body); showToast('تنظیم‌ها در فرم گذاشته شد'); }
+    return;
+  }
   if (t.dataset.jdel){
     const id = Number(t.dataset.jdel);
     if (delArm !== id){ delArm = id; render(true); setTimeout(() => { if (delArm === id){ delArm = null; if (tab === 'journal') render(true); } }, 3000); return; }
@@ -235,8 +240,8 @@ body.addEventListener('input', e => {
   if (e.target.id === 'cQ'){ cartQ = e.target.value; const pos = e.target.selectionStart; render(true); const el = document.getElementById('cQ'); if (el){ el.focus(); try { el.setSelectionRange(pos, pos); } catch (x) {} } }
 });
 body.addEventListener('change', e => { if (e.target.id === 'jDrink'){ readForm(); render(true); } });
-document.querySelectorAll('[data-studiotab]').forEach(b => b.addEventListener('click', () => { tab = b.dataset.studiotab; render(); }));
-document.getElementById('openStudioBtn').addEventListener('click', () => { render(); showView('studio'); });
+document.querySelectorAll('[data-studiotab]').forEach(b => b.addEventListener('click', () => { tab = b.dataset.studiotab; render(); softSwap(body); }));
+document.getElementById('openStudioBtn').addEventListener('click', () => { render(); showView('studio'); softSwap(body); });
 document.getElementById('studioBackBtn').addEventListener('click', () => showView(state.currentTab));
 window.addEventListener('cp-reset', () => { journal = []; gear = []; cart = {}; form = {rating: 0}; render(); });
 render();

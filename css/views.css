@@ -506,3 +506,26 @@ html.recipe-big .g-text{ font-size:26px; }
 html.calm *, html.calm *::before, html.calm *::after{ animation-duration:.001ms !important; animation-iteration-count:1 !important; transition-duration:.001ms !important; scroll-behavior:auto !important; }
 .switch.on{ background:var(--rust); }
 .switch.on .knob{ background:var(--paper-card); }
+
+/* انیمیشن‌های نرم */
+@keyframes softSwap{ from{ opacity:0; transform:translateY(8px); } to{ opacity:1; transform:none; } }
+.soft-swap{ animation:softSwap .32s var(--ease-out, cubic-bezier(.22,1,.36,1)) both; }
+@keyframes barGrow{ from{ width:var(--from,0%); } }
+.caf-meter .fill.grow{ animation:barGrow .6s var(--ease-out, cubic-bezier(.22,1,.36,1)) both; }
+@keyframes okPop{ 0%{ transform:scale(.97); } 60%{ transform:scale(1.015); } 100%{ transform:none; } }
+@keyframes nudge{ 0%,100%{ transform:none; } 25%{ transform:translateX(-5px); } 75%{ transform:translateX(5px); } }
+.lab-opt.ok{ animation:okPop .4s var(--ease-out, ease) both; }
+.lab-opt.bad{ animation:nudge .38s ease both; }
+.lab-fb{ animation:softSwap .4s var(--ease-out, ease) both; }
+.lab-score{ animation:okPop .55s var(--ease-out, ease) both; }
+.lab-drink, .star, .wr-leg, .j-del, .option-row, .seal-fav, .stepper button, .g-tbtns button, .wr-svg .mk, .wr-svg .pt-s{
+  transition:background-color .2s ease, border-color .2s ease, color .2s ease, opacity .2s ease, stroke .2s ease, fill .2s ease, transform .15s var(--ease-out, ease);
+}
+.wr-svg .mk circle, .wr-svg .mk text{ transition:fill .2s ease, stroke .2s ease; }
+.lab-drink:active, .star:active, .wr-leg:active, .j-del:active, .stepper button:active, .g-tbtns button:active, .option-row:active{ transform:scale(.96); }
+.star.on{ transform:scale(1.08); }
+.guide-overlay.show{ animation:pageIn .3s var(--ease-out, ease) both; }
+.g-body{ animation:softSwap .32s var(--ease-out, ease) both; }
+.wr-care-slot{ min-height:30px; }
+html.calm .soft-swap, html.calm .g-body, html.calm .guide-overlay.show{ animation:none !important; }
+@media (prefers-reduced-motion: reduce){ .soft-swap, .g-body, .lab-opt, .lab-fb, .lab-score{ animation:none !important; } }

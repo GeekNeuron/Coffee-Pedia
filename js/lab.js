@@ -152,7 +152,7 @@ function renderQuestion(){
   const ans = new Set(q.ans);
   let h = `<div class="tool-card lab-run">
     <div class="lab-run-top"><b>${esc(run.title)}</b><span>${fa(run.i + 1)} از ${fa(n)}</span></div>
-    <div class="caf-meter"><div class="fill" style="width:${(run.i) / n * 100}%; background:var(--rust);"></div></div>
+    <div class="caf-meter"><div class="fill grow" style="width:${(run.i) / n * 100}%; --from:${Math.max(0, run.i - 1) / n * 100}%; background:var(--rust);"></div></div>
     <p class="lab-q">${esc(q.q)}</p>${q.block ? `<blockquote class="lab-block">${esc(q.block)}</blockquote>` : ''}
     ${q.multi ? '<p class="lab-muted">همه‌ی گزینه‌های درست را انتخاب کنید.</p>' : ''}
     <div class="lab-opts">`;
@@ -186,7 +186,7 @@ function renderResult(){
       <button class="btn btn-ink" id="labAgainBtn" type="button">تلاش دوباره</button>
       <button class="btn btn-line" id="labQuitBtn" type="button">بازگشت</button>
     </div>`;
-  if (run.kind === 'drink') h += `<div class="btn-row" style="margin-top:10px;"><button class="btn btn-line" id="labRecipeBtn" type="button">دیدن دستور</button></div>`;
+  if (run.kind === 'drink') h += `<div class="btn-row" style="margin-top:10px;"><button class="btn btn-line" id="labRecipeBtn" type="button">${run.id >= 9000 ? 'دیدن دستگاه' : 'دیدن دستور'}</button></div>`;
   return h + '</div>';
 }
 
@@ -233,7 +233,7 @@ function render(keepScroll){
     sub.textContent = tab === 'lab' ? 'ساخت نوشیدنی با بازخورد' : 'سنجش دانش شما از واژه‌نامه';
     body.innerHTML = tab === 'lab' ? homeLab() : homeQuiz();
   }
-  if (!keepScroll) document.getElementById('appBody').scrollTop = 0;
+  if (!keepScroll){ document.getElementById('appBody').scrollTop = 0; softSwap(body); }
 }
 
 document.getElementById('labBody').addEventListener('click', e => {
@@ -244,7 +244,7 @@ document.getElementById('labBody').addEventListener('click', e => {
   if (t.id === 'quizStartBtn'){ startQuiz(); return; }
   if (t.id === 'labQuitBtn'){ run = null; render(); return; }
   if (t.id === 'labAgainBtn'){ run.kind === 'drink' ? startDrink(run.id) : startQuiz(); return; }
-  if (t.id === 'labRecipeBtn'){ openDetail(run.id); return; }
+  if (t.id === 'labRecipeBtn'){ if (run.id >= 9000 && window.openWrench){ window.openWrench(run.id - 9001); } else openDetail(run.id); return; }
   if (t.id === 'labSubmitBtn'){ submit(); return; }
   if (t.id === 'labNextBtn'){
     if (run.i + 1 < run.qs.length){ run.i++; run.picked = []; run.answered = false; render(); }
