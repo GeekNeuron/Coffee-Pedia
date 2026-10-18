@@ -529,3 +529,7 @@ html.calm *, html.calm *::before, html.calm *::after{ animation-duration:.001ms 
 .wr-care-slot{ min-height:30px; }
 html.calm .soft-swap, html.calm .g-body, html.calm .guide-overlay.show{ animation:none !important; }
 @media (prefers-reduced-motion: reduce){ .soft-swap, .g-body, .lab-opt, .lab-fb, .lab-score{ animation:none !important; } }
+
+/* تصویر سردسته‌ی دانشنامه: هم‌عرض کارت‌ها، بدون چسبیدن به لبه‌ها */
+#categoryItemsWrap > .photo{ margin:0 22px 14px; }
+@media (min-width:860px){ #categoryItemsWrap > .photo{ margin-inline:30px; } }
