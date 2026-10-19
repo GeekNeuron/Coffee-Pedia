@@ -741,7 +741,7 @@ function renderFlavorWheel(){
   document.querySelectorAll('[data-flavor]').forEach(el =>
     el.addEventListener('click', () => {
       const f = FLAVOR_WHEEL.find(x => x.key === el.dataset.flavor);
-      if (f) showToast(`${f.fa} (${f.en}) — مثل: ${f.example}`);
+      if (f) showToast(f.example ? `${f.fa} (${f.en}) — مثل: ${f.example}` : `${f.fa} (${f.en})`);
     }));
 }
 
@@ -887,6 +887,9 @@ function sourceSections(){
     {title:'راهنمای دما', links: uniq(TEMP_SOURCES)},
     {title:'درجه‌ی برشته‌کاری', links: uniq(ROAST_SOURCES)},
     {title:'درشتی آسیاب', links: uniq(GRIND_SOURCES)},
+    {title:'عیب‌یاب طعم', links: uniq(TROUBLE_SOURCES)},
+    {title:'نسبت دم‌آوری', links: uniq(RATIO_SOURCES)},
+    {title:'چرخ طعم', links: uniq(FLAVOR_SOURCES)},
     {title:'جدول کافئین', links: uniq(CAFFEINE_SOURCES)},
     {title:'راهنمای تجهیزات', links: uniq(EQUIPMENT.flatMap(e => e.src || []))},
     {title:'دست به آچار', links: uniq(WRENCH_SOURCES)},

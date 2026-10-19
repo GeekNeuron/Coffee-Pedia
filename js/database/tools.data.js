@@ -9,10 +9,10 @@ const TIMER_PRESETS = [
 ];
 
 const RATIOS = [
-  {r:15, desc:'قوی: غلیظ و پرقدرت، برای دوست‌داران قهوه‌ی تلخ و پرقدرت'},
-  {r:16, desc:'استاندارد: متعادل و کامل، عالی برای بیشتر روش‌های دم‌آوری'},
-  {r:17, desc:'ملایم: سبک‌تر و لطیف‌تر، مناسب دانه‌های تیره‌برشته'},
-  {r:18, desc:'بسیار ملایم: سبک‌ترین حالت، برای طعم‌های ظریف و اسیدیته‌ی بالا'},
+  {r:15, desc:'۱ به ۱۵: نسبت رایج در کافه‌ها (۱ به ۱۵ تا ۱ به ۱۷)؛ فنجان غلیظ‌تر از استاندارد SCA'},
+  {r:16, desc:'۱ به ۱۶: در بازه‌ی رایج کافه‌ها و قهوه‌ساز قطره‌ای (۱ به ۱۶ تا ۱ به ۱۸)'},
+  {r:17, desc:'۱ به ۱۷: نزدیک به بازه‌ی استاندارد SCA (۵۰ تا ۶۰ گرم در لیتر، یعنی حدود ۱ به ۱۶٫۷ تا ۱ به ۲۰)'},
+  {r:18, desc:'۱ به ۱۸: نسبت استاندارد SCA (حدود ۵۵ گرم قهوه در هر لیتر آب)'},
 ];
 
 const TEMP_GUIDE = [
@@ -102,15 +102,15 @@ const CAFFEINE_SOURCES = [['Mayo Clinic — Caffeine content','https://www.mayoc
 const CAFFEINE_DAILY_LIMIT = 400;
 
 const FLAVOR_WHEEL = [
-  {key:'fruity',   fa:'میوه‌ای',            en:'Fruity',              color:'#C1553F', example:'توت‌فرنگی، مرکبات، سیب، آلبالو'},
-  {key:'floral',   fa:'گلی',                en:'Floral',              color:'#D98BB0', example:'یاس، بابونه، گل رز'},
-  {key:'sweet',    fa:'شیرین',              en:'Sweet',               color:'#E8B95C', example:'وانیل، عسل، کارامل، شکلات شیری'},
-  {key:'nutty',    fa:'آجیلی و کاکائویی',   en:'Nutty / Cocoa',       color:'#8C5A3C', example:'بادام، فندق، کاکائو تلخ'},
-  {key:'spices',   fa:'ادویه‌ای',           en:'Spices',              color:'#B5502F', example:'دارچین، فلفل سیاه، هل'},
-  {key:'roasted',  fa:'برشته',              en:'Roasted',             color:'#4A2E1E', example:'دودی، تست‌نان، غلات برشته'},
-  {key:'green',    fa:'سبز و گیاهی',        en:'Green / Vegetative',  color:'#6E9E5B', example:'علف تازه، سبزیجات، هسته‌ی سبز'},
-  {key:'sour',     fa:'ترش و تخمیری',       en:'Sour / Fermented',    color:'#D9A441', example:'سرکه، ماست، شراب'},
-  {key:'other',    fa:'سایر (نامطلوب)',     en:'Other / Papery / Chemical', color:'#8A7360', example:'کاغذی، کپک‌زده، دارویی — نشانه‌ی معمول عیب در دانه یا دم‌آوری'},
+  {key:'fruity',   fa:'میوه‌ای',            en:'Fruity',              color:'#C1553F', example:'توت‌ها، میوه‌ی خشک، مرکبات (گریپ‌فروت، پرتقال، لیمو)'},
+  {key:'floral',   fa:'گلی',                en:'Floral',              color:'#D98BB0', example:''},
+  {key:'sweet',    fa:'شیرین',              en:'Sweet',               color:'#E8B95C', example:''},
+  {key:'nutty',    fa:'آجیلی و کاکائویی',   en:'Nutty / Cocoa',       color:'#8C5A3C', example:''},
+  {key:'spices',   fa:'ادویه‌ای',           en:'Spices',              color:'#B5502F', example:''},
+  {key:'roasted',  fa:'برشته',              en:'Roasted',             color:'#4A2E1E', example:''},
+  {key:'green',    fa:'سبز و گیاهی',        en:'Green / Vegetative',  color:'#6E9E5B', example:''},
+  {key:'sour',     fa:'ترش و تخمیری',       en:'Sour / Fermented',    color:'#D9A441', example:''},
+  {key:'other',    fa:'سایر',     en:'Other / Papery / Chemical', color:'#8A7360', example:''},
 ];
 
 const GROUP_EQUIPMENT = {
@@ -128,3 +128,7 @@ const UNIT_CONVERT = {
   'گرم': {factor: 0.035274, imperialUnit: 'oz'},
   'میلی‌لیتر': {factor: 0.033814, imperialUnit: 'fl oz'},
 };
+
+const TROUBLE_SOURCES = [['Open Exam Prep — SCA Brewing Control Chart','https://open-exam-prep.com/study-guides/sca-q-grader/brewing-science-water-chemistry/brewing-control-chart'],['Atlas Coffee Club — The Brewing Control Chart','https://www.atlascoffee.com/encyclopedia/extraction-fundamentals-3-the-brewing-control-chart/'],['Wanderlust Coffee — Coffee to Water Ratio','https://wanderlust.coffee/coffee-to-water-ratio/']];
+const RATIO_SOURCES = [['Wanderlust Coffee — Coffee to Water Ratio','https://wanderlust.coffee/coffee-to-water-ratio/'],['Open Exam Prep — SCA Brewing Control Chart','https://open-exam-prep.com/study-guides/sca-q-grader/brewing-science-water-chemistry/brewing-control-chart']];
+const FLAVOR_SOURCES = [['SCA — How to Use the Coffee Taster’s Flavor Wheel','https://sca.coffee/sca-news/how-to-use-the-flavor-wheel-in-eight-steps'],['SCA article — The Coffee Taster’s Flavor Wheel','https://roastercup.com/pages/sca-article-1-the-coffee-tasters-flavor-wheel']];
