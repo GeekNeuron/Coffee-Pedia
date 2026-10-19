@@ -533,3 +533,4 @@ html.calm .soft-swap, html.calm .g-body, html.calm .guide-overlay.show{ animatio
 /* تصویر سردسته‌ی دانشنامه: هم‌عرض کارت‌ها، بدون چسبیدن به لبه‌ها */
 #categoryItemsWrap > .photo{ margin:0 22px 14px; }
 @media (min-width:860px){ #categoryItemsWrap > .photo{ margin-inline:30px; } }
+@media (min-width:860px){ #categoryItemsWrap .ev-era{ margin-inline:30px; } }

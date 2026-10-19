@@ -346,7 +346,7 @@ function renderCategoryList(filterText){
       </div>`).join('');
     wrap.querySelectorAll('[data-cat]').forEach(el =>
       el.addEventListener('click', () => openCategory(el.dataset.cat)));
-    document.getElementById('eventsCard').addEventListener('click', () => showView('events'));
+    document.getElementById('eventsCard').addEventListener('click', () => { if (window.matchMedia('(min-width:860px)').matches) openEventsPanel(); else showView('events'); });
     return;
   }
 
@@ -393,6 +393,18 @@ document.getElementById('categoryBackBtn').addEventListener('click', () => {
   document.getElementById('categoryListPanel').classList.remove('is-hidden-mobile');
 });
 
+function openEventsPanel(){
+  const total = EVENTS.reduce((a,g) => a + g.items.length, 0);
+  document.getElementById('categoryIcon').innerHTML = Icons.render('history');
+  document.getElementById('categoryTitle').textContent = 'رویدادهای قهوه';
+  document.getElementById('categoryCount').textContent = `${toPersianDigits(total)} رویداد`;
+  document.getElementById('categoryItemsWrap').innerHTML = document.getElementById('eventsList').innerHTML;
+  document.getElementById('categoryListPanel').classList.add('is-hidden-mobile');
+  document.getElementById('categoryDetailPanel').classList.remove('is-hidden');
+  document.getElementById('categoryDetailPanel').classList.add('has-selection');
+  document.querySelectorAll('#categoryList .cat-card').forEach(el => el.classList.toggle('active', el.id === 'eventsCard'));
+  document.getElementById('appBody').scrollTop = 0;
+}
 function updateNavIndicator(tab, animate){
   const idx = NAV_TABS.indexOf(tab);
   if (idx === -1) return;
