@@ -110,3 +110,10 @@
   .photo-enc{ aspect-ratio:auto; height:300px; }
   .photo-roast{ aspect-ratio:auto; height:240px; }
 }
+
+/* ابزار: سه ورودی (آزمایشگاه، دست به آچار، کارگاه) کنار هم */
+@media (min-width:860px){
+  .lab-entries{ display:grid; grid-template-columns:repeat(3, 1fr); gap:14px; padding:0 30px; margin-bottom:14px; align-items:stretch; }
+  #view-tools .lab-entries .tool-card{ margin:0; display:flex; flex-direction:column; }
+  .lab-entries .lab-entry-text{ flex:1 1 auto; }
+}
