@@ -21,7 +21,7 @@ function pickFeatured(count){
   try { localStorage.setItem('cp_featured_prev', JSON.stringify(picks.map(d => d.id))); } catch (e) {}
   return picks.length ? picks : FEATURED_IDS.map(id => ITEM_INDEX.get(id)?.item).filter(Boolean);
 }
-const FEATURED = pickFeatured(6);
+const FEATURED = pickFeatured(4);
 
 function splitName(title){
   const m = title.match(/^(.*?)\s*\(([^)]*)\)\s*$/);
