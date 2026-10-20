@@ -66,7 +66,7 @@ function entryLine(e){
   if (e.water) bits.push(fa(e.water) + ' میل آب');
   if (e.dose && e.water) bits.push('نسبت ' + ratioText(e.dose, e.water));
   if (e.grind) bits.push('آسیاب ' + e.grind);
-  if (e.temp) bits.push(fa(e.temp) + '°C');
+  if (e.temp) bits.push(fa(e.temp) + ' درجه‌ی سانتی‌گراد');
   if (e.time) bits.push(fa(e.time) + ' ثانیه');
   return bits.join(' • ');
 }
@@ -88,7 +88,7 @@ function journalView(){
       <div class="studio-grid">
         <div><label class="field-label">قهوه (گرم)</label><input id="jDose" class="studio-in" type="number" inputmode="decimal" min="0" step="0.1" value="${form.dose || ''}"></div>
         <div><label class="field-label">آب (میلی‌لیتر)</label><input id="jWater" class="studio-in" type="number" inputmode="decimal" min="0" step="1" value="${form.water || ''}"></div>
-        <div><label class="field-label">دما (°C)</label><input id="jTemp" class="studio-in" type="number" inputmode="decimal" min="0" step="1" value="${form.temp || ''}"></div>
+        <div><label class="field-label">دما (درجه‌ی سانتی‌گراد)</label><input id="jTemp" class="studio-in" type="number" inputmode="decimal" min="0" step="1" value="${form.temp || ''}"></div>
         <div><label class="field-label">زمان (ثانیه)</label><input id="jTime" class="studio-in" type="number" inputmode="decimal" min="0" step="1" value="${form.time || ''}"></div>
       </div>
       <label class="field-label">اندازه‌ی آسیاب</label>

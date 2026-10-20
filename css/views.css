@@ -142,7 +142,7 @@ html[dir="rtl"] .switch.on .knob{ transform:translateX(-19px); }
 .ring-timer .progress{ fill:none; stroke:var(--rust); stroke-width:8; stroke-linecap:round; transition:stroke-dashoffset .3s linear; }
 #timerIcon{ transform:rotate(var(--timer-icon-angle)); }
 .ring-center{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; }
-.ring-center svg{ width:26px; height:26px; color:var(--rust); }
+.ring-center svg{ width:38px; height:38px; color:var(--rust); }
 .ring-clock{ font-size:30px; font-weight:800; color:var(--ink); direction:ltr; }
 .btn-row{ display:flex; gap:10px; }
 .field-label{ font-size:12px; font-weight:700; color:var(--ink-soft); margin:0 0 8px; }
@@ -534,3 +534,16 @@ html.calm .soft-swap, html.calm .g-body, html.calm .guide-overlay.show{ animatio
 #categoryItemsWrap > .photo{ margin:0 22px 14px; }
 @media (min-width:860px){ #categoryItemsWrap > .photo{ margin-inline:30px; } }
 @media (min-width:860px){ #categoryItemsWrap .ev-era{ margin-inline:30px; } }
+
+.modal-sheet:has(.about-wrap){ max-height:94%; padding:16px 18px 16px; }
+.about-wrap h3{ margin:0 0 10px; }
+.about-wrap .about-hero{ margin-bottom:8px; }
+.about-wrap .about-hero .seal{ width:44px; height:44px; }
+.about-wrap .about-name{ font-size:19px; }
+.about-wrap .about-text{ margin:0 0 10px; font-size:12.5px; line-height:1.75; }
+.about-wrap .about-stats{ margin-bottom:10px; gap:6px; }
+.about-wrap .about-stat{ padding:6px 4px; }
+.about-wrap .about-stat b{ font-size:16px; }
+.about-wrap .about-credits{ margin-bottom:8px; }
+.about-wrap .about-credits li{ padding:5px 2px; font-size:11.5px; line-height:1.55; }
+.about-wrap .modal-actions{ margin-top:10px; }

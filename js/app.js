@@ -31,7 +31,7 @@ function splitName(title){
 
 const state = {
   theme: 'light',
-  unit: 'متریک (ml, g)',
+  unit: 'متریک (میلی‌لیتر، گرم)',
   language: 'فارسی',
   favorites: new Set(),
   selectedGroup: 'all',
@@ -93,11 +93,43 @@ function renderFeatured(){
   track.querySelectorAll('[data-open]').forEach(el =>
     el.addEventListener('click', () => openDetail(Number(el.dataset.open))));
   track.addEventListener('scroll', () => {
-    const idx = Math.round(track.scrollLeft / (track.firstElementChild.offsetWidth + 13));
+    const idx = Math.round(Math.abs(track.scrollLeft) / (track.firstElementChild.offsetWidth + 13));
     [...dots.children].forEach((d, i) => d.classList.toggle('active', i === idx));
   });
 }
 
+let featTimer = null, featPauseUntil = 0, featAnim = 0;
+function featGo(track, i, ms){
+  const card = track.children[i]; if (!card) return;
+  const tr = track.getBoundingClientRect(), cr = card.getBoundingClientRect();
+  const rtl = getComputedStyle(track).direction === 'rtl';
+  const delta = rtl ? cr.right - (tr.right - 22) : cr.left - (tr.left + 22);
+  const from = track.scrollLeft, t0 = performance.now(), id = ++featAnim;
+  track.style.scrollSnapType = 'none';
+  const ease = t => t < .5 ? 2*t*t : 1 - Math.pow(-2*t + 2, 2) / 2;
+  (function step(now){
+    if (id !== featAnim) return;
+    const p = Math.min(1, (now - t0) / ms);
+    track.scrollLeft = from + delta * ease(p);
+    if (p < 1) requestAnimationFrame(step); else track.style.scrollSnapType = '';
+  })(t0);
+}
+function startFeaturedLoop(){
+  const track = document.getElementById('featuredCarousel');
+  if (featTimer || window.matchMedia('(prefers-reduced-motion: reduce)').matches) return;
+  const pause = () => { featPauseUntil = Date.now() + 6000; featAnim++; track.style.scrollSnapType = ''; };
+  ['pointerdown', 'touchstart', 'wheel'].forEach(ev => track.addEventListener(ev, pause, {passive:true}));
+  let cur = 0;
+  featTimer = setInterval(() => {
+    if (document.hidden || Date.now() < featPauseUntil) return;
+    if (!document.getElementById('view-home').classList.contains('active')) return;
+    if (track.scrollWidth <= track.clientWidth + 4) return;
+    const n = track.children.length;
+    const near = Math.round(Math.abs(track.scrollLeft) / (track.firstElementChild.offsetWidth + 13));
+    cur = near + 1;
+    if (cur >= n) featGo(track, 0, 380); else featGo(track, cur, 900);
+  }, 3200);
+}
 function renderChips(){
   const row = document.getElementById('categoryChips');
   const all = [{id:'all', icon:'gridDots', title:'همه'}, ...RECIPE_GROUPS, {id:'alcohol', icon:'gridDots', title:'مشروب‌دار'}];
@@ -523,7 +555,7 @@ document.getElementById('aboutRow').addEventListener('click', () => {
   const groups = toPersianDigits(RECIPE_GROUPS.length);
   const articles = toPersianDigits(ENCYCLOPEDIA.reduce((sum, c) => sum + c.items.length, 0));
   const version = escapeHtml(document.querySelector('.pkg-tag').textContent.trim());
-  openModal(`<h3>درباره ما</h3>
+  openModal(`<div class="about-wrap"><h3>درباره ما</h3>
     <div class="about-hero">
       <div class="seal">${Icons.render('coffee')}</div>
       <div>
@@ -531,7 +563,7 @@ document.getElementById('aboutRow').addEventListener('click', () => {
         <div class="about-sub">دانشنامه‌ی قهوه — هر فنجان یک داستان دارد</div>
       </div>
     </div>
-    <p class="about-text">کافی‌پدیا یک دانشنامه‌ی فارسی درباره‌ی قهوه است: تاریخ، علم و فرهنگ قهوه، دستور تهیه‌ی ده‌ها نوشیدنی و ابزارهای دم‌آوری، همه در یک اپلیکیشن که بدون اینترنت هم کار می‌کند. این اپلیکیشن حاصل تلاش یک‌نفره است.</p>
+    <p class="about-text">کافی‌پدیا دانشنامه‌ی فارسی قهوه است: تاریخ، علم و فرهنگ، دستور نوشیدنی‌ها و ابزارهای دم‌آوری، بدون نیاز به اینترنت. حاصل تلاش یک‌نفره.</p>
     <div class="about-stats">
       <div class="about-stat"><b>${drinks}</b><span>نوشیدنی</span></div>
       <div class="about-stat"><b>${groups}</b><span>دسته‌بندی</span></div>
@@ -542,13 +574,13 @@ document.getElementById('aboutRow').addEventListener('click', () => {
       <li><b>فونت‌ها:</b> وزیرمتن (Vazirmatn) و لاله‌زار (Lalezar) با مجوز SIL OFL</li>
       <li><b>آیکون‌ها:</b> مجموعه‌ی اختصاصی پروژه (طراحی و کدنویسی داخلی)</li>
       <li><b>تصاویر:</b> تصویرسازی با هوش مصنوعی به سبک نقاشی دیجیتال</li>
-      <li><b>داده‌ی امتیاز کاپینگ:</b> پایگاه Coffee Quality Institute، از مخزن متن‌باز jldbc/coffee-quality-database</li>
+      <li><b>داده‌ی امتیاز کاپینگ:</b> پایگاه Coffee Quality Institute</li>
     </ul>
     <p class="about-version">${version}</p>
     <div class="modal-actions">
       <button class="btn btn-line" id="aboutFeedback" type="button">ارسال بازخورد</button>
       <button class="btn btn-ink" id="aboutClose" type="button">بستن</button>
-    </div>`);
+    </div></div>`);
   document.getElementById('aboutClose').addEventListener('click', closeModal);
   document.getElementById('aboutFeedback').addEventListener('click', () => {
     closeModal();
@@ -934,6 +966,7 @@ function init(){
   renderSources();
   renderEvents();
   renderFeatured();
+  startFeaturedLoop();
   renderChips();
   renderGrid();
   renderFavorites();
