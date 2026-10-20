@@ -141,8 +141,8 @@ html[dir="rtl"] .switch.on .knob{ transform:translateX(-19px); }
 .ring-timer .track{ fill:none; stroke:var(--mustard-soft); stroke-width:8; }
 .ring-timer .progress{ fill:none; stroke:var(--rust); stroke-width:8; stroke-linecap:round; transition:stroke-dashoffset .3s linear; }
 #timerIcon{ transform:rotate(var(--timer-icon-angle)); }
-.ring-center{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:6px; }
-.ring-center svg{ width:38px; height:38px; color:var(--rust); }
+.ring-center{ position:absolute; inset:0; display:flex; flex-direction:column; align-items:center; justify-content:center; gap:4px; }
+.ring-center svg{ width:58px; height:58px; color:var(--rust); }
 .ring-clock{ font-size:30px; font-weight:800; color:var(--ink); direction:ltr; }
 .btn-row{ display:flex; gap:10px; }
 .field-label{ font-size:12px; font-weight:700; color:var(--ink-soft); margin:0 0 8px; }
