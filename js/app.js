@@ -81,7 +81,8 @@ function renderFeatured(){
   track.innerHTML = FEATURED.map(d => {
     const n = splitName(d.title);
     return `
-    <div class="feature-card" data-open="${d.id}">
+    <div class="feature-card${cardHasPhoto() ? ' has-photo' : ''}" data-open="${d.id}">
+      ${cardPhotoHtml(d.id, 'feat-photo')}
       <div class="feature-ring">${Icons.render(DRINK_ICON.get(d.id))}</div>
       <div class="feature-fa">${escapeHtml(n.fa)}</div>
       <div class="feature-en">${escapeHtml(n.en)}</div>
@@ -159,7 +160,8 @@ function drinkCardHtml(d){
   const isFav = state.favorites.has(d.id);
   const n = splitName(d.title);
   return `
-    <div class="drink-card" data-open="${d.id}">
+    <div class="drink-card${cardHasPhoto() ? ' has-photo' : ''}" data-open="${d.id}">
+      ${cardPhotoHtml(d.id)}
       <button class="seal-fav" data-fav="${d.id}" aria-label="افزودن به علاقه‌مندی‌ها">
         ${isFav ? heartFilledSVG('var(--rust)') : heartOutlineSVG('var(--ink-soft)')}
       </button>

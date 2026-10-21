@@ -96,3 +96,23 @@ textarea.line-field{ resize:none; height:90px; align-items:flex-start; padding-t
   opacity:0; transform:translateY(8px); transition:all .25s ease; pointer-events:none;
 }
 .toast.show{ opacity:1; transform:translateY(0); }
+
+/* ---- عکس روی کارت نوشیدنی‌ها ---- */
+.card-photo{ margin:0; }
+.card-photo img{ display:block; width:100%; height:100%; object-fit:cover; }
+.drink-card.has-photo{ padding:0 0 12px; overflow:hidden; }
+.drink-card.has-photo .ring{ display:none; }
+.drink-card.has-photo .card-photo{ height:92px; border-bottom:1.5px dashed var(--line); margin-bottom:10px; }
+.drink-card.has-photo h4{ padding:0 12px; }
+.drink-card.has-photo .seal-fav{ z-index:2; box-shadow:0 1px 4px rgba(0,0,0,.28); }
+
+/* نوشیدنی‌های ویژه: عکس تمام‌کارت با لایه‌ی تیره */
+.feature-card.has-photo{ min-height:176px; display:flex; flex-direction:column; justify-content:flex-end; border-color:var(--rust); }
+.feature-card.has-photo .feat-photo{ position:absolute; inset:0; z-index:0; }
+.feature-card.has-photo .feat-photo::after{ content:''; position:absolute; inset:0; background:linear-gradient(to top, rgba(20,12,6,.88) 0%, rgba(20,12,6,.55) 45%, rgba(20,12,6,.12) 100%); }
+.feature-card.has-photo .feature-ring{ display:none; }
+.feature-card.has-photo > :not(.feat-photo){ position:relative; z-index:1; }
+.feature-card.has-photo::before{ z-index:2; border-color:rgba(255,255,255,.55); }
+.feature-card.has-photo .feature-fa{ color:#fff; text-shadow:0 1px 6px rgba(0,0,0,.5); }
+.feature-card.has-photo .feature-en{ color:rgba(255,255,255,.82); }
+.feature-card.has-photo .feature-tagline{ color:#F6D9A0; }

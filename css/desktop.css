@@ -37,7 +37,7 @@
   .stat-lbl{ font-size:12px; color:var(--ink-soft); font-weight:700; white-space:nowrap; }
 
   .feature-scroll{
-    display:grid; grid-template-columns:repeat(3, 1fr); gap:14px;
+    display:grid; grid-template-columns:repeat(4, 1fr); gap:14px;
     overflow-x:visible; padding:0 30px 8px; scroll-snap-type:none;
   }
   .feature-card{ flex:none; }
@@ -116,4 +116,9 @@
   .lab-entries{ display:grid; grid-template-columns:repeat(3, 1fr); gap:14px; padding:0 30px; margin-bottom:14px; align-items:stretch; }
   #view-tools .lab-entries .tool-card{ margin:0; display:flex; flex-direction:column; }
   .lab-entries .lab-entry-text{ flex:1 1 auto; }
+}
+
+@media (min-width:860px){
+  .drink-card.has-photo .card-photo{ height:112px; }
+  .feature-card.has-photo{ min-height:200px; }
 }
