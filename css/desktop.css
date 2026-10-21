@@ -119,6 +119,6 @@
 }
 
 @media (min-width:860px){
-  .drink-card.has-photo .card-photo{ height:112px; }
+  .drink-card.has-photo{ min-height:170px; }
   .feature-card.has-photo{ min-height:200px; }
 }

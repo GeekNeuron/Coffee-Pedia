@@ -11,14 +11,25 @@ RECIPE_GROUPS.forEach(g => g.items.forEach(it => DRINK_ICON.set(it.id, g.icon ||
 
 function pickFeatured(count){
   const shuffle = arr => arr.map(v => [Math.random(), v]).sort((a, b) => a[0] - b[0]).map(x => x[1]);
-  let prev = [];
-  try { prev = JSON.parse(localStorage.getItem('cp_featured_prev') || '[]'); } catch (e) {}
+  const d = new Date(), today = d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate();
+  let saved = null;
+  try { saved = JSON.parse(localStorage.getItem('cp_featured') || 'null'); } catch (e) {}
+  // پیشنهاد هر ۲۴ ساعت (روز تقویمی) یک بار عوض می‌شود
+  if (saved && saved.day === today && Array.isArray(saved.ids)){
+    const keep = saved.ids.map(id => ITEM_INDEX.get(id)?.item).filter(Boolean);
+    if (keep.length === count) return keep;
+  }
+  let prev = (saved && saved.ids) || [];
+  try { if (!prev.length) prev = JSON.parse(localStorage.getItem('cp_featured_prev') || '[]'); } catch (e) {}
   const picks = [];
   shuffle(RECIPE_GROUPS.filter(g => g.items.length)).slice(0, count).forEach(g => {
     const fresh = g.items.filter(d => !prev.includes(d.id));
     picks.push(shuffle(fresh.length ? fresh : g.items)[0]);
   });
-  try { localStorage.setItem('cp_featured_prev', JSON.stringify(picks.map(d => d.id))); } catch (e) {}
+  try {
+    localStorage.setItem('cp_featured', JSON.stringify({day: today, ids: picks.map(d => d.id)}));
+    localStorage.setItem('cp_featured_prev', JSON.stringify(picks.map(d => d.id)));
+  } catch (e) {}
   return picks.length ? picks : FEATURED_IDS.map(id => ITEM_INDEX.get(id)?.item).filter(Boolean);
 }
 const FEATURED = pickFeatured(4);
