@@ -122,3 +122,15 @@
   .drink-card.has-photo{ min-height:170px; }
   .feature-card.has-photo{ min-height:200px; }
 }
+
+/* ابزار: تایمر + نسبت، چرخ طعم + ردیاب کافئین کنار هم */
+@media (min-width:860px){
+  .tool-pair{ display:grid; grid-template-columns:repeat(2, 1fr); gap:14px; padding:0 30px; align-items:stretch; }
+  #view-tools .tool-pair .tool-card{ margin:0; }
+  .tool-pair .timer-body{ gap:22px; flex-wrap:wrap; }
+  .tool-pair .timer-body .btn-row{ width:150px; }
+}
+@media (min-width:860px){
+  #view-tools .tool-pair .tool-card{ display:flex; flex-direction:column; }
+  .tool-pair .timer-body{ flex:1 1 auto; }
+}
