@@ -134,3 +134,7 @@
   #view-tools .tool-pair .tool-card{ display:flex; flex-direction:column; }
   .tool-pair .timer-body{ flex:1 1 auto; }
 }
+@media (min-width:860px){
+  .tool-pair{ margin-bottom:16px; }
+  .lab-entries{ margin-bottom:16px; }
+}
