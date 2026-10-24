@@ -547,3 +547,47 @@ html.calm .soft-swap, html.calm .g-body, html.calm .guide-overlay.show{ animatio
 .about-wrap .about-credits{ margin-bottom:8px; }
 .about-wrap .about-credits li{ padding:5px 2px; font-size:11.5px; line-height:1.55; }
 .about-wrap .modal-actions{ margin-top:10px; }
+
+/* آزمایشگاه: گام بعدی، نتیجه و مرور */
+.lab-next{ display:flex; align-items:center; justify-content:space-between; gap:14px; }
+.lab-next > div{ display:flex; flex-direction:column; gap:3px; min-width:0; }
+.lab-next-name{ font-size:15px; color:var(--rust-deep); }
+.lab-next .lab-muted{ margin:0; }
+.lab-next .btn{ flex:0 0 auto; width:auto; padding-inline:22px; }
+.lab-keys{ display:none; margin:12px 0 0; text-align:center; font-size:11px; color:var(--ink-soft); }
+@media (hover:hover) and (min-width:860px){ .lab-keys{ display:block; } }
+.lab-score.is-pass{ color:var(--good); }
+.lab-badge{ margin:0 0 8px; text-align:center; font-size:12.5px; font-weight:800; }
+.lab-badge.is-pass{ color:var(--good); }
+.lab-badge.is-fail{ color:var(--warn); }
+.lab-review-h{ margin:18px 0 10px; }
+.lab-review{ display:flex; flex-direction:column; gap:10px; }
+.lab-rv{ padding:12px 14px; border-radius:var(--r-md); border:1.5px dashed var(--line); background:var(--paper); }
+.lab-rv p{ margin:0 0 6px; line-height:1.9; }
+.lab-rv-q{ font-size:13px; font-weight:800; }
+.lab-rv-a{ font-size:12.5px; color:var(--good); }
+.lab-rv-w{ font-size:12px; color:var(--ink-soft); margin-bottom:0 !important; }
+.btn.is-armed{ border-color:var(--warn); color:var(--warn); }
+.stepper b{ min-width:26px; text-align:center; font-size:15px; }
+
+/* کارگاه و دست به آچار */
+.j-tools{ display:flex; gap:8px; margin-bottom:12px; }
+.j-tools .btn{ flex:1; padding-inline:10px; }
+.cart-chosen{ display:flex; flex-wrap:wrap; gap:6px; margin:0 0 12px; }
+.cart-chosen .pill-choice{ font-size:11.5px; }
+.wr-late{ color:var(--warn); font-weight:800; }
+.wr-late-sum{ margin:0 0 12px; font-size:12px; font-weight:800; color:var(--warn); }
+.wr-svg .mk:focus-visible{ outline:none; }
+.wr-svg .mk:focus-visible circle{ stroke-width:3; }
+
+/* دست به آچار: تصویر جزئیات‌دار و ناحیه‌های قابل‌لمس */
+.wr-svg{ max-width:460px; filter:drop-shadow(0 6px 10px rgba(40,20,10,.10)); }
+.wr-svg .ol{ stroke:#3b2c24; stroke-width:1.3; stroke-linejoin:round; stroke-linecap:round; }
+.wr-svg .pt{ fill:transparent; stroke:none; cursor:pointer; transition:fill .18s ease, stroke .18s ease; }
+.wr-svg .pt:hover{ fill:rgba(179,74,36,.22); }
+.wr-svg .pt.on{ fill:rgba(179,74,36,.42); stroke:var(--rust); stroke-width:2; }
+.wr-svg .pt-s{ fill:none; stroke:transparent; stroke-width:14; stroke-linecap:round; stroke-linejoin:round; cursor:pointer; }
+.wr-svg .pt-s:hover{ stroke:rgba(179,74,36,.25); }
+.wr-svg .pt-s.on{ stroke:rgba(179,74,36,.5); }
+.wr-svg .ld{ stroke:var(--rust); opacity:.55; }
+.wr-svg .mk circle{ filter:drop-shadow(0 1px 2px rgba(0,0,0,.25)); }

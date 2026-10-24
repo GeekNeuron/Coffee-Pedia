@@ -8,7 +8,7 @@ const sv = (k, v) => { try { localStorage.setItem(k, JSON.stringify(v)); } catch
 let journal = ld(K_J, []); if (!Array.isArray(journal)) journal = [];
 let gear = ld(K_G, []); if (!Array.isArray(gear)) gear = [];
 let cart = ld(K_C, {}); if (!cart || typeof cart !== 'object' || Array.isArray(cart)) cart = {};
-let tab = 'journal', form = {rating: 0}, trouble = {m: 'espresso', s: 'sour'}, cartQ = '', delArm = null;
+let tab = 'journal', form = {rating: 0}, trouble = {m: 'espresso', s: 'sour'}, cartQ = '', cartMore = false, delArm = null, jClearArm = false;
 const body = document.getElementById('studioBody');
 
 /* ---------- تجهیزات ---------- */
@@ -45,6 +45,7 @@ function gearView(){
       <h3>تجهیزات من</h3>
       <p class="lab-muted">وسایلی را که دارید لمس کنید تا فقط نوشیدنی‌هایی که با آن‌ها قابل‌تهیه‌اند ببینید. ظرف‌ها، یخ و فیلتر کاغذی همیشه در دسترس فرض می‌شوند.</p>
       <div class="gear-chips">${GEAR.map(g => `<button type="button" class="pill-choice${own.has(g.key) ? ' active' : ''}" data-gear="${g.key}">${esc(g.fa)}</button>`).join('')}</div>
+      ${gear.length ? `<button type="button" class="btn btn-line" id="gClear" style="margin-top:12px">پاک‌کردن انتخاب‌ها (${fa(gear.length)})</button>` : ''}
     </div>
     <div class="tool-card">
       <h3>قابل‌تهیه با وسایل شما <span class="lab-count">${fa(ok.length)} از ${fa(ALL_DRINKS.length)}</span></h3>
@@ -69,6 +70,9 @@ function entryLine(e){
   if (e.temp) bits.push(fa(e.temp) + ' درجه‌ی سانتی‌گراد');
   if (e.time) bits.push(fa(e.time) + ' ثانیه');
   return bits.join(' • ');
+}
+function journalText(){
+  return journal.map(e => '• ' + (e.name || 'دم‌آوری دلخواه') + ' — ' + stars(e.rating) + '\n  ' + (entryLine(e) || '—') + (e.note ? '\n  یادداشت: ' + e.note : '') + '\n  ' + cpDate(e.t)).join('\n\n');
 }
 const stars = n => '★'.repeat(n) + '☆'.repeat(5 - n);
 function journalView(){
@@ -101,6 +105,7 @@ function journalView(){
     </div>
     <div class="tool-card">
       <h3>دفترچه‌ی من</h3>
+      ${journal.length ? `<div class="j-tools"><button type="button" class="btn btn-line" id="jCopy">کپی دفترچه</button><button type="button" class="btn btn-line${jClearArm ? ' is-armed' : ''}" id="jClear">${jClearArm ? 'مطمئنید؟ همه پاک می‌شود' : 'پاک‌کردن همه'}</button></div>` : ''}
       ${journal.length ? journal.map(e => `
         <div class="j-entry">
           <div class="j-top"><b>${esc(e.name || 'دم‌آوری دلخواه')}</b><span class="j-stars">${stars(e.rating)}</span></div>
@@ -179,15 +184,19 @@ window.cpCartText = cartText;
 function cartView(){
   const ids = Object.keys(cart).filter(k => cart[k] > 0);
   const q = cartQ.trim().toLowerCase();
-  const list = ALL_DRINKS.filter(d => !q || d.title.toLowerCase().includes(q)).slice(0, 30);
+  const found = ALL_DRINKS.filter(d => !q || d.title.toLowerCase().includes(q));
+  const list = cartMore || q ? found : found.slice(0, 30);
+  const chosen = ALL_DRINKS.filter(d => cart[d.id] > 0);
   const tot = totals();
   return `
     <div class="tool-card">
       <h3>انتخاب نوشیدنی‌ها <span class="lab-count">${fa(ids.reduce((s, k) => s + cart[k], 0))} فنجان</span></h3>
+      ${chosen.length ? `<div class="cart-chosen">${chosen.map(d => `<button type="button" class="pill-choice active" data-cdrop="${d.id}" aria-label="حذف ${esc(splitName(d.title).fa)}">${esc(splitName(d.title).fa)} × ${fa(cart[d.id])}</button>`).join('')}</div>` : ''}
       <input id="cQ" class="studio-in" type="search" placeholder="جست‌وجوی نوشیدنی…" value="${esc(cartQ)}">
-      <div class="cart-list">${list.map(d => `
+      <div class="cart-list">${list.length ? '' : '<p class="lab-muted">نوشیدنی‌ای با این نام پیدا نشد.</p>'}${list.map(d => `
         <div class="cart-row"><span>${esc(splitName(d.title).fa)}</span>
           <span class="stepper"><button type="button" data-cdec="${d.id}" aria-label="کم">−</button><b>${fa(cart[d.id] || 0)}</b><button type="button" data-cinc="${d.id}" aria-label="زیاد">+</button></span></div>`).join('')}</div>
+      ${!q && !cartMore && found.length > 30 ? `<button type="button" class="btn btn-line" id="cMore" style="margin-top:10px;width:100%">نمایش همه‌ی ${fa(found.length)} نوشیدنی</button>` : ''}
     </div>
     <div class="tool-card">
       <h3>مجموع مواد لازم</h3>
@@ -230,6 +239,17 @@ body.addEventListener('click', e => {
     const id = t.dataset.cinc || t.dataset.cdec; cart[id] = Math.max(0, Math.min(20, (cart[id] || 0) + (t.dataset.cinc ? 1 : -1)));
     if (!cart[id]) delete cart[id]; sv(K_C, cart); render(true); return;
   }
+  if (t.id === 'cMore'){ cartMore = true; render(true); return; }
+  if (t.dataset.cdrop){ delete cart[t.dataset.cdrop]; sv(K_C, cart); render(true); return; }
+  if (t.id === 'gClear'){ gear = []; sv(K_G, gear); render(true); return; }
+  if (t.id === 'jCopy'){
+    (navigator.clipboard ? navigator.clipboard.writeText(journalText()) : Promise.reject()).then(() => showToast('دفترچه کپی شد')).catch(() => showToast('کپی نشد'));
+    return;
+  }
+  if (t.id === 'jClear'){
+    if (!jClearArm){ jClearArm = true; render(true); setTimeout(() => { if (jClearArm){ jClearArm = false; if (tab === 'journal') render(true); } }, 3500); return; }
+    journal = []; sv(K_J, journal); jClearArm = false; render(true); showToast('دفترچه پاک شد'); return;
+  }
   if (t.id === 'cClear'){ cart = {}; sv(K_C, cart); render(true); return; }
   if (t.id === 'cCopy'){
     const txt = cartText();
@@ -243,6 +263,6 @@ body.addEventListener('change', e => { if (e.target.id === 'jDrink'){ readForm()
 document.querySelectorAll('[data-studiotab]').forEach(b => b.addEventListener('click', () => { tab = b.dataset.studiotab; render(); softSwap(body); }));
 document.getElementById('openStudioBtn').addEventListener('click', () => { render(); showView('studio'); softSwap(body); });
 document.getElementById('studioBackBtn').addEventListener('click', () => showView(state.currentTab));
-window.addEventListener('cp-reset', () => { journal = []; gear = []; cart = {}; form = {rating: 0}; render(); });
+window.addEventListener('cp-reset', () => { journal = []; gear = []; cart = {}; form = {rating: 0}; cartMore = false; jClearArm = false; render(); });
 render();
 })();

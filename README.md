@@ -102,9 +102,11 @@ coffee-pedia/
 │       ├── equipment.data.js      EQUIPMENT
 │       ├── events.data.js         EVENTS، EVENT_SOURCES
 │       ├── lab.data.js            LAB
+│       ├── lab.extra.data.js      پرسش‌های تکمیلی (هر نوشیدنی دست‌کم سه پرسش)
 │       ├── studio.data.js         GEAR، TROUBLE و گزینه‌های عیب‌یاب
 │       ├── tools.data.js          جدول‌های ابزارها و منبع‌های آن‌ها
-│       └── wrench.data.js         WRENCH، WRENCH_SOURCES
+│       ├── wrench.data.js         WRENCH، WRENCH_SOURCES (متن قطعه‌ها و نگهداری)
+│       └── wrench.art.js          WRENCH_ART، WRENCH_DEFS (تصویر برش‌خورده و ناحیه‌های لمس هر دستگاه)
 ├── database/                  نسخه‌ی JSON مرجع (راهنما: database/README.md)
 ├── fonts/                     وزیرمتن و لالزار (محلی، مجوز OFL)
 └── assets/
@@ -224,7 +226,7 @@ Icons.registry.coffee                           // فقط بدنه‌ی SVG
 
 **افزودن پرسش آزمایشگاه.** در `lab.data.js` با `Q(متن, گزینه‌ها, شماره‌ی پاسخ درست, دلیل)`. گزینه‌ی درست را اول بنویسید؛ برنامه در هر دور گزینه‌ها را بر می‌زند. پیشرفت با `id` نوشیدنی ذخیره می‌شود.
 
-**افزودن دستگاه به دست به آچار.** یک شیء به `WRENCH` در `wrench.data.js` بیفزایید: `id`، نام، نقشه‌ی SVG (`deco`)، قطعه‌ها (`parts` با شکل و مختصات نشانگر) و چک‌لیست (`care`)، و منبع‌ها را به `WRENCH_SOURCES` اضافه کنید.
+**افزودن دستگاه به دست به آچار.** یک شیء به `WRENCH` در `wrench.data.js` بیفزایید: `id`، نام، قطعه‌ها (`parts` با متن)، و در `wrench.art.js` تصویر برش‌خورده‌ی SVG (`art`) و ناحیه‌ی لمس و مختصات نشانگر هر قطعه (`hits`)، و چک‌لیست (`care`)، و منبع‌ها را به `WRENCH_SOURCES` اضافه کنید.
 
 **افزودن منبع به ابزارها.** منبع‌های ابزارها در `tools.data.js` (مانند `TEMP_SOURCES`، `TROUBLE_SOURCES`، `RATIO_SOURCES` و `FLAVOR_SOURCES`) تعریف و در `sourceSections()` در `app.js` ثبت می‌شوند.
 

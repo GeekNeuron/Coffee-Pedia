@@ -17,6 +17,8 @@ let quizMode = 'mixed';
 if (!labData.done) labData.done = {};
 let tab = 'lab';
 let run = null;
+let quitArmed = false, quitTimer = null;
+function disarmQuit(){ quitArmed = false; clearTimeout(quitTimer); }
 
 function shuffle(a){
   a = a.slice();
@@ -50,6 +52,11 @@ function homeLab(){
     <div class="caf-meter"><div class="fill" style="width:${pct}%; background:var(--good);"></div></div>
     <p class="lab-muted">${fa(r.n)} از ${fa(r.total)} نوشیدنی را گذرانده‌اید (حداقل ${fa(Math.round(PASS * 100))}٪ پاسخ درست).</p>
   </div>`;
+  const nxt = allDrinks().find(x => !passed(x.drink));
+  if (nxt){
+    h += `<div class="tool-card lab-next"><div><span class="lab-rank-label">گام بعدی شما</span><b class="lab-next-name">${esc(nxt.drink.name)}</b><small class="lab-muted">${esc(nxt.level.title)}</small></div>
+      <button class="btn btn-ink" type="button" data-drink="${nxt.drink.id}">شروع</button></div>`;
+  }
   h += '<div class="lab-levels">';
   LAB.forEach(l => {
     const done = l.drinks.filter(passed).length;
@@ -137,11 +144,11 @@ function quizQuestions(){
 function startDrink(id){
   const hit = allDrinks().find(x => x.drink.id === id);
   if (!hit) return;
-  run = { kind: 'drink', id, title: hit.drink.name, qs: hit.drink.qs.map(prepare), i: 0, score: 0, picked: [], answered: false };
+  run = { kind: 'drink', id, level: hit.level, title: hit.drink.name, qs: hit.drink.qs.map(prepare), i: 0, score: 0, picked: [], answered: false, missed: [] };
   render();
 }
 function startQuiz(){
-  run = { kind: 'quiz', title: 'آزمون واژه‌نامه', qs: quizQuestions(), i: 0, score: 0, picked: [], answered: false };
+  run = { kind: 'quiz', title: 'آزمون واژه‌نامه', qs: quizQuestions(), i: 0, score: 0, picked: [], answered: false, missed: [] };
   render();
 }
 
@@ -152,7 +159,7 @@ function renderQuestion(){
   const ans = new Set(q.ans);
   let h = `<div class="tool-card lab-run">
     <div class="lab-run-top"><b>${esc(run.title)}</b><span>${fa(run.i + 1)} از ${fa(n)}</span></div>
-    <div class="caf-meter"><div class="fill grow" style="width:${(run.i) / n * 100}%; --from:${Math.max(0, run.i - 1) / n * 100}%; background:var(--rust);"></div></div>
+    <div class="caf-meter" role="progressbar" aria-valuemin="0" aria-valuemax="${n}" aria-valuenow="${run.i + 1}"><div class="fill grow" style="width:${(run.i + (run.answered ? 1 : 0)) / n * 100}%; --from:${(run.i) / n * 100}%; background:var(--rust);"></div></div>
     <p class="lab-q">${esc(q.q)}</p>${q.block ? `<blockquote class="lab-block">${esc(q.block)}</blockquote>` : ''}
     ${q.multi ? '<p class="lab-muted">همه‌ی گزینه‌های درست را انتخاب کنید.</p>' : ''}
     <div class="lab-opts">`;
@@ -166,36 +173,54 @@ function renderQuestion(){
   h += '</div>';
   if (run.answered){
     const good = run.lastOk;
-    h += `<div class="info-box lab-fb ${good ? 'is-good' : 'is-bad'}"><p><b>${good ? 'درست بود.' : 'نادرست بود.'}</b> ${esc(q.why)}</p></div>
+    h += `<div class="info-box lab-fb ${good ? 'is-good' : 'is-bad'}" role="status" aria-live="polite"><p><b>${good ? 'درست بود.' : 'نادرست بود.'}</b> ${esc(q.why)}</p></div>
       <div class="btn-row" style="margin-top:14px;"><button class="btn btn-ink" id="labNextBtn" type="button">${run.i + 1 < n ? 'بعدی' : 'دیدن نتیجه'}</button></div>`;
   } else if (q.multi){
     h += `<div class="btn-row" style="margin-top:14px;"><button class="btn btn-ink" id="labSubmitBtn" type="button"${sel.size ? '' : ' disabled'}>ثبت پاسخ</button></div>`;
   }
-  h += `<div class="btn-row" style="margin-top:10px;"><button class="btn btn-line" id="labQuitBtn" type="button">خروج</button></div></div>`;
+  h += `<div class="btn-row" style="margin-top:10px;"><button class="btn btn-line${quitArmed ? ' is-armed' : ''}" id="labQuitBtn" type="button">${quitArmed ? 'مطمئنید؟ پیشرفت این دور ذخیره نمی‌شود' : 'خروج'}</button></div>
+    <p class="lab-keys">میان‌بر: عدد گزینه برای انتخاب، Enter برای ادامه</p></div>`;
   return h;
 }
 
 function renderResult(){
   const n = run.qs.length;
   const ratio = run.score / n;
-  let msg = ratio === 1 ? 'عالی بود؛ همه‌ی پاسخ‌ها درست.' : ratio >= PASS ? 'خوب بود؛ این مرحله را گذراندید.' : 'هنوز جای کار دارد؛ پاسخ‌های درست را مرور کنید و دوباره تلاش کنید.';
+  const ok = ratio >= PASS;
+  let msg = ratio === 1 ? 'عالی بود؛ همه‌ی پاسخ‌ها درست.' : ok ? 'خوب بود؛ این مرحله را گذراندید.' : 'هنوز جای کار دارد؛ پاسخ‌های درست را مرور کنید و دوباره تلاش کنید.';
   let h = `<div class="tool-card lab-run"><h3>${esc(run.title)}</h3>
-    <div class="lab-score">${fa(run.score)} <small>از ${fa(n)}</small></div>
-    <p class="lab-muted" style="text-align:center;">${msg}</p>
-    <div class="btn-row" style="margin-top:14px; flex-wrap:wrap;">
-      <button class="btn btn-ink" id="labAgainBtn" type="button">تلاش دوباره</button>
+    <div class="lab-score ${ok ? 'is-pass' : 'is-fail'}">${fa(run.score)} <small>از ${fa(n)}</small></div>
+    <p class="lab-badge ${ok ? 'is-pass' : 'is-fail'}">${ok ? '✓ گذراندید' : 'نیاز به تلاش دوباره'}</p>
+    <p class="lab-muted" style="text-align:center;">${msg}</p>`;
+  if (run.rankUp) h += `<div class="info-box lab-fb is-good" role="status"><p><b>رتبه‌ی تازه:</b> ${esc(run.rankUp)}</p></div>`;
+  if (run.missed && run.missed.length){
+    h += `<h3 class="lab-review-h">مرور پاسخ‌های نادرست</h3><div class="lab-review">` + run.missed.map(m =>
+      `<div class="lab-rv"><p class="lab-rv-q">${esc(m.q)}</p><p class="lab-rv-a"><b>پاسخ درست:</b> ${esc(m.right)}</p><p class="lab-rv-w">${esc(m.why)}</p></div>`).join('') + '</div>';
+  }
+  h += `<div class="btn-row" style="margin-top:14px; flex-wrap:wrap;">`;
+  const nx = run.kind === 'drink' ? nextDrink() : null;
+  if (nx) h += `<button class="btn btn-ink" type="button" data-drink="${nx.drink.id}">نوشیدنی بعدی: ${esc(nx.drink.name)}</button>`;
+  h += `<button class="btn ${nx ? 'btn-line' : 'btn-ink'}" id="labAgainBtn" type="button">تلاش دوباره</button>
       <button class="btn btn-line" id="labQuitBtn" type="button">بازگشت</button>
     </div>`;
   if (run.kind === 'drink') h += `<div class="btn-row" style="margin-top:10px;"><button class="btn btn-line" id="labRecipeBtn" type="button">${run.id >= 9000 ? 'دیدن دستگاه' : 'دیدن دستور'}</button></div>`;
   return h + '</div>';
 }
+function nextDrink(){
+  const all = allDrinks();
+  const i = all.findIndex(x => x.drink.id === run.id);
+  return all.slice(i + 1).find(x => !passed(x.drink)) || all.find(x => !passed(x.drink) && x.drink.id !== run.id) || null;
+}
 
 function finish(){
   const n = run.qs.length;
   if (run.kind === 'drink'){
+    const before = rankInfo().title;
     const prev = labData.done[run.id];
     labData.done[run.id] = { best: Math.max(prev ? prev.best : 0, run.score), total: n };
     save(KEY_LAB, labData);
+    const after = rankInfo().title;
+    if (after !== before) run.rankUp = after;
   } else {
     quizData.rounds++;
     quizData.best = Math.max(quizData.best, run.score);
@@ -211,6 +236,7 @@ function submit(){
   const a = q.ans.slice().sort().join(), p = run.picked.slice().sort().join();
   run.lastOk = a === p;
   if (run.lastOk) run.score++;
+  else run.missed.push({ q: q.q, right: q.ans.slice().sort().map(i => q.opts[i]).join('، '), why: q.why });
   if (run.kind === 'quiz' && q.key){
     const w = quizData.wrong.filter(k => k !== q.key);
     if (!run.lastOk) w.push(q.key);
@@ -222,6 +248,7 @@ function submit(){
 }
 
 function render(keepScroll){
+  if (!run) quitArmed = false;
   const body = document.getElementById('labBody');
   const sub = document.getElementById('labSub');
   document.querySelectorAll('[data-labtab]').forEach(b => b.classList.toggle('active', b.dataset.labtab === tab));
@@ -239,10 +266,13 @@ function render(keepScroll){
 document.getElementById('labBody').addEventListener('click', e => {
   const t = e.target.closest('button');
   if (!t) return;
-  if (t.dataset.drink){ startDrink(Number(t.dataset.drink)); return; }
+  if (t.dataset.drink){ disarmQuit(); startDrink(Number(t.dataset.drink)); return; }
   if (t.dataset.qmode){ quizMode = t.dataset.qmode; render(true); return; }
   if (t.id === 'quizStartBtn'){ startQuiz(); return; }
-  if (t.id === 'labQuitBtn'){ run = null; render(); return; }
+  if (t.id === 'labQuitBtn'){
+    if (run && !run.finished && run.i + (run.answered ? 1 : 0) > 0 && !quitArmed){ quitArmed = true; render(true); quitTimer = setTimeout(() => { quitArmed = false; if (run && !run.finished) render(true); }, 3500); return; }
+    disarmQuit(); run = null; render(); return;
+  }
   if (t.id === 'labAgainBtn'){ run.kind === 'drink' ? startDrink(run.id) : startQuiz(); return; }
   if (t.id === 'labRecipeBtn'){ if (run.id >= 9000 && window.openWrench){ window.openWrench(run.id - 9001); } else openDetail(run.id); return; }
   if (t.id === 'labSubmitBtn'){ submit(); return; }
@@ -264,6 +294,22 @@ document.getElementById('labBody').addEventListener('click', e => {
   }
 });
 document.querySelectorAll('[data-labtab]').forEach(b => b.addEventListener('click', () => { tab = b.dataset.labtab; render(); }));
+document.addEventListener('keydown', e => {
+  if (!run || run.finished || e.ctrlKey || e.metaKey || e.altKey) return;
+  const v = document.getElementById('view-lab');
+  if (!v || !v.classList.contains('active')) return;
+  const el = e.target;
+  if (el && /^(INPUT|TEXTAREA|SELECT)$/.test(el.tagName)) return;
+  const q = run.qs[run.i];
+  const fd = e.key.replace(/[۰-۹]/g, d => '۰۱۲۳۴۵۶۷۸۹'.indexOf(d));
+  if (/^[1-9]$/.test(fd) && !run.answered && Number(fd) <= q.opts.length){
+    const b = document.querySelector('.lab-opt[data-opt="' + (Number(fd) - 1) + '"]');
+    if (b){ e.preventDefault(); b.click(); }
+  } else if (e.key === 'Enter'){
+    const b = document.getElementById(run.answered ? 'labNextBtn' : 'labSubmitBtn');
+    if (b && !b.disabled && el !== b){ e.preventDefault(); b.click(); }
+  }
+});
 document.getElementById('openLabBtn').addEventListener('click', () => { run = null; render(); showView('lab'); });
 document.getElementById('labBackBtn').addEventListener('click', () => { run = null; showView(state.currentTab); });
 

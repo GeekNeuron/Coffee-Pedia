@@ -13,11 +13,12 @@ function ago(ts){
   return d <= 0 ? 'امروز' : fa(d) + ' روز پیش';
 }
 function svg(w){
-  const tgt = sel ? w.parts.find(p => p.id === sel) : null;
   const lines = w.parts.map(p => `<line class="ld" x1="${p.mx}" y1="${p.my}" x2="${p.tx}" y2="${p.ty}"/>`).join('');
-  const marks = w.parts.map((p, i) => `<g class="mk${sel === p.id ? ' on' : ''}" data-part="${p.id}"><circle cx="${p.mx}" cy="${p.my}" r="11"/><text x="${p.mx}" y="${p.my + 4}" text-anchor="middle">${fa(i + 1)}</text></g>`).join('');
-  const shapes = w.parts.map(p => p.shape.replace(/<(\w+) class="(pt|pt-s)"/g, (m, t, c) => `<${t} class="${c}${sel === p.id ? ' on' : ''}" data-part="${p.id}"`)).join('');
-  return `<svg class="wr-svg" viewBox="0 0 320 260" role="img" aria-label="${esc(w.name)}">${w.deco}${shapes}${lines}${marks}</svg>`;
+  const marks = w.parts.map((p, i) => `<g class="mk${sel === p.id ? ' on' : ''}" data-part="${p.id}" role="button" tabindex="0" aria-label="${esc(p.n)}"><circle cx="${p.mx}" cy="${p.my}" r="11"/><text x="${p.mx}" y="${p.my + 4}" text-anchor="middle">${fa(i + 1)}</text></g>`).join('');
+  const ordered = w.order ? w.order.map(id => w.parts.find(p => p.id === id)).filter(Boolean) : w.parts;
+  const shapes = ordered.map(p => p.shape.replace(/<(\w+) class="(pt|pt-s)"/g, (m, t, c) => `<${t} class="${c}${sel === p.id ? ' on' : ''}" data-part="${p.id}"`)).join('');
+  const art = w.art ? (typeof WRENCH_DEFS === 'string' ? WRENCH_DEFS : '') + w.art : (w.deco || '');
+  return `<svg class="wr-svg" viewBox="0 0 320 260" role="img" aria-label="${esc(w.name)}">${art}${shapes}${lines}${marks}</svg>`;
 }
 function detail(p){
   return p
@@ -25,9 +26,16 @@ function detail(p){
         <p class="wr-d">${esc(p.d)}</p>${p.tip ? `<div class="lab-block">${esc(p.tip)}</div>` : ''}`
     : '<h3>قطعه‌ها</h3><p class="lab-muted">یک عدد روی تصویر یا یکی از نام‌های زیر آن را لمس کنید تا کارش و نکته‌ی نگهداری‌اش را ببینید.</p>';
 }
+const DAYS = [[/بعد از هر|هنگام کنار گذاشتن|هرگز/, 0], [/هر یک تا دو روز/, 2], [/هر ۱ تا ۳ هفته/, 21], [/هفته‌ای/, 7], [/هر ۱ تا ۲ ماه/, 60], [/هر ۳ تا ۶ ماه/, 180], [/ماهی/, 30]];
+function dueDays(when){ for (const [re, d] of DAYS) if (re.test(when)) return d; return 0; }
+function overdue(c, ts){
+  const d = dueDays(c.when);
+  return !!ts && d > 0 && (Date.now() - ts) / 86400000 > d;
+}
 function careFoot(c, i, dn){
   if (c.when === 'هرگز') return '';
-  return `<div class="wr-care-foot"><span>آخرین بار: ${ago(dn[i])}</span><span>${dn[i] ? `<button type="button" class="j-del" data-undo="${i}">لغو</button>` : ''}<button type="button" class="j-del" data-done="${i}">انجام شد</button></span></div>`;
+  const od = overdue(c, dn[i]);
+  return `<div class="wr-care-foot"><span${od ? ' class="wr-late"' : ''}>آخرین بار: ${ago(dn[i])}${od ? ' • موعد گذشته' : ''}</span><span>${dn[i] ? `<button type="button" class="j-del" data-undo="${i}">لغو</button>` : ''}<button type="button" class="j-del" data-done="${i}">انجام شد</button></span></div>`;
 }
 function render(keep){
   const y = document.getElementById('appBody').scrollTop;
@@ -46,6 +54,7 @@ function render(keep){
     <div class="tool-card">
       <h3>نگهداری و تمیزکاری</h3>
       <p class="lab-muted">پیش از هر کاری دفترچه‌ی دستگاه خودتان را ببینید؛ روش دقیق بسته به مدل فرق می‌کند. با «انجام شد» زمان آخرین بار را روی همین دستگاه ثبت کنید.</p>
+      ${(() => { const n = w.care.filter((c, i) => overdue(c, dn[i])).length; return n ? `<p class="wr-late-sum">${fa(n)} کار نگهداری موعدش گذشته است.</p>` : ''; })()}
       ${w.care.map((c, i) => `
         <div class="wr-care">
           <div class="wr-care-top"><b>${esc(c.t)}</b><span class="wr-when">${esc(c.when)}</span></div>
@@ -71,6 +80,9 @@ function refreshCare(i){
   const slot = body.querySelector(`[data-care="${i}"]`);
   if (slot){ slot.innerHTML = careFoot(w.care[i], i, dn); softSwap(slot); }
 }
+body.addEventListener('keydown', e => {
+  if ((e.key === 'Enter' || e.key === ' ') && e.target.closest && e.target.closest('g.mk')){ e.preventDefault(); select(e.target.closest('g.mk').dataset.part); }
+});
 body.addEventListener('click', e => {
   const part = e.target.closest('[data-part]');
   if (part){ select(part.dataset.part); return; }
