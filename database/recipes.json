@@ -130,7 +130,7 @@
    {
     "id": 26,
     "title": "دوپیو (Doppio)",
-    "body": "<ul><li><strong>گام ۱ (دوز):</strong> برای شات دوبل حدود ۱۴ گرم قهوه‌ی خشک وزن کنید (تک: حدود ۷، سه‌بل: حدود ۲۱ گرم).</li><li><strong>گام ۲ (عصاره‌گیری):</strong> مانند اسپرسوی نورمال عصاره بگیرید؛ برای دوبل ۱۴ گرمی، نورمال حدود ۶۰ میلی‌لیتر آب مصرف می‌کند.</li></ul>",
+    "body": "<ul><li><strong>گام ۱ (آماده‌سازی):</strong> فنجان را از پیش گرم کنید و قهوه را تازه آسیاب کنید.</li><li><strong>گام ۲ (دوز):</strong> برای شات دوبل حدود ۱۴ گرم قهوه‌ی خشک وزن کنید (تک: حدود ۷، سه‌بل: حدود ۲۱ گرم).</li><li><strong>گام ۳ (فشردن):</strong> قهوه را در پورتافیلتر بریزید و یکنواخت تمپر کنید.</li><li><strong>گام ۴ (عصاره‌گیری):</strong> مانند اسپرسوی نورمال عصاره بگیرید؛ زمان عصاره‌گیری حدود ۲۵ تا ۳۰ ثانیه است و حجم نهایی حدود ۵۰ تا ۶۰ میلی‌لیتر می‌شود.</li></ul>",
     "kind": "item",
     "description": "«دوپیو» واژه‌ی ایتالیایی برای شات دوبل است؛ حدود دو برابر اسپرسوی تک.",
     "difficulty": "",
@@ -158,14 +158,24 @@
     ],
     "steps": [
      {
+      "label": "آماده‌سازی",
+      "text": "فنجان را از پیش گرم کنید و قهوه را تازه آسیاب کنید.",
+      "meta": ""
+     },
+     {
       "label": "دوز",
       "text": "برای شات دوبل حدود ۱۴ گرم قهوه‌ی خشک وزن کنید (تک: حدود ۷، سه‌بل: حدود ۲۱ گرم).",
       "meta": "۱۴ گرم"
      },
      {
+      "label": "فشردن",
+      "text": "قهوه را در پورتافیلتر بریزید و یکنواخت تمپر کنید.",
+      "meta": ""
+     },
+     {
       "label": "عصاره‌گیری",
-      "text": "مانند اسپرسوی نورمال عصاره بگیرید؛ برای دوبل ۱۴ گرمی، نورمال حدود ۶۰ میلی‌لیتر آب مصرف می‌کند.",
-      "meta": "≈۶۰ میلی‌لیتر"
+      "text": "مانند اسپرسوی نورمال عصاره بگیرید؛ زمان عصاره‌گیری حدود ۲۵ تا ۳۰ ثانیه است و حجم نهایی حدود ۵۰ تا ۶۰ میلی‌لیتر می‌شود.",
+      "meta": "۲۵–۳۰ ثانیه"
      }
     ],
     "proTip": "حجم یک دوپیو در ایتالیا حدود ۷۵ میلی‌لیتر و در آمریکا حدود ۹۰ تا ۱۵۰ میلی‌لیتر گزارش شده است؛ در هر دو حالت دوپیو با دو برابر قهوه‌ی تک ساخته می‌شود.",
@@ -179,6 +189,14 @@
      [
       "Coffee Review — Traditional espresso drink descriptions",
       "https://www.coffeereview.com/coffee-reference/espresso/espresso-cuisines/traditional-drink-descriptions/"
+     ],
+     [
+      "Copenhagen Coffee Lab — What is a doppio",
+      "https://copenhagencoffeelab.com/en/blogs/inside-the-lab/hvad-er-en-doppio"
+     ],
+     [
+      "Your Dream Coffee — Doppio espresso",
+      "https://yourdreamcoffee.com/doppio-espresso/"
      ]
     ]
    },
@@ -390,7 +408,7 @@
    {
     "id": 33,
     "title": "لانگ بلک (Long Black)",
-    "body": "<ul><li><strong>گام ۱ (آب):</strong> ابتدا آب داغ را در فنجان بریزید؛ معمولاً حدود ۱۰۰ تا ۱۲۰ میلی‌لیتر.</li><li><strong>گام ۲ (اسپرسو):</strong> شات دوبل اسپرسو را روی آب داغ بریزید. اگر درست ساخته شود کرما حفظ می‌شود و در لانگ بلک پررنگ‌تر است.</li></ul>",
+    "body": "<ul><li><strong>گام ۱ (اسپرسو):</strong> یک شات دوبل اسپرسو با نسبت حدود ۱ به ۲ و در ۲۷ تا ۳۳ ثانیه بگیرید.</li><li><strong>گام ۲ (آب):</strong> آب داغ را در فنجان بریزید؛ معمولاً حدود ۱۰۰ تا ۱۲۰ میلی‌لیتر. آب تازه‌جوش را کمی خنک کنید تا کرما زود از بین نرود.</li><li><strong>گام ۳ (ریختن اسپرسو):</strong> اسپرسو را آهسته و تا جای ممکن نزدیک سطح آب روی آن بریزید تا لایه‌ی کرما روی نوشیدنی بماند.</li><li><strong>گام ۴ (هم‌زدن):</strong> پیش از نوشیدن کمی هم بزنید تا کرمای تلخ با نوشیدنی یکدست شود.</li></ul>",
     "kind": "item",
     "description": "لانگ بلک با ریختن شات دوبل اسپرسو روی آب داغ ساخته می‌شود.",
     "difficulty": "",
@@ -417,13 +435,22 @@
     ],
     "steps": [
      {
+      "label": "اسپرسو",
+      "text": "یک شات دوبل اسپرسو با نسبت حدود ۱ به ۲ و در ۲۷ تا ۳۳ ثانیه بگیرید.",
+      "meta": "۲۷–۳۳ ثانیه"
+     },
+     {
       "label": "آب",
-      "text": "ابتدا آب داغ را در فنجان بریزید؛ معمولاً حدود ۱۰۰ تا ۱۲۰ میلی‌لیتر.",
+      "text": "آب داغ را در فنجان بریزید؛ معمولاً حدود ۱۰۰ تا ۱۲۰ میلی‌لیتر. آب تازه‌جوش را کمی خنک کنید تا کرما زود از بین نرود.",
       "meta": "۱۰۰–۱۲۰ میلی‌لیتر"
      },
      {
-      "label": "اسپرسو",
-      "text": "شات دوبل اسپرسو را روی آب داغ بریزید. اگر درست ساخته شود کرما حفظ می‌شود و در لانگ بلک پررنگ‌تر است."
+      "label": "ریختن اسپرسو",
+      "text": "اسپرسو را آهسته و تا جای ممکن نزدیک سطح آب روی آن بریزید تا لایه‌ی کرما روی نوشیدنی بماند."
+     },
+     {
+      "label": "هم‌زدن",
+      "text": "پیش از نوشیدن کمی هم بزنید تا کرمای تلخ با نوشیدنی یکدست شود."
      }
     ],
     "proTip": "اسپرسو را آهسته و نزدیک سطح آب بریزید تا کرما سالم بماند؛ ریختن آب روی اسپرسو کرما را می‌شکند و بدنه‌ی نوشیدنی سبک‌تر می‌شود.",
@@ -437,6 +464,14 @@
      [
       "Wikipedia — Caff%C3%A8 Americano",
       "https://en.wikipedia.org/wiki/Caff%C3%A8_Americano"
+     ],
+     [
+      "Leaf Bean Machine — How to make the perfect long black",
+      "https://www.leafbeanmachine.com.au/how-to-make-the-perfect-karvan-long-black/"
+     ],
+     [
+      "Bean Poet — Long black vs Americano",
+      "https://www.beanpoet.com/long-black-vs-americano"
      ]
     ]
    },
@@ -767,7 +802,7 @@
    {
     "id": 42,
     "title": "لاته ماکیاتو (Latte Macchiato)",
-    "body": "<ul><li><strong>گام ۱ (شیر):</strong> شیر را بخار بدهید و در لیوان بریزید؛ لاته ماکیاتو کف بیشتری دارد تا فقط شیر داغ. برای دیده‌شدن لایه‌ها لیوان شیشه‌ای ضروری است.</li><li><strong>گام ۲ (اسپرسو):</strong> اسپرسو را به شیر اضافه کنید؛ برای ساخت لایه می‌توان آن را روی پشت قاشق ریخت. اسپرسو بین شیر مایع سنگین‌تر در پایین و کف سبک‌تر بالا لایه‌ای می‌سازد.</li></ul>",
+    "body": "<ul><li><strong>گام ۱ (بخار‌دادن شیر):</strong> پارچ را حدود دوسوم با شیر سرد پر کنید و شیر را تا حدود ۶۵ درجه‌ی سانتی‌گراد بخار بدهید؛ نوک لوله‌ی بخار در مایع باشد و کف بیشتر از لاته معمولی بسازید.</li><li><strong>گام ۲ (استراحت شیر):</strong> پارچ را چند ثانیه نگه دارید، آرام روی میز بکوبید و بچرخانید تا حباب‌های درشت از بین برود.</li><li><strong>گام ۳ (ریختن شیر):</strong> شیر بخارداده‌شده را با حرکت دورانی آرام در لیوان بلند شیشه‌ای بریزید (حدود ۲۰۰ تا ۲۴۰ میلی‌لیتر)، سپس کف باقی‌مانده را روی آن بگذارید.</li><li><strong>گام ۴ (گرفتن اسپرسو):</strong> یک شات اسپرسو را در فنجان کوچک یا پارچ جدا بگیرید، نه مستقیم در لیوان.</li><li><strong>گام ۵ (ریختن اسپرسو):</strong> اسپرسو را آهسته و از ارتفاع کم، درست وسط کف بریزید تا لایه‌ها قاطی نشوند.</li><li><strong>گام ۶ (سرو):</strong> فوراً سرو کنید و هم نزنید؛ لایه‌ها با گذشت زمان کم‌کم در هم می‌روند.</li></ul>",
     "kind": "item",
     "description": "در لاته ماکیاتو اسپرسو به شیر اضافه می‌شود، نه شیر به اسپرسو؛ نوشیدنی معمولاً لایه‌لایه است.",
     "difficulty": "",
@@ -795,12 +830,34 @@
     ],
     "steps": [
      {
-      "label": "شیر",
-      "text": "شیر را بخار بدهید و در لیوان بریزید؛ لاته ماکیاتو کف بیشتری دارد تا فقط شیر داغ. برای دیده‌شدن لایه‌ها لیوان شیشه‌ای ضروری است."
+      "label": "بخار‌دادن شیر",
+      "text": "پارچ را حدود دوسوم با شیر سرد پر کنید و شیر را تا حدود ۶۵ درجه‌ی سانتی‌گراد بخار بدهید؛ نوک لوله‌ی بخار در مایع باشد و کف بیشتر از لاته معمولی بسازید.",
+      "meta": "۶۵ درجه‌ی سانتی‌گراد"
      },
      {
-      "label": "اسپرسو",
-      "text": "اسپرسو را به شیر اضافه کنید؛ برای ساخت لایه می‌توان آن را روی پشت قاشق ریخت. اسپرسو بین شیر مایع سنگین‌تر در پایین و کف سبک‌تر بالا لایه‌ای می‌سازد."
+      "label": "استراحت شیر",
+      "text": "پارچ را چند ثانیه نگه دارید، آرام روی میز بکوبید و بچرخانید تا حباب‌های درشت از بین برود.",
+      "meta": ""
+     },
+     {
+      "label": "ریختن شیر",
+      "text": "شیر بخارداده‌شده را با حرکت دورانی آرام در لیوان بلند شیشه‌ای بریزید (حدود ۲۰۰ تا ۲۴۰ میلی‌لیتر)، سپس کف باقی‌مانده را روی آن بگذارید.",
+      "meta": "۲۰۰–۲۴۰ میلی‌لیتر"
+     },
+     {
+      "label": "گرفتن اسپرسو",
+      "text": "یک شات اسپرسو را در فنجان کوچک یا پارچ جدا بگیرید، نه مستقیم در لیوان.",
+      "meta": "۲۰–۵۰ میلی‌لیتر"
+     },
+     {
+      "label": "ریختن اسپرسو",
+      "text": "اسپرسو را آهسته و از ارتفاع کم، درست وسط کف بریزید تا لایه‌ها قاطی نشوند.",
+      "meta": ""
+     },
+     {
+      "label": "سرو",
+      "text": "فوراً سرو کنید و هم نزنید؛ لایه‌ها با گذشت زمان کم‌کم در هم می‌روند.",
+      "meta": ""
      }
     ],
     "proTip": "«ماکیا» لکه‌ی کوچک کف اسپرسوی قهوه‌ای (کرما) است که روی شیر باقی می‌ماند.",
@@ -814,6 +871,14 @@
      [
       "Wikipedia — Latte",
       "https://en.wikipedia.org/wiki/Latte"
+     ],
+     [
+      "Coffeeness — How to make latte macchiato",
+      "https://www.coffeeness.de/en/how-to-make-latte-macchiato/"
+     ],
+     [
+      "Complete Home Barista — Latte macchiato",
+      "https://completehomebarista.com/guides/how-to-make-a-latte-macchiato-milk-first-espresso-second/"
      ]
     ]
    },
@@ -886,7 +951,7 @@
    {
     "id": 44,
     "title": "کورتادو (Cortado)",
-    "body": "<ul><li><strong>گام ۱ (اسپرسو):</strong> یک شات اسپرسو بگیرید.</li><li><strong>گام ۲ (شیر):</strong> حدود همان مقدار شیر گرم اضافه کنید. شیر کورتادو بخار داده می‌شود اما کف‌دار نیست. نسبت دقیق از منطقه‌ای به منطقه‌ی دیگر تفاوت زیادی دارد.</li></ul>",
+    "body": "<ul><li><strong>گام ۱ (اسپرسو):</strong> اسپرسو را مستقیم در لیوان کوچک (حدود ۱۲۰ میلی‌لیتر) بگیرید؛ در دستورهای رایج دوبل اسپرسو، حدود ۶۰ میلی‌لیتر، به کار می‌رود.</li><li><strong>گام ۲ (بخار دادن شیر):</strong> حدود همان مقدار شیر سرد را با هوای خیلی کم بخار بدهید تا گرم و نرم شود، نه کف‌دار.</li><li><strong>گام ۳ (ترکیب):</strong> شیر را آهسته و دایره‌وار روی اسپرسو بریزید تا رنگ قهوه‌ای روشن و یکدست شود.</li></ul>",
     "kind": "item",
     "description": "کورتادو اسپرسویی است که با مقداری تقریباً برابر شیر گرم «بریده» می‌شود تا اسیدیته‌اش کم شود.",
     "difficulty": "",
@@ -915,11 +980,17 @@
     "steps": [
      {
       "label": "اسپرسو",
-      "text": "یک شات اسپرسو بگیرید."
+      "text": "اسپرسو را مستقیم در لیوان کوچک (حدود ۱۲۰ میلی‌لیتر) بگیرید؛ در دستورهای رایج دوبل اسپرسو، حدود ۶۰ میلی‌لیتر، به کار می‌رود.",
+      "meta": "۶۰ میلی‌لیتر"
      },
      {
-      "label": "شیر",
-      "text": "حدود همان مقدار شیر گرم اضافه کنید. شیر کورتادو بخار داده می‌شود اما کف‌دار نیست. نسبت دقیق از منطقه‌ای به منطقه‌ی دیگر تفاوت زیادی دارد."
+      "label": "بخار دادن شیر",
+      "text": "حدود همان مقدار شیر سرد را با هوای خیلی کم بخار بدهید تا گرم و نرم شود، نه کف‌دار.",
+      "meta": "۵۴–۶۰ درجه‌ی سانتی‌گراد"
+     },
+     {
+      "label": "ترکیب",
+      "text": "شیر را آهسته و دایره‌وار روی اسپرسو بریزید تا رنگ قهوه‌ای روشن و یکدست شود."
      }
     ],
     "proTip": "شیر را فقط بخار بدهید و کف‌دار نکنید؛ کورتادو برخلاف ماکیاتو و کاپوچینو لایه‌ی کف ندارد.",
@@ -929,13 +1000,21 @@
      [
       "Wikipedia — Cortado",
       "https://en.wikipedia.org/wiki/Cortado"
+     ],
+     [
+      "Home Grounds — Cortado recipe",
+      "https://www.homegrounds.co/cortado-recipe/"
+     ],
+     [
+      "Complete Home Barista — How to make a cortado",
+      "https://completehomebarista.com/guides/how-to-make-cortado/"
      ]
     ]
    },
    {
     "id": 45,
     "title": "پیکولو لاته (Piccolo Latte)",
-    "body": "<ul><li><strong>گام ۱ (ریسترتو):</strong> یک شات ریسترتو بگیرید و آن را در لیوان ماکیاتو بریزید. در استرالیا این نوشیدنی «پیکولو لاته» یا فقط «پیکولو» نام دارد.</li><li><strong>گام ۲ (شیر):</strong> لیوان را با شیر بخارداده‌شده پر کنید؛ شیر را مانند کافه لاته آماده کنید.</li></ul>",
+    "body": "<ul><li><strong>گام ۱ (ریسترتو):</strong> یک شات ریسترتو بگیرید و آن را در لیوان کوچک ماکیاتو بریزید. رست روشن بهتر است، چون رست تیره در این غلظت تلخ می‌شود.</li><li><strong>گام ۲ (شیر):</strong> حدود هفتاد میلی‌لیتر شیر را مثل لاته بخار بدهید.</li><li><strong>گام ۳ (ترکیب):</strong> شیر را روی ریسترتو بریزید و با هم یکی کنید تا نوشیدنی یکدست شود و کف جدا روی آن نماند.</li></ul>",
     "kind": "item",
     "description": "پیکولو لاته نام استرالیایی نوشیدنی‌ای است که با یک شات ریسترتو در لیوان ماکیاتو ساخته می‌شود.",
     "difficulty": "",
@@ -964,11 +1043,17 @@
     "steps": [
      {
       "label": "ریسترتو",
-      "text": "یک شات ریسترتو بگیرید و آن را در لیوان ماکیاتو بریزید. در استرالیا این نوشیدنی «پیکولو لاته» یا فقط «پیکولو» نام دارد."
+      "text": "یک شات ریسترتو بگیرید و آن را در لیوان کوچک ماکیاتو بریزید. رست روشن بهتر است، چون رست تیره در این غلظت تلخ می‌شود.",
+      "meta": "حدود ۲۰ ثانیه"
      },
      {
       "label": "شیر",
-      "text": "لیوان را با شیر بخارداده‌شده پر کنید؛ شیر را مانند کافه لاته آماده کنید."
+      "text": "حدود هفتاد میلی‌لیتر شیر را مثل لاته بخار بدهید.",
+      "meta": "۷۰ میلی‌لیتر"
+     },
+     {
+      "label": "ترکیب",
+      "text": "شیر را روی ریسترتو بریزید و با هم یکی کنید تا نوشیدنی یکدست شود و کف جدا روی آن نماند."
      }
     ],
     "proTip": "باریستاها از آن برای چشیدن یک بلند تازه در نوشیدنی شیری استفاده می‌کنند؛ لیوان کوچک حدود ۹۰ میلی‌لیتری جای اشتباه در ریختن شیر نمی‌گذارد و تعادل شیر و قهوه از فلت‌وایت قهوه‌ای‌تر است.",
@@ -986,6 +1071,10 @@
      [
       "Coffee Parts — Piccolo latte glossary",
       "https://know.coffeeparts.com.au/glossary/piccolo-latte"
+     ],
+     [
+      "Tasting Table — Piccolo latte",
+      "https://tastingtable.com/1458889/piccolo-latte-different-coffee-drink-explained"
      ]
     ]
    },
@@ -1155,7 +1244,7 @@
     ],
     "proTip": "گاهی روی خامه کمی پودر کاکائوی بدون شکر می‌پاشند.",
     "variation": "در فرانسه و بریتانیا این نوشیدنی «کافه ویوا» (café viennois) نام دارد.",
-    "history": "",
+    "history": "نام این نوشیدنی ایتالیایی و به معنای «اسپرسو با خامه» است، اما ریشه‌ی آن را احتمالاً به اتریش و قهوه‌ی وینی نسبت می‌دهند. تاریخ یا مبتکر مشخصی برای آن ثبت نشده است.",
     "src": [
      [
       "Wikipedia — Espresso con panna",
@@ -1164,6 +1253,10 @@
      [
       "Coffee Review — Traditional espresso drink descriptions",
       "https://www.coffeereview.com/coffee-reference/espresso/espresso-cuisines/traditional-drink-descriptions/"
+     ],
+     [
+      "Food Republic — Espresso con panna",
+      "https://www.foodrepublic.com/1489391/starbucks-espresso-order-con-panna-meaning"
      ]
     ]
    },
@@ -1353,7 +1446,7 @@
       "text": "در پایان کمی دارچین رویش بپاشید."
      }
     ],
-    "proTip": "",
+    "proTip": "پوست پرتقال را تازه و درست بالای فنجان رنده کنید تا روغن معطرش به نوشیدنی برسد؛ پوست خشک طعم کم‌جان و کمی تلخ می‌دهد. شکلات تیره نسبت به شربت شکلات شیرینی کمتر و عمق بیشتری می‌دهد.",
     "variation": "در دستورهای خانگی ساده‌تر، قهوه‌ی معمولی با خامه‌ی زده‌شده و پوست رنده‌شده‌ی پرتقال سرو می‌شود.",
     "history": "",
     "src": [
@@ -1364,6 +1457,10 @@
      [
       "Food.com — Cafe Borgia",
       "https://www.food.com/recipe/cafe-borgia-320970?nav=recipe"
+     ],
+     [
+      "Coffee Voila — Borgia coffee",
+      "https://coffeevoila.com/borgia-coffee/"
      ]
     ]
    },
@@ -1582,7 +1679,7 @@
    {
     "id": 55,
     "title": "کافه کورتو (Caffè Corretto)",
-    "body": "<ul><li><strong>گام ۱ (اسپرسو):</strong> یک شات اسپرسو بگیرید.</li><li><strong>گام ۲ (مشروب):</strong> معمولاً چند قطره از مشروب دلخواه را داخل شات اسپرسو می‌ریزند؛ گاهی مشروب جداگانه در یک شات کنار قهوه سرو می‌شود.</li></ul>",
+    "body": "<ul><li><strong>گام ۱ (آماده‌سازی):</strong> فنجان کوچک را با آب داغ گرم کنید.</li><li><strong>گام ۲ (اسپرسو):</strong> یک شات اسپرسو را مستقیم در فنجان بگیرید.</li><li><strong>گام ۳ (مشروب):</strong> درست پیش از نوشیدن چند قطره مشروب، حدود پنج میلی‌لیتر، به اسپرسو بیفزایید.</li><li><strong>گام ۴ (سرو):</strong> زود بنوشید؛ گاهی مشروب جدا در لیوان کوچک سرو می‌شود تا هرکس به‌دلخواه بریزد.</li></ul>",
     "kind": "item",
     "description": "کافه کورتو (caffè corretto) یک شات اسپرسو با مقدار کمی مشروب است؛ معمولاً گراپا و گاهی سامبوکا یا براندی.",
     "difficulty": "",
@@ -1608,12 +1705,22 @@
     ],
     "steps": [
      {
+      "label": "آماده‌سازی",
+      "text": "فنجان کوچک را با آب داغ گرم کنید."
+     },
+     {
       "label": "اسپرسو",
-      "text": "یک شات اسپرسو بگیرید."
+      "text": "یک شات اسپرسو را مستقیم در فنجان بگیرید.",
+      "meta": "۹ گرم قهوه"
      },
      {
       "label": "مشروب",
-      "text": "معمولاً چند قطره از مشروب دلخواه را داخل شات اسپرسو می‌ریزند؛ گاهی مشروب جداگانه در یک شات کنار قهوه سرو می‌شود."
+      "text": "درست پیش از نوشیدن چند قطره مشروب، حدود پنج میلی‌لیتر، به اسپرسو بیفزایید.",
+      "meta": "۵ میلی‌لیتر"
+     },
+     {
+      "label": "سرو",
+      "text": "زود بنوشید؛ گاهی مشروب جدا در لیوان کوچک سرو می‌شود تا هرکس به‌دلخواه بریزد."
      }
     ],
     "proTip": "گاهی مشروب جداگانه در یک لیوان کوچک کنار قهوه سرو می‌شود تا هرکس به اندازه‌ی دلخواه خودش بریزد.",
@@ -1623,6 +1730,10 @@
      [
       "Wikipedia — Caff%C3%A8 corretto",
       "https://en.wikipedia.org/wiki/Caff%C3%A8_corretto"
+     ],
+     [
+      "Homegrounds — Caffè corretto recipe",
+      "https://www.homegrounds.co/caffe-corretto-recipe/"
      ]
     ]
    },
@@ -1801,8 +1912,8 @@
       "text": "نوشیدنی را بلافاصله سرو کنید."
      }
     ],
-    "proTip": "",
-    "variation": "",
+    "proTip": "این سفارش استاندارد نیست؛ به باریستا دقیق بگویید «دوپیو با آب داغ هم‌حجم» تا همان نسخه‌ی مدنظرتان ساخته شود.",
+    "variation": "آمریکانو معمولاً ملایم‌تر است و کافه زورو را قوی‌تر از آن می‌دانند. لونگو هم با همان قهوه‌ی تک اما حدود دو برابر آب و زمان عصاره‌گیری ساخته می‌شود و با زورو فرق دارد.",
     "history": "دوپیو شات استاندارد بیشتر کافه‌ها بیرون از ایتالیاست و حجمی حدود ۶۰ میلی‌لیتر دارد؛ کافه زورو همین دوپیو است با آب داغ هم‌حجم.",
     "src": [
      [
@@ -1812,6 +1923,10 @@
      [
       "Wikipedia — Doppio",
       "https://en.wikipedia.org/wiki/Doppio"
+     ],
+     [
+      "Badger and Blade — Cafe Zorro",
+      "https://www.badgerandblade.com/forum/threads/cafe-zorro.646002/"
      ]
     ]
    },
@@ -1908,7 +2023,7 @@
    {
     "id": 651,
     "title": "کافه سریع و کثیف (Quick and Dirty)",
-    "body": "<ul><li><strong>گام ۱ (ترکیب):</strong> اسپرسو را با شربت شکلات یا موکا ترکیب کنید.</li></ul>",
+    "body": "<ul><li><strong>گام ۱ (اسپرسو):</strong> سه شات اسپرسو بگیرید.</li><li><strong>گام ۲ (شربت):</strong> شربت شکلات یا موکا را روی اسپرسو بریزید.</li><li><strong>گام ۳ (سرو):</strong> نوشیدنی فقط اسپرسو و شکلات دارد؛ شیر یا آب به آن اضافه نمی‌شود. اگر شات‌ها بیشتر از سه تا باشد، نامش «فست اند فیلثی» می‌شود.</li></ul>",
     "kind": "item",
     "description": "سه شات اسپرسو با شربت شکلات یا موکا؛ چهار شات یا بیشتر «Fast & Filthy» نام دارد.",
     "difficulty": "",
@@ -1931,8 +2046,17 @@
     ],
     "steps": [
      {
-      "label": "ترکیب",
-      "text": "اسپرسو را با شربت شکلات یا موکا ترکیب کنید."
+      "label": "اسپرسو",
+      "text": "سه شات اسپرسو بگیرید.",
+      "meta": "۳ شات"
+     },
+     {
+      "label": "شربت",
+      "text": "شربت شکلات یا موکا را روی اسپرسو بریزید."
+     },
+     {
+      "label": "سرو",
+      "text": "نوشیدنی فقط اسپرسو و شکلات دارد؛ شیر یا آب به آن اضافه نمی‌شود. اگر شات‌ها بیشتر از سه تا باشد، نامش «فست اند فیلثی» می‌شود."
      }
     ],
     "proTip": "",
@@ -1942,6 +2066,10 @@
      [
       "Wikipedia — List of coffee drinks",
       "https://en.wikipedia.org/wiki/List_of_coffee_drinks"
+     ],
+     [
+      "Wikipedia — List of coffee drinks",
+      "https://en.wikipedia.org/wiki/Depth_Charge_(coffee)"
      ]
     ]
    },
@@ -2042,19 +2170,19 @@
     ],
     "ingredients": [
      {
-      "amount": "۱",
-      "unit": "شات دوبل",
-      "name": "اسپرسو (دوپیو)"
+      "amount": "۱۸۰",
+      "unit": "میلی‌لیتر",
+      "name": "اسپرسوی داغ (برای هر فنجان)"
      },
      {
       "amount": "۲",
       "unit": "قاشق غذاخوری",
-      "name": "شربت شکلات (برای هر نفر، طبق یک دستور)"
+      "name": "شربت شکلات"
      },
      {
       "amount": "۱",
       "unit": "قاشق غذاخوری",
-      "name": "شکر (در همان دستور)"
+      "name": "شکر"
      },
      {
       "amount": "۱",
@@ -2065,6 +2193,11 @@
       "amount": "",
       "unit": "",
       "name": "خامه‌ی زده‌شده"
+     },
+     {
+      "amount": "به‌اندازه‌ی دلخواه",
+      "unit": "",
+      "name": "کاکائو و شکلات تلخ رنده‌شده (برای تزئین)"
      }
     ],
     "steps": [
@@ -2101,6 +2234,10 @@
      [
       "Emeril's — Caffe Medici",
       "https://www.emerils.com/126001/caffe-medici"
+     ],
+     [
+      "Emeril's — Caffe Medici",
+      "https://www.emerils.com/node/126001"
      ]
     ]
    },
@@ -2181,7 +2318,11 @@
     "totalTime": "",
     "origin": "",
     "caffeineLevel": 0,
-    "equipment": [],
+    "equipment": [
+     "قهوه‌ساز قطره‌ای",
+     "دستگاه اسپرسو",
+     "آسیاب برر"
+    ],
     "ingredients": [
      {
       "amount": "۱",
@@ -2208,13 +2349,17 @@
       "text": "قهوه و اسپرسو را به‌اندازه‌ی مساوی ترکیب کنید."
      }
     ],
-    "proTip": "",
+    "proTip": "برای طعم متعادل، قهوه‌ی دم‌شده و اسپرسو را از یک نوع دانه بگیرید.",
     "variation": "کافه توبیو گونه‌ای از ردآی است؛ ردآی قهوه‌ی دم‌شده‌ای است که اسپرسو به آن افزوده می‌شود.",
     "history": "",
     "src": [
      [
       "Wikipedia — List of coffee drinks",
       "https://en.wikipedia.org/wiki/List_of_coffee_drinks"
+     ],
+     [
+      "The Daily Meal — Red eye coffee",
+      "https://www.thedailymeal.com/1531847/what-is-red-eye-coffee/"
      ]
     ]
    }
@@ -3208,7 +3353,7 @@
      }
     ],
     "proTip": "قهوه‌ی سرد معمولاً با قدرت بیشتر از قهوه‌ی عادی دم می‌شود تا رقیق‌شدن با یخ جبران شود.",
-    "variation": "",
+    "variation": "به‌جای دریپر دستی می‌شود از قهوه‌ساز قطره‌ای هم استفاده کرد و قهوه‌ی داغ را مستقیم روی فنجان پر از یخ چکاند. جایگزین دیگر دم‌آوری سرد است که ۱۲ تا ۲۴ ساعت طول می‌کشد؛ تلخی و اسیدیته‌اش کمتر است، اما بخشی از ظرافت طعم دانه از دست می‌رود، در حالی که روش ژاپنی حدود پنج دقیقه زمان می‌برد و عطر قهوه‌ی داغ را نگه می‌دارد.",
     "history": "قهوه‌ی سرد از دوران تایشو (حدود ۱۹۲۰) در قهوه‌خانه‌های ژاپن نوشیده می‌شود. در ۱۹۶۹ UCC اوشیما قهوه‌ی کنسروی عرضه کرد.",
     "src": [
      [
@@ -3218,6 +3363,14 @@
      [
       "Brew Coffee Home — Clever Dripper",
       "https://www.brewcoffeehome.com/clever-coffee-dripper/"
+     ],
+     [
+      "Brew Coffee Home — Japanese iced coffee",
+      "https://www.brewcoffeehome.com/?p=6363"
+     ],
+     [
+      "Coffeeparts — Japanese iced",
+      "https://know.coffeeparts.com.au/glossary/japanese-iced"
      ]
     ]
    },
@@ -3411,7 +3564,7 @@
     "difficulty": "",
     "prepTime": "",
     "totalTime": "",
-    "origin": "",
+    "origin": "ایتالیا (لاته)؛ نسخه‌ی سرد از دهه‌ی ۱۹۹۰ در آمریکا رواج یافت",
     "caffeineLevel": 0,
     "equipment": [
      "دستگاه اسپرسو",
@@ -3474,6 +3627,10 @@
      [
       "Complete Home Barista — Iced espresso drinks at home",
       "https://completehomebarista.com/guides/how-to-make-iced-espresso-drinks-at-home/"
+     ],
+     [
+      "787 Coffee — What is an iced latte",
+      "https://787coffee.com/drinks-explained-787-coffee/what-is-an-iced-latte"
      ]
     ]
    },
@@ -3486,7 +3643,7 @@
     "difficulty": "",
     "prepTime": "",
     "totalTime": "",
-    "origin": "",
+    "origin": "ایتالیا (پایه‌ی لاته ماکیاتو)",
     "caffeineLevel": 0,
     "equipment": [
      "دستگاه اسپرسو یا قهوه‌ی غلیظ آماده",
@@ -3551,6 +3708,10 @@
      [
       "Lifeboost — Iced Latte Macchiato",
       "https://lifeboostcoffee.com/blogs/news/iced-latte-macchiato"
+     ],
+     [
+      "Lifeboost — What is a latte macchiato",
+      "https://lifeboostcoffee.com/blogs/lifeboost/what-is-a-latte-macchiato-origins-recipe-key-fact"
      ]
     ]
    },
@@ -3736,7 +3897,7 @@
     ],
     "proTip": "اسپرسوی تازه روی یخ بریزید؛ قهوه‌ی داغ بخشی از یخ را آب می‌کند و مخلوط دوباره منجمد می‌شود و بافتی شبیه گرانیتا می‌گیرد.",
     "variation": "یک قاشق بستنی روی آن، نسخه‌ی پرطرفدار این نوشیدنی است.",
-    "history": "",
+    "history": "آیس‌شات از استرالیا آمده است؛ نوشیدنی‌ای ساده با یک شات اسپرسوی تازه روی لیوان لاته‌ی پر از یخ.",
     "src": [
      [
       "Wikipedia — List of coffee drinks",
@@ -4552,14 +4713,14 @@
       "name": "آب سرد"
      },
      {
-      "amount": "",
-      "unit": "",
-      "name": "شکر (اختیاری)"
+      "amount": "۱",
+      "unit": "قاشق چای‌خوری",
+      "name": "شکر برای هر فنجان (اختیاری؛ ۰٫۵ کم‌شیرین، ۲ شیرین)"
      },
      {
-      "amount": "",
+      "amount": "یک لایه‌ی یکنواخت",
       "unit": "",
-      "name": "شن داغ (حدود ۱۹۰ تا ۲۰۰ درجه‌ی سانتی‌گراد)"
+      "name": "شن داغ در تابه (حدود ۱۹۰ تا ۲۰۰ درجه‌ی سانتی‌گراد)"
      }
     ],
     "steps": [
@@ -4599,6 +4760,18 @@
      [
       "Tasting Table — Why Is Turkish Coffee Heated With Hot Sand?",
       "https://www.tastingtable.com/1879415/why-turkish-coffee-heated-hot-sand"
+     ],
+     [
+      "Yemek.com — Türk kahvesi ölçüleri",
+      "https://yemek.com/turk-kahvesi-olculeri/"
+     ],
+     [
+      "Yemek.com — Kumda kahve nasıl yapılır",
+      "https://yemek.com/kumda-kahve-nasil-yapilir/"
+     ],
+     [
+      "Saki — Sand coffee",
+      "https://sakiproducts.com/pages/glossary-sand-coffee"
      ]
     ]
    },
@@ -4897,9 +5070,14 @@
       "name": "تخم‌مرغ (پوست آن اختیاری است)"
      },
      {
-      "amount": "",
+      "amount": "۱۲",
+      "unit": "فنجان",
+      "name": "آب (به‌اندازه‌ی پرشدن قوری)"
+     },
+     {
+      "amount": "کمی",
       "unit": "",
-      "name": "آب (به‌اندازه‌ی قوری ۱۲ فنجانی)"
+      "name": "آب سرد (برای ته‌نشین‌کردن تفاله)"
      }
     ],
     "steps": [
@@ -5009,7 +5187,7 @@
       "text": "با ملاقه در فنجان‌های دمی‌تاس بریزید."
      }
     ],
-    "proTip": "",
+    "proTip": "شعله را کم نگه دارید و مایع را یک تا دو دقیقه هم بزنید تا شکر حل شود. پوست پرتقال را بلند و سالم بکنید، با چنگال بالای ظرف بگیرید و مایع شعله‌ور را چند بار روی آن بریزید. بطری مشروب را از شعله دور نگه دارید و فقط به اندازه‌ی دستور از آن استفاده کنید.",
     "variation": "دستور Saveur (گالاتوآز): ۳ فنجان قهوه، ½ فنجان براندی، ¼ فنجان لیکور پرتقال، ۱۲ میخک، ۲ چوب دارچین، پوست یک پرتقال ناول و پوست یک لیمو؛ برای ۸ نفر. براندی و لیکور با پوست‌ها ۵ دقیقه ملایم گرم و روشن می‌شود.",
     "history": "طبق New Orleans & Company، آن را اواخر دهه‌ی ۱۸۸۰ در رستوران آنتوان ابداع کردند و ژول آلسیاتور، پسر بنیان‌گذار، مبدع آن بود (به نقل از Mixing New Orleans، الهام‌گرفته از فرانسوی‌هایی که حبه‌ی قندِ خیس‌شده در کنیاک را شعله‌ور در قهوه می‌انداختند). Daily Coffee News می‌نویسد دست‌کم ۲۰۰ سال قدمت دارد، ریشه‌ی فرانسوی و هویت لوئیزیانایی دارد و در لوئیزیانا اغلب با مخلوط قهوه و کاسنی بوده است.",
     "src": [
@@ -5024,6 +5202,14 @@
      [
       "Daily Coffee News — The History of the Boozy Café Brûlot",
       "https://dailycoffeenews.com/2019/02/19/playing-with-fire-the-history-of-the-boozy-cafe-brulot/"
+     ],
+     [
+      "Emeril's — Café Brûlot",
+      "https://www.emerils.com/node/125461"
+     ],
+     [
+      "Punch — Café Brûlot",
+      "https://punchdrink.com/recipes/cafe-brulot/"
      ]
     ]
    },
@@ -5482,7 +5668,7 @@
      {
       "amount": "",
       "unit": "",
-      "name": "یخ"
+      "name": "یخ (به‌اندازه‌ی پر شدن لیوان)"
      },
      {
       "amount": "",
@@ -5490,9 +5676,9 @@
       "name": "خامه‌ی زده‌شده"
      },
      {
-      "amount": "",
-      "unit": "",
-      "name": "دانه‌ی قهوه‌ی شکلاتی برای تزئین"
+      "amount": "۳",
+      "unit": "دانه",
+      "name": "دانه‌ی قهوه (شکلاتی یا ساده) برای تزئین"
      }
     ],
     "steps": [
@@ -5532,6 +5718,14 @@
      [
       "Homegrounds — Carajillo Recipe",
       "https://www.homegrounds.co/carajillo-recipe/"
+     ],
+     [
+      "Difford's Guide — Carajillo",
+      "https://www.diffordsguide.com/cocktails/recipe/4848/carajillo"
+     ],
+     [
+      "A Couple Cooks — Carajillo",
+      "https://www.acouplecooks.com/carajillo-recipe/print/94021/"
      ]
     ]
    },
@@ -5577,7 +5771,7 @@
       "name": "اسپرسوی تازه و داغ"
      },
      {
-      "amount": "",
+      "amount": "کمی",
       "unit": "",
       "name": "دارچین رنده‌شده برای تزئین"
      }
@@ -5672,7 +5866,7 @@
      }
     ],
     "proTip": "قهوه را آهسته و از پشت قاشق بریزید و خامه را کمی فرم بگیرید و با قاشق روی قهوه شناور کنید تا لایه‌ها جدا بماند. گرم‌کردن گیلاس نوشیدنی را گرم‌تر نگه می‌دارد.",
-    "variation": "",
+    "variation": "به‌جای قهوه‌ی فیلتری می‌شود از اسپرسوی تازه برای طعم قوی‌تر استفاده کرد. در نسخه‌ی سمله، گالیانو وانیل با گالیانو آمارتو عوض می‌شود و با نان سمله، شیرینی اسکاندیناویایی، سرو می‌شود. برای نسخه‌ی بدون الکل می‌توان شربت وانیل گذاشت، هرچند لایه‌ها کمتر جدا می‌مانند.",
     "history": "بارتندر سوئدی بوسه برگستروم آن را در ۱۹۸۷ برای مسابقه‌ی نوشیدنی‌های قهوه‌ای در استکهلم ساخت. در سوئد و فراتر از آن محبوب شد و جمعه‌ی سوم نوامبر در سوئد «روز هات‌شات» است. آن را «پاسخ سوئد به ایریش کافی» نامیده‌اند.",
     "src": [
      [
@@ -5682,6 +5876,14 @@
      [
       "Difford's Guide — Hot Shot",
       "https://www.diffordsguide.com/cocktails/recipe/986/hot-shot"
+     ],
+     [
+      "Galliano — Hot Shot",
+      "https://galliano.com/cocktail/hot-shot/"
+     ],
+     [
+      "Drinks World — Hot Shot",
+      "https://drinksworld.com/recipe/hot-shot-drink/"
      ]
     ]
    },
@@ -5717,13 +5919,13 @@
       "name": "براندی آسباخ اورالت (یا کنیاک یا آرمانیاک)"
      },
      {
-      "amount": "",
-      "unit": "",
-      "name": "خامه‌ی زده‌شده با شکر وانیلی"
+      "amount": "۵۰",
+      "unit": "میلی‌لیتر",
+      "name": "خامه‌ی غلیظ زده‌شده با شکر وانیلی"
      },
      {
-      "amount": "",
-      "unit": "",
+      "amount": "۱",
+      "unit": "قاشق چای‌خوری",
       "name": "تراشه‌ی شکلات تلخ"
      }
     ],
@@ -5765,6 +5967,10 @@
      [
       "Wikipedia — Rüdesheimer Kaffee",
       "https://en.wikipedia.org/wiki/R%C3%BCdesheimer_Kaffee"
+     ],
+     [
+      "Coffeeness — Rüdesheimer coffee",
+      "https://www.coffeeness.de/en/what-is-rudesheimer-coffee/"
      ]
     ]
    },
@@ -5800,9 +6006,9 @@
       "name": "قهوه‌ی سیاه قوی (یا دابل اسپرسو)"
      },
      {
-      "amount": "",
-      "unit": "",
-      "name": "خامه‌ی زده‌شده"
+      "amount": "۶۰",
+      "unit": "میلی‌لیتر",
+      "name": "خامه‌ی زده‌شده (حجم خامه‌ی مایع پیش از زدن)"
      }
     ],
     "steps": [
@@ -5838,6 +6044,10 @@
      [
       "Foodal — Pharisäer coffee with rum",
       "https://foodal.com/drinks-2/alcoholic-beverages/pharisee-rum/"
+     ],
+     [
+      "Coffeeness — Pharisäer",
+      "https://www.coffeeness.de/pharisaeer/"
      ]
     ]
    },
@@ -5878,9 +6088,9 @@
       "name": "شیر گرم یا سرد"
      },
      {
-      "amount": "",
+      "amount": "کمی",
       "unit": "",
-      "name": "دارچین برای تزئین"
+      "name": "دارچین یا کاکائو برای تزئین (اختیاری)"
      }
     ],
     "steps": [
@@ -5912,6 +6122,10 @@
      [
       "Archana's Kitchen — Indian Beaten Coffee",
       "https://www.archanaskitchen.com/recipe/indian-beaten-coffee-recipe-dalgona-coffee"
+     ],
+     [
+      "Veg Recipes of India — Beaten coffee",
+      "https://www.vegrecipesofindia.com/hot-coffee-recipe-cafe-style/"
      ]
     ]
    },
@@ -5932,29 +6146,29 @@
     ],
     "ingredients": [
      {
-      "amount": "",
-      "unit": "",
-      "name": "آووکادو"
+      "amount": "۱",
+      "unit": "عدد",
+      "name": "آووکادوی متوسط (برای ۲ لیوان)"
      },
      {
-      "amount": "",
-      "unit": "",
+      "amount": "۰٫۵",
+      "unit": "فنجان",
       "name": "شیر تغلیظ‌شده‌ی شیرین"
      },
      {
       "amount": "",
       "unit": "",
-      "name": "شربت شکلات"
+      "name": "شربت شکلات (به‌اندازه‌ی پوشاندن جداره‌ی لیوان)"
+     },
+     {
+      "amount": "۲",
+      "unit": "فنجان",
+      "name": "قهوه‌ی تیره‌ی سرد"
      },
      {
       "amount": "",
       "unit": "",
-      "name": "قهوه‌ی تیره"
-     },
-     {
-      "amount": "",
-      "unit": "",
-      "name": "یخ"
+      "name": "یخ (برای سرو)"
      }
     ],
     "steps": [
@@ -5982,6 +6196,14 @@
      [
       "Tasting Table — The Indonesian Iced Coffee That Features Blended Avocado",
       "https://tastingtable.com/1359543/indonesia-iced-coffee-blended-avocado"
+     ],
+     [
+      "The Big Sweet Tooth — Es Alpukat coffee avocado milkshake",
+      "https://www.thebigsweettooth.com/wprm_print/es-alpukat-coffee-avocado-milkshake"
+     ],
+     [
+      "Smithsonian APA — Iced avocado and coffee drink",
+      "https://apa.si.edu/picklesandtea/iced-avocado-and-coffee-drink/"
      ]
     ]
    },
@@ -6013,9 +6235,9 @@
       "name": "شکر"
      },
      {
-      "amount": "",
+      "amount": "تا لبه‌ی بطری ۴۰۰ میلی‌لیتری",
       "unit": "",
-      "name": "نوشابه (تا لبه‌ی بطری)"
+      "name": "نوشابه"
      }
     ],
     "steps": [
@@ -6336,7 +6558,10 @@
     "totalTime": "",
     "origin": "پرتغال",
     "caffeineLevel": 0,
-    "equipment": [],
+    "equipment": [
+     "دستگاه اسپرسو (یا موکاپات، ایروپرس، فرنچ‌پرس)",
+     "فنجان کوچک"
+    ],
     "ingredients": [
      {
       "amount": "۱",
@@ -6381,6 +6606,10 @@
      [
       "Destination Eat Drink — Coffee with a shot in Portugal",
       "https://destinationeatdrink.com/coffee-with-a-shot-in-portugal/"
+     ],
+     [
+      "Homegrounds — Café com cheirinho",
+      "https://www.homegrounds.co/cafe-com-cheirinho/"
      ]
     ]
    },
@@ -6527,7 +6756,12 @@
     "totalTime": "",
     "origin": "نیواورلئان",
     "caffeineLevel": 0,
-    "equipment": [],
+    "equipment": [
+     "قهوه‌ساز قطره‌ای",
+     "قابلمه‌ی کوچک (برای داغ‌کردن شیر)",
+     "ماگ",
+     "فروتر یا همزن دستی (اختیاری)"
+    ],
     "ingredients": [
      {
       "amount": "—",
@@ -6569,6 +6803,14 @@
      [
       "Wikipedia — Caf%C3%A9 au lait",
       "https://en.wikipedia.org/wiki/Caf%C3%A9_au_lait"
+     ],
+     [
+      "Deep South Dish — New Orleans café au lait",
+      "https://www.deepsouthdish.com/2010/02/new-orleans-style-cafe-au-lait.html"
+     ],
+     [
+      "Corner Coffee Store — Café au lait recipe",
+      "https://cornercoffeestore.com/cafe-au-lait-recipe/"
      ]
     ]
    },
@@ -6616,13 +6858,17 @@
       "meta": ""
      }
     ],
-    "proTip": "",
+    "proTip": "قهوه را کمی قوی‌تر دم کنید و شیر را داغ و کف‌دار بریزید. برای طعم قهوه‌ی پررنگ‌تر، شیر را کمتر کنید.",
     "variation": "کافه‌اوله‌ی فرانسوی با شیر داغ زیاد در کاسه‌ی بدون دسته سرو می‌شود. نسخه‌ی نیواورلئانی قهوه را با کاسنی دم می‌کند و شیر جوش‌آمده دارد و اغلب با بنیه سرو می‌شود. در کافه‌های آمریکا قهوه‌ی صافی یا فرنچ‌پرس با شیر بخارداده‌شده می‌آید.",
     "history": "استارباکس کافه‌اوله را با نام «کافه میستو» عرضه می‌کند.",
     "src": [
      [
       "Wikipedia — Caf%C3%A9 au lait",
       "https://en.wikipedia.org/wiki/Caf%C3%A9_au_lait"
+     ],
+     [
+      "Barista Life — What is a Starbucks misto",
+      "https://baristalife.co/blogs/blog/what-is-a-starbucks-misto"
      ]
     ]
    }
@@ -6651,24 +6897,24 @@
     ],
     "ingredients": [
      {
-      "amount": "۱",
-      "unit": "بخش",
+      "amount": "۲",
+      "unit": "قاشق غذاخوری",
       "name": "قهوه‌ی فوری"
      },
      {
-      "amount": "۱",
-      "unit": "بخش",
+      "amount": "۲",
+      "unit": "قاشق غذاخوری",
       "name": "شکر"
      },
      {
-      "amount": "۱",
-      "unit": "بخش",
+      "amount": "۲",
+      "unit": "قاشق غذاخوری",
       "name": "آب داغ"
      },
      {
-      "amount": "",
-      "unit": "",
-      "name": "شیر سرد یا گرم"
+      "amount": "حدود ۱۸۰",
+      "unit": "میلی‌لیتر",
+      "name": "شیر سرد یا گرم (برای هر لیوان)"
      }
     ],
     "steps": [
@@ -6700,6 +6946,14 @@
      [
       "Wikipedia — Dalgona coffee",
       "https://en.wikipedia.org/wiki/Dalgona_coffee"
+     ],
+     [
+      "Gimme Yummy — Dalgona coffee",
+      "https://gimmeyummy.com/dalgona-coffee-easy-recipe-at-home-frothy-fluffy-whipped-coffee/"
+     ],
+     [
+      "Not Quite Nigella — Dalgona coffee",
+      "https://www.notquitenigella.com/2020/04/01/dalgona-coffee-how-to-make/print/"
      ]
     ]
    },
@@ -6848,7 +7102,7 @@
     "difficulty": "",
     "prepTime": "",
     "totalTime": "",
-    "origin": "",
+    "origin": "آمریکا",
     "caffeineLevel": 0,
     "equipment": [
      "قهوه‌ساز قطره‌ای",
@@ -6903,6 +7157,10 @@
      [
       "Wikipedia — List of coffee drinks",
       "https://en.wikipedia.org/wiki/List_of_coffee_drinks"
+     ],
+     [
+      "Drinktrade — What is a red eye",
+      "https://www.drinktrade.com/blog/education/what-is-a-red-eye-coffee"
      ]
     ]
    },
@@ -6956,7 +7214,7 @@
      }
     ],
     "proTip": "طعم آن بسیار قوی است؛ شیر، شکر یا شربت می‌تواند آن را ملایم کند.",
-    "variation": "",
+    "variation": "ردآی قهوه‌ی دم‌شده با یک شات اسپرسو است، بلک‌آی با دو شات و ددآی با سه شات. در استارباکس ددآی را «گرین‌آی» می‌نامند و باریستاها ممکن است این نام‌ها را نشناسند؛ بهتر است بگویید «قهوه با سه شات اسپرسو اضافه».",
     "history": "با نام «triple red eye» هم شناخته می‌شود و در استارباکس با نام «Green Eye» فروخته می‌شود. منشأ نام را توضیح نمی‌دهد.",
     "src": [
      [
@@ -6966,6 +7224,10 @@
      [
       "Wikipedia — List of coffee drinks",
       "https://en.wikipedia.org/wiki/List_of_coffee_drinks"
+     ],
+     [
+      "The Daily Meal — Red eye coffee",
+      "https://www.thedailymeal.com/1531847/what-is-red-eye-coffee/"
      ]
     ]
    },
@@ -7122,19 +7384,24 @@
     ],
     "ingredients": [
      {
-      "amount": "",
-      "unit": "",
-      "name": "قهوه‌ی روبوستای قوی"
+      "amount": "۶۰ تا ۱۲۰",
+      "unit": "میلی‌لیتر",
+      "name": "قهوه‌ی روبوستای قوی (دو شات اسپرسو یا نیم پیمانه قهوه‌ی غلیظ)"
      },
      {
-      "amount": "",
-      "unit": "",
+      "amount": "۲",
+      "unit": "قاشق غذاخوری",
       "name": "شیر عسلی (شیر تغلیظ‌شده‌ی شیرین)"
      },
      {
-      "amount": "",
-      "unit": "",
-      "name": "خامه‌ی زده‌شده با کمی نمک"
+      "amount": "حدود ۶۰",
+      "unit": "میلی‌لیتر",
+      "name": "خامه‌ی مایع برای زدن"
+     },
+     {
+      "amount": "یک‌چهارم",
+      "unit": "قاشق چای‌خوری",
+      "name": "نمک دریایی"
      },
      {
       "amount": "",
@@ -7164,6 +7431,14 @@
      [
       "Vietnam Coracle — Salt Coffee: Cà Phê Muối",
       "https://www.vietnamcoracle.com/salt-coffee-ca-phe-muoi/"
+     ],
+     [
+      "Dame Cacao — Vietnamese sea salt coffee",
+      "https://damecacao.com/wprm_print/vietnamese-sea-salt-coffee-ca-phe-muoi"
+     ],
+     [
+      "Local Vietnam — Salt coffee (Cà phê muối)",
+      "https://localvietnam.com/culture/cuisine/vietnamese-salt-coffee/"
      ]
     ]
    }
@@ -7279,12 +7554,24 @@
      }
     ],
     "proTip": "کارشناس مزرعه طعم آن را شیرین با اسیدیته‌ی خوب توصیف می‌کند.",
-    "variation": "",
+    "variation": "ایده از کوپی لواک اندونزی گرفته شده، اما اینجا پرنده فقط میوه‌ی رسیده را برمی‌گزیند و رژیم گیاهی و گوارش سریعش از پروتئین‌های حیوانی و اسید معده‌ای که در کوپی لواک اثر می‌گذارد دور است. طعم هر دسته به میوه‌های وحشی‌ای که پرنده خورده بستگی دارد و گاهی نت هسته‌ی زردآلو یا ترافل می‌دهد.",
     "history": "ژاکو پرنده‌ای فازان‌مانند با پرهای سیاه و گلوی قرمز در جنگل‌های اطلس برزیل است. مزرعه‌ی Camocim (ایالت اسپیریتو سانتو، مالک هنریکه اسلوپر) آن را جمع می‌کند. ژاکو فقط جایی می‌خورد که قهوه رسیده است؛ گذر دانه از روده کوتاه است و فرایند بیوشیمیایی خاصی رخ نمی‌دهد. قیمت داخلی ۱٬۱۱۸ رئال به‌ازای هر کیلو (حدود ۱۰۰ دلار برای هر پوند) و کمتر از ۲ درصد تولید مزرعه است.",
     "src": [
      [
       "Phys.org (AFP) — Jacu bird coffee",
       "https://phys.org/news/2023-09-rear-pheasant-brazil-coffee.html"
+     ],
+     [
+      "Gastro Obscura — Jacu Bird Coffee",
+      "https://assets.atlasobscura.com/foods/jacu-bird-coffee"
+     ],
+     [
+      "Modern Farmer — Jacu bird coffee",
+      "https://modernfarmer.com/2013/10/flight-jacu-bird/"
+     ],
+     [
+      "The Daily Meal — Jacu bird coffee",
+      "https://www.thedailymeal.com/1358564/expensive-jacu-bird-coffee-brazil"
      ]
     ]
    },
@@ -7332,13 +7619,25 @@
       "meta": ""
      }
     ],
-    "proTip": "",
-    "variation": "",
+    "proTip": "بگذارید قهوه تا حدود ۶۰ تا ۶۵ درجه‌ی سانتی‌گراد خنک شود؛ در ۷۵ درجه برای نوشیدن زیادی داغ است. اگر لیوان را نمی‌شود با دست گرفت، قهوه هنوز داغ است.",
+    "variation": "ایده‌ی مشابه آن کوپی لواک اندونزی است که دانه‌ها از دستگاه گوارش زیبت گرفته می‌شود؛ عاج سیاه را گونه‌ای از همان فکر می‌دانند. در هتل‌های لوکس آن را معمولاً با سیفون و کنار میز دم می‌کنند.",
     "history": "نمونه‌ی مشهور آن «عاج سیاه» است؛ بلیک دینکین کانادایی پس از ۹ سال آزمایش در ۲۰۱۲ با تولید اولیه‌ی ۱۵۰ کیلوگرم به کیفیت رضایت‌بخش رسید و تولید بعدها از شمال تایلند به استان سورین رفت.",
     "src": [
      [
       "Wikipedia — Black Ivory coffee",
       "https://en.wikipedia.org/wiki/Black_Ivory_coffee"
+     ],
+     [
+      "NPR — Black Ivory coffee",
+      "https://www.npr.org/sections/thesalt/2014/08/20/340154271/no-1-most-expensive-coffee-comes-from-elephants-no-2"
+     ],
+     [
+      "Remotelands — Black Ivory in the Golden Triangle",
+      "https://www.remotelands.com/travelogues/the-cost-of-coffee-from-inside-an-elephant-in-thailands-golden-triangle/"
+     ],
+     [
+      "WNF Diary — Black Ivory coffee",
+      "https://wnfdiary.com/black-ivory-coffee-is-it-worth-all-that-money/amp/"
      ]
     ]
    },
@@ -7387,12 +7686,24 @@
      }
     ],
     "proTip": "طعم آن را نرم، شکلاتی و کم‌تلخ‌تر از قهوه‌ی معمولی توصیف کرده‌اند.",
-    "variation": "",
+    "variation": "ترکیبی به نام «ترکیب ماهوت» هم عرضه می‌شود. تولیدکننده سیفون فرانسوی سبک دهه‌ی ۱۸۴۰ را برای دم‌آوری توصیه می‌کند، ولی در خانه با هر وسیله‌ای، مثلاً فرنچ‌پرس، هم می‌شود آن را دم کرد.",
     "history": "تولید توسط شرکت Black Ivory Coffee و بنیان‌گذار کانادایی، بلیک دینکین، انجام می‌شود. پس از ۹ سال آزمایش، او در ۲۰۱۲ با تولید اولیه‌ی ۱۵۰ کیلوگرم به کیفیت رضایت‌بخش رسید. تولید ابتدا در پناهگاهی در شمال تایلند بود و بعد به استان سورین منتقل شد (۲۰ فیل مشارکت‌کننده). هر فنجان حدود ۵۰ دلار.",
     "src": [
      [
       "Wikipedia — Black Ivory coffee",
       "https://en.wikipedia.org/wiki/Black_Ivory_coffee"
+     ],
+     [
+      "Coffee or Die — Black Ivory coffee",
+      "https://www.coffeeordie.com/black-ivory-coffee"
+     ],
+     [
+      "Food Republic — Why Black Ivory coffee is so expensive",
+      "https://www.foodrepublic.com/1545400/why-black-ivory-coffee-expensive"
+     ],
+     [
+      "Black Ivory Coffee — press",
+      "https://blackivorycoffee.com/blogs/press/you-can-taste-floral-notes-of-chocolate-cardamom-tobacco-and-a-hint-of-sweet-fruit"
      ]
     ]
    }
